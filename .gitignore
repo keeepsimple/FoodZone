@@ -5,3 +5,11 @@
 /src/FoodZone/.vs/FoodZone/v17
 /src/FoodZone/FoodZone.Models/bin/Debug/net6.0
 /src/FoodZone/FoodZone.Models/obj
+/src/FoodZone/FoodZone.API/bin/Debug/net6.0
+/src/FoodZone/FoodZone.API/obj
+/src/FoodZone/FoodZone.Data/bin/Debug/net6.0
+/src/FoodZone/FoodZone.Data/obj
+/src/FoodZone/FoodZone.Services/bin/Debug/net6.0
+/src/FoodZone/FoodZone.Services/obj
+/src/FoodZone/.vs
+/src/FoodZone/FoodZone.Extensions/obj
