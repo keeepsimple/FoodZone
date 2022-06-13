@@ -1,3 +1,4 @@
+using FoodZone.API.Configurations;
 using FoodZone.Data;
 using FoodZone.Data.Infrastructure;
 using FoodZone.Extensions;
@@ -28,6 +29,9 @@ builder.Services.AddCors(o =>
                                                            .AllowAnyMethod()
                                                            .AllowAnyHeader());
 });
+
+//add automapper
+builder.Services.AddAutoMapper(typeof(MapperInitializer));
 
 builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodZone", Version = "v1" }));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
