@@ -5,9 +5,9 @@ using FoodZone.Services.IServices;
 
 namespace FoodZone.Services.Services
 {
-    public class ReservationServidces : BaseServices<Reservation>, IReservationServices
+    public class FeedbackServices : BaseServices<Feedback>, IFeedbackServices
     {
-        public ReservationServidces(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public FeedbackServices(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
     }

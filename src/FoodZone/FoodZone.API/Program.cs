@@ -2,6 +2,8 @@ using FoodZone.API.Configurations;
 using FoodZone.Data;
 using FoodZone.Data.Infrastructure;
 using FoodZone.Models.Sercurity;
+using FoodZone.Services.IServices;
+using FoodZone.Services.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -38,6 +40,14 @@ builder.Services.AddAuthentication();
 
 //add dependency injection
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IFoodServices, FoodServices>();
+builder.Services.AddScoped<IFeedbackServices, FeedbackServices>();
+builder.Services.AddScoped<IPaymentServices, PaymentServices>();
+builder.Services.AddScoped<IReservationServices, ReservationServices>();
+builder.Services.AddScoped<IReservationDetailServices, ReservationDetailServices>();
+builder.Services.AddScoped<IMenuServices, MenuServices>();
+builder.Services.AddScoped<ISalaryServices, SalaryServices>();
+builder.Services.AddScoped<ITableServices, TableServices>();
 
 builder.Services.AddControllers();
 
