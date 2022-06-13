@@ -13,13 +13,13 @@ using Serilog.Events;
 var builder = WebApplication.CreateBuilder(args);
 
 //config log
-builder.Host.UseSerilog();
-Log.Logger = new LoggerConfiguration()
-    .WriteTo
-    .File(path: "logs\\log-.txt",
-    outputTemplate: "{Timestamp: yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3} {Message:lj}{NewLine}{Exception}]",
-    rollingInterval: RollingInterval.Day,
-    restrictedToMinimumLevel: LogEventLevel.Information).CreateLogger();
+//builder.Host.UseSerilog();
+//Log.Logger = new LoggerConfiguration()
+//    .WriteTo
+//    .File(path: "logs\\log-.txt",
+//    outputTemplate: "{Timestamp: yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3} {Message:lj}{NewLine}{Exception}]",
+//    rollingInterval: RollingInterval.Day,
+//    restrictedToMinimumLevel: LogEventLevel.Information).CreateLogger();
 
 // Add services to the container.
 //add connection string
@@ -35,6 +35,7 @@ builder.Services.AddIdentity<Account, IdentityRole>(q =>
     q.Password.RequiredLength = 8;
     q.Password.RequireUppercase = true;
     q.Password.RequireLowercase = true;
+    q.Password.RequireNonAlphanumeric = false;
 }).AddEntityFrameworkStores<FoodZoneContext>().AddDefaultTokenProviders();
 builder.Services.AddAuthentication();
 

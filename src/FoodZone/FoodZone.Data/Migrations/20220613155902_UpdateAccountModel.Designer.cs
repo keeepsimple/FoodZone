@@ -4,6 +4,7 @@ using FoodZone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodZone.Data.Migrations
 {
     [DbContext(typeof(FoodZoneContext))]
-    partial class FoodZoneContextModelSnapshot : ModelSnapshot
+    [Migration("20220613155902_UpdateAccountModel")]
+    partial class UpdateAccountModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,9 +305,6 @@ namespace FoodZone.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -313,8 +312,6 @@ namespace FoodZone.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReservationId");
 
                     b.ToTable("Tables", "common");
                 });
@@ -369,6 +366,9 @@ namespace FoodZone.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TableId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -385,6 +385,8 @@ namespace FoodZone.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("TableId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -596,15 +598,13 @@ namespace FoodZone.Data.Migrations
                     b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("FoodZone.Models.Common.Table", b =>
+            modelBuilder.Entity("FoodZone.Models.Sercurity.Account", b =>
                 {
-                    b.HasOne("FoodZone.Models.Common.Reservation", "Reservation")
-                        .WithMany("Tables")
-                        .HasForeignKey("ReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("FoodZone.Models.Common.Table", "Table")
+                        .WithMany("Accounts")
+                        .HasForeignKey("TableId");
 
-                    b.Navigation("Reservation");
+                    b.Navigation("Table");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -668,8 +668,11 @@ namespace FoodZone.Data.Migrations
             modelBuilder.Entity("FoodZone.Models.Common.Reservation", b =>
                 {
                     b.Navigation("ReservationDetails");
+                });
 
-                    b.Navigation("Tables");
+            modelBuilder.Entity("FoodZone.Models.Common.Table", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 
             modelBuilder.Entity("FoodZone.Models.Sercurity.Account", b =>

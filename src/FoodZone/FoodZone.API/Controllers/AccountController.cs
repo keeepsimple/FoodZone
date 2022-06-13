@@ -13,14 +13,12 @@ namespace FoodZone.API.Controllers
     {
         private readonly UserManager<Account> _userManager;
         private readonly SignInManager<Account> _signInManager;
-        private readonly ILogger<AccountController> _logger;
         private readonly IMapper _mapper;
 
-        public AccountController(UserManager<Account> userManager, SignInManager<Account> signInManager, ILogger<AccountController> logger, IMapper mapper)
+        public AccountController(UserManager<Account> userManager, SignInManager<Account> signInManager, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
             _mapper = mapper;
         }
 
@@ -28,33 +26,24 @@ namespace FoodZone.API.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] AccountDTO accountDTO)
         {
-            _logger.LogInformation($"Registration For {accountDTO.Email}");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            try
-            {
-                var user = _mapper.Map<Account>(accountDTO);
-                user.UserName = accountDTO.Email;
-                var result = await _userManager.CreateAsync(user);
+            var user = _mapper.Map<Account>(accountDTO);
+            user.UserName = accountDTO.Email;
+            var result = await _userManager.CreateAsync(user, accountDTO.Password);
 
-                if (!result.Succeeded)
+            if (!result.Succeeded)
+            {
+                foreach (var item in result.Errors)
                 {
-                    foreach (var item in result.Errors)
-                    {
-                        ModelState.AddModelError(item.Code, item.Description);
-                    }
-                    return BadRequest($"User Registration Failed");
+                    ModelState.AddModelError(item.Code, item.Description);
                 }
+                return BadRequest(ModelState);
+            }
 
-                return Accepted();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Something went wrong in the {nameof(Register)}");
-                return Problem($"Something went wrong in the {nameof(Register)}", statusCode: 500);
-            }
+            return Accepted();
         }
 
         //[HttpPost]
