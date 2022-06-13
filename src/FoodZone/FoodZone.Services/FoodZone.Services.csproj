@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FoodZone.Data\FoodZone.Data.csproj" />
+    <ProjectReference Include="..\FoodZone.Models\FoodZone.Models.csproj" />
+  </ItemGroup>
+
 </Project>

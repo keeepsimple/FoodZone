@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FoodZone.API.Models;
 using FoodZone.Models.Common;
+using FoodZone.Models.Sercurity;
 
 namespace FoodZone.API.Configurations
 {
@@ -16,7 +17,7 @@ namespace FoodZone.API.Configurations
             CreateMap<ReservationDetail, ReservationDetailDTO>().ReverseMap();
             CreateMap<Salary, SalaryDTO>().ReverseMap();
             CreateMap<Table, TableDTO>().ReverseMap();
-
+            CreateMap<Account, AccountDTO>().ReverseMap();
         }
     }
 }

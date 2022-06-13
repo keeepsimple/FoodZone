@@ -22,6 +22,9 @@ namespace FoodZone.Data
         public DbSet<Table> Tables { get; set; }
         public DbSet<Account> Accounts { get; set; }
 
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }
