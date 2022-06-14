@@ -13,8 +13,6 @@ namespace FoodZone.Models.Common
 
         public int Status { get; set; }
 
-        public int ReservationId { get; set; }
-
-        public Reservation Reservation { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

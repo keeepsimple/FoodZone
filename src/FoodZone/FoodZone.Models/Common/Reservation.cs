@@ -20,8 +20,11 @@ namespace FoodZone.Models.Common
 
         public Account Account { get; set; }
 
+        public int TableId { get; set; }
+
+        public Table Table { get; set; }
+
         public virtual ICollection<ReservationDetail> ReservationDetails { get; set; }
         
-        public virtual ICollection<Table> Tables { get; set; }
     }
 }

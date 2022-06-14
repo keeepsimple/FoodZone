@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodZone.Models.BaseEntities
 {
@@ -9,6 +10,7 @@ namespace FoodZone.Models.BaseEntities
             IsDeleted = false;
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Display(Name = "Is Deleted")]
