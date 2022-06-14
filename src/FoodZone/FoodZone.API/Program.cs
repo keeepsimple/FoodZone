@@ -29,14 +29,7 @@ builder.Services.AddDbContext<FoodZoneContext>(opt =>
 });
 
 //config identity
-builder.Services.AddIdentity<Account, IdentityRole>(q =>
-{
-    q.Password.RequireDigit = true;
-    q.Password.RequiredLength = 8;
-    q.Password.RequireUppercase = true;
-    q.Password.RequireLowercase = true;
-    q.Password.RequireNonAlphanumeric = false;
-}).AddEntityFrameworkStores<FoodZoneContext>().AddDefaultTokenProviders();
+builder.Services.ConfigureIdentity();
 builder.Services.AddAuthentication();
 
 //add dependency injection

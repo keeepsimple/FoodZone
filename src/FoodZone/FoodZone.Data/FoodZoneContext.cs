@@ -1,4 +1,6 @@
-﻿using FoodZone.Models.Common;
+﻿using FoodZone.Data.Configuration;
+using FoodZone.Models.BaseEntities;
+using FoodZone.Models.Common;
 using FoodZone.Models.Sercurity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +27,43 @@ namespace FoodZone.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new MenuConfiguration());
+            builder.ApplyConfiguration(new FoodConfiguration());
+            builder.ApplyConfiguration(new TableConfiguration());
+            builder.ApplyConfiguration(new SalaryConfiguration());
+        }
+
+        public override int SaveChanges()
+        {
+            BeforeSaveChanges();
+            return base.SaveChanges();
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            BeforeSaveChanges();
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void BeforeSaveChanges()
+        {
+            var entities = this.ChangeTracker.Entries();
+            foreach (var entry in entities)
+            {
+                if (entry.Entity is IBaseEntity entityBase)
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Modified: entityBase.UpdatedAt = DateTime.Now; break;
+                        case EntityState.Added:
+                            entityBase.UpdatedAt = DateTime.Now;
+                            entityBase.InsertedAt = DateTime.Now;
+                            break;
+                    }
+                }
+            }
         }
     }
 }
