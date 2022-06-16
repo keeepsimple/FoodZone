@@ -1,18 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FoodZone.API.Models
+namespace FoodZone.Services.DTO
 {
-    public class SalaryDTO
+    public class MenuDTO
     {
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "The {0} is required")]
-        public decimal BasicSalary { get; set; }
 
         [Required(ErrorMessage = "The {0} is required")]
         [StringLength(255, ErrorMessage = "The {0} must between {2} and {1} characters", MinimumLength = 3)]
         public string Name { get; set; }
 
-        public string AccountId { get; set; }
+        [Required(ErrorMessage = "The {0} is required")]
+        [StringLength(255, ErrorMessage = "The {0} must less than {1} characters")]
+        public string Description { get; set; }
     }
 }

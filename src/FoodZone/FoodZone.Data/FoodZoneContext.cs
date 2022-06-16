@@ -1,7 +1,7 @@
 ﻿using FoodZone.Data.Configuration;
 using FoodZone.Models.BaseEntities;
 using FoodZone.Models.Common;
-using FoodZone.Models.Sercurity;
+using FoodZone.Models.Security;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,4 @@
 ﻿using FoodZone.Models.BaseEntities;
-using FoodZone.Models.Sercurity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

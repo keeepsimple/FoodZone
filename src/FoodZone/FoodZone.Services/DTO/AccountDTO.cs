@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FoodZone.API.Models
+namespace FoodZone.Services.DTO
 {
     public class LoginUserDTO
     {

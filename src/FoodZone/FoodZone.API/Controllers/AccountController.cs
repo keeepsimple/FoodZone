@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using FoodZone.API.Models;
-using FoodZone.Models.Sercurity;
+using FoodZone.Models.Security;
+using FoodZone.Services.DTO;
+using FoodZone.Services.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,14 @@ namespace FoodZone.API.Controllers
         private readonly UserManager<Account> _userManager;
         private readonly SignInManager<Account> _signInManager;
         private readonly IMapper _mapper;
+        private readonly IAuthServices _authServices;
 
-        public AccountController(UserManager<Account> userManager, SignInManager<Account> signInManager, IMapper mapper)
+        public AccountController(UserManager<Account> userManager, SignInManager<Account> signInManager, IMapper mapper, IAuthServices authServices)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
+            _authServices = authServices;
         }
 
         [HttpPost]
@@ -46,33 +49,20 @@ namespace FoodZone.API.Controllers
             return Accepted();
         }
 
-        //[HttpPost]
-        //[Route("login")]
-        //public async Task<IActionResult> Login([FromBody] LoginUserDTO loginUserDTO)
-        //{
-        //    _logger.LogInformation($"Login For {loginUserDTO.Email}");
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    try
-        //    {
-        //        var result = await _signInManager.PasswordSignInAsync(loginUserDTO.Email, 
-        //                                                               loginUserDTO.Password,
-        //                                                               false, false);
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserDTO loginUserDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!await _authServices.ValidateUser(loginUserDTO))
+            {
+                return Unauthorized(loginUserDTO);
+            }
 
-        //        if (!result.Succeeded)
-        //        {
-        //            return Unauthorized(loginUserDTO);
-        //        }
-
-        //        return Accepted();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, $"Something went wrong in the {nameof(Login)}");
-        //        return Problem($"Something went wrong in the {nameof(Login)}", statusCode: 500);
-        //    }
-        //}
+            return Accepted(new {Token = await _authServices.CreateToken()});
+        }
     }
 }

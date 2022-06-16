@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using FoodZone.API.Models;
 using FoodZone.Models.Common;
-using FoodZone.Models.Sercurity;
+using FoodZone.Models.Security;
+using FoodZone.Services.DTO;
 
 namespace FoodZone.API.Configurations
 {

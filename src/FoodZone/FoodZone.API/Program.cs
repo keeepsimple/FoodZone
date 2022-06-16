@@ -1,17 +1,13 @@
 using FoodZone.API.Configurations;
 using FoodZone.Data;
 using FoodZone.Data.Infrastructure;
-using FoodZone.Models.Sercurity;
 using FoodZone.Services.IServices;
 using FoodZone.Services.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Serilog;
-using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var Configuration = builder.Configuration;
 //config log
 //builder.Host.UseSerilog();
 //Log.Logger = new LoggerConfiguration()
@@ -28,9 +24,9 @@ builder.Services.AddDbContext<FoodZoneContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("FoodZoneCnn"));
 });
 
-//config identity
 builder.Services.ConfigureIdentity();
 builder.Services.AddAuthentication();
+builder.Services.ConfigureJWT(Configuration);
 
 //add dependency injection
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -42,6 +38,7 @@ builder.Services.AddScoped<IReservationDetailServices, ReservationDetailServices
 builder.Services.AddScoped<IMenuServices, MenuServices>();
 builder.Services.AddScoped<ISalaryServices, SalaryServices>();
 builder.Services.AddScoped<ITableServices, TableServices>();
+builder.Services.AddScoped<IAuthServices, AuthServices>();
 
 builder.Services.AddControllers();
 
@@ -57,7 +54,38 @@ builder.Services.AddCors(o =>
 builder.Services.AddAutoMapper(typeof(MapperInitializer));
 
 //config api docs
-builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodZone", Version = "v1" }));
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"JWT Authorization header using the Bearer scheme.
+        Enter 'Bearer' [space] and then your token in the text input below.
+        Example: 'Bearer 12345abcdef",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            },
+            Scheme = "0auth2",
+            Name = "Bearer",
+            In = ParameterLocation.Header
+            },
+            new List<string>()
+    }});
+
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodZone", Version = "v1" });
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

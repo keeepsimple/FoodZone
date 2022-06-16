@@ -1,4 +1,4 @@
-﻿namespace FoodZone.API.Models
+﻿namespace FoodZone.Services.DTO
 {
     public class FeedbackDTO
     {
