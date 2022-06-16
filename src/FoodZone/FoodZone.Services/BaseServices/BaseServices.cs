@@ -13,6 +13,7 @@ namespace FoodZone.Services.BaseServices
             _unitOfWork = unitOfWork;
         }
 
+
         public virtual int Add(TEntity entity)
         {
             if (entity == null)
