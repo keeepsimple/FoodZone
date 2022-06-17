@@ -2,6 +2,7 @@
 using FoodZone.Models.BaseEntities;
 using FoodZone.Models.Common;
 using FoodZone.Models.Security;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,28 @@ namespace FoodZone.Data
             builder.ApplyConfiguration(new FoodConfiguration());
             builder.ApplyConfiguration(new TableConfiguration());
             builder.ApplyConfiguration(new SalaryConfiguration());
+
+            //var passwordHash = new PasswordHasher<Account>();
+
+            //var user = new Account
+            //{
+            //    Email = "owner@foodzone.com",
+            //    UserName = "owner@foodzone.com",
+            //    FullName = "Quang",
+            //    PhoneNumber = "0985786750",
+            //    Id = "fec388f4-32c6-4e2c-bae0-d3c807612c6d",
+            //    PasswordHash=passwordHash.HashPassword(null,"admin123")
+            //};
+
+            //builder.Entity<Account>().HasData(user);
+
+            //builder.Entity<IdentityUserRole<string>>().HasData(
+            //    new IdentityUserRole<string>()
+            //    {
+            //        RoleId = "5188a7a7-5b1d-4c02-a47e-d032961253f9",
+            //        UserId = "fec388f4-32c6-4e2c-bae0-d3c807612c6d"
+            //    }
+            //    );
         }
 
         public override int SaveChanges()

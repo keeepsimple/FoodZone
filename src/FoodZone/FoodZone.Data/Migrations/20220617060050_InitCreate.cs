@@ -372,10 +372,10 @@ namespace FoodZone.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5c2b0474-36f5-4649-a195-23cd58408b55", "7c2182c9-4773-45bf-b9a6-38f6482d0b36", "Staff", "STAFF" },
-                    { "9acc3c05-d4da-46e5-b1f6-f611ecea0963", "94690d2a-ff99-44f9-8557-542148803985", "Manager", "MANAGER" },
-                    { "b149f796-68cb-45e4-a6e9-6b985b7c53c0", "33de990e-ad18-4153-99d5-08879f6d8cf4", "User", "USER" },
-                    { "d37aa94c-c312-4e78-be72-448fe8f6638b", "37cf89c8-78fb-4e6f-9d9c-42535386358e", "Owner", "OWNER" }
+                    { "5188a7a7-5b1d-4c02-a47e-d032961253f9", "52eb0b83-f89b-448c-84c7-068ee58f2fb0", "Owner", "OWNER" },
+                    { "6db8e259-cc84-44f0-952a-20daf821a5ac", "54bd66ce-8c03-4a66-800b-3a526acb73be", "Staff", "STAFF" },
+                    { "850d4e33-fcb4-417b-b738-67edfb69d5ee", "ec444353-66e5-48ed-81c2-42d9668f87f2", "User", "USER" },
+                    { "96b48346-4528-47cb-be00-a3eeecc7b695", "320bb7f0-5184-4485-9ac3-3498572c0e87", "Manager", "MANAGER" }
                 });
 
             migrationBuilder.InsertData(
@@ -384,10 +384,10 @@ namespace FoodZone.Data.Migrations
                 columns: new[] { "Id", "Description", "InsertedAt", "IsDeleted", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Mang lại một vị tươi mới", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4339), false, "Đồ Uống", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "Mỗi mùa mang đến một vị khác nhau", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4348), false, "Thực Đơn Theo Mùa", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "Mùa nào cũng có", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4349), false, "Thực Đơn Tối", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "Mùa nào cũng có", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4350), false, "Thực Đơn Sáng", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, "Mang lại một vị tươi mới", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1355), false, "Đồ Uống", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Mỗi mùa mang đến một vị khác nhau", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1364), false, "Thực Đơn Theo Mùa", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Mùa nào cũng có", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1391), false, "Thực Đơn Tối", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Mùa nào cũng có", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1392), false, "Thực Đơn Sáng", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -396,11 +396,11 @@ namespace FoodZone.Data.Migrations
                 columns: new[] { "Id", "AccountId", "BasicSalary", "InsertedAt", "IsDeleted", "Name", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, null, 3000000m, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4586), false, "Nhân viên 1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, null, 4000000m, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4587), false, "Nhân viên 2", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, null, 5000000m, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4588), false, "Nhân viên 3", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, null, 8000000m, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4589), false, "Quản lý 1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, null, 10000000m, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4590), false, "Quản lý 2", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, null, 3000000m, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1612), false, "Nhân viên 1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, null, 4000000m, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1614), false, "Nhân viên 2", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, null, 5000000m, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1615), false, "Nhân viên 3", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, null, 8000000m, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1616), false, "Quản lý 1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, null, 10000000m, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1617), false, "Quản lý 2", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -409,14 +409,14 @@ namespace FoodZone.Data.Migrations
                 columns: new[] { "Id", "Capacity", "InsertedAt", "IsDeleted", "Status", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, 10, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4502), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 10, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4505), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 8, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4506), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 8, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4507), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 6, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4508), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 6, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4509), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, 2, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4510), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, 2, new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4511), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 10, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1543), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 10, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1544), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 8, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1545), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 8, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1546), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 6, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1547), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 6, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1548), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, 2, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1549), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, 2, new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1550), false, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -425,14 +425,14 @@ namespace FoodZone.Data.Migrations
                 columns: new[] { "Id", "Description", "Image", "InsertedAt", "IsDeleted", "MenuId", "Name", "Price", "RateCount", "Status", "TotalRate", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "Có vị thanh ngọt của đào, vị chua dịu của những tép cam căng mọng, vị chát của trà, cùng hương thơm nồng đặc trưng của sả.", "tradaocamxa.jpg", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4423), false, 1, "Trà Đào Cam Sả", 30000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, "Vị chua chua hòa quyện với vị ngọt từ hoa quả cùng cảm giác mát lạnh từ món ăn.", "suachuadanhda.jpg", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4425), false, 1, "Sữa Chua Đánh Đá", 30000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, "Thịt bò được kho vừa mềm mà không bị dai, cà rốt giòn ngọt thấm vị nước sốt cay cay mặn mặn đậm đà, dậy mùi thơm phức từ sả rất hấp dẫn.", "thitbokhocarot.jpg", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4427), false, 2, "Thịt Bò Kho Cà Rốt", 50000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, "Mùi vị thơm ngon và độ dai giòn của mực hòa với vị ngon của nhân bên trong. ", "mucvientuyethoa.jpg", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4429), false, 2, "Mực Viên Tuyết Hoa", 215000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, "Ướp với nước sốt đặc biệt làm món ăn ngon ngọt thơm.", "canhganuongraucu.png", new DateTime(2022, 6, 14, 18, 57, 22, 962, DateTimeKind.Local).AddTicks(4430), false, 3, "Cánh Gà Nướng Rau Củ", 150000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, "Vị thơm của dứa thêm vào cho sườn heo một vị chua chua.", "suonheoomdua.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 3, "Sườn Heo Om Dứa", 170000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, "Vị thơm của cà thêm vào cho thịt heo vị ngon.", "catimhapthitheo.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 4, "Cà Tím Hấp Thịt Heo", 130000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, "Vị thơm của cà thêm vào cho thịt heo vị ngon.", "dauphuomvoitom.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, 4, "Đậu Phụ Om Với Tôm", 120000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, "Có vị thanh ngọt của đào, vị chua dịu của những tép cam căng mọng, vị chát của trà, cùng hương thơm nồng đặc trưng của sả.", "tradaocamxa.jpg", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1465), false, 1, "Trà Đào Cam Sả", 30000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "Vị chua chua hòa quyện với vị ngọt từ hoa quả cùng cảm giác mát lạnh từ món ăn.", "suachuadanhda.jpg", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1466), false, 1, "Sữa Chua Đánh Đá", 30000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Thịt bò được kho vừa mềm mà không bị dai, cà rốt giòn ngọt thấm vị nước sốt cay cay mặn mặn đậm đà, dậy mùi thơm phức từ sả rất hấp dẫn.", "thitbokhocarot.jpg", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1468), false, 2, "Thịt Bò Kho Cà Rốt", 50000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, "Mùi vị thơm ngon và độ dai giòn của mực hòa với vị ngon của nhân bên trong. ", "mucvientuyethoa.jpg", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1469), false, 2, "Mực Viên Tuyết Hoa", 215000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, "Ướp với nước sốt đặc biệt làm món ăn ngon ngọt thơm.", "canhganuongraucu.png", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1470), false, 3, "Cánh Gà Nướng Rau Củ", 150000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, "Vị thơm của dứa thêm vào cho sườn heo một vị chua chua.", "suonheoomdua.png", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1472), false, 3, "Sườn Heo Om Dứa", 170000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, "Vị thơm của cà thêm vào cho thịt heo vị ngon.", "catimhapthitheo.png", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1473), false, 4, "Cà Tím Hấp Thịt Heo", 130000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, "Vị thơm của cà thêm vào cho thịt heo vị ngon.", "dauphuomvoitom.png", new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1475), false, 4, "Đậu Phụ Om Với Tôm", 120000m, 0, 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.CreateIndex(
