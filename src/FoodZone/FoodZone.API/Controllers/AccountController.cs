@@ -14,19 +14,22 @@ namespace FoodZone.API.Controllers
     {
         private readonly UserManager<Account> _userManager;
         private readonly SignInManager<Account> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly IAuthServices _authServices;
 
-        public AccountController(UserManager<Account> userManager, SignInManager<Account> signInManager, IMapper mapper, IAuthServices authServices)
+        public AccountController(UserManager<Account> userManager, SignInManager<Account> signInManager,
+            IMapper mapper, IAuthServices authServices, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _authServices = authServices;
+            _roleManager = roleManager;
         }
 
         [HttpPost]
-        [Route("register")]
+        [Route("Register")]
         public async Task<IActionResult> Register([FromBody] AccountDTO accountDTO)
         {
             if (!ModelState.IsValid)
@@ -46,11 +49,18 @@ namespace FoodZone.API.Controllers
                 return BadRequest(ModelState);
             }
 
+            var defaultRole = _roleManager.FindByNameAsync("User").Result;
+
+            if (defaultRole != null)
+            {
+                IdentityResult role = await _userManager.AddToRoleAsync(user, defaultRole.Name);
+            }
+
             return Accepted();
         }
 
         [HttpPost]
-        [Route("login")]
+        [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginUserDTO loginUserDTO)
         {
             if (!ModelState.IsValid)
@@ -62,7 +72,7 @@ namespace FoodZone.API.Controllers
                 return Unauthorized(loginUserDTO);
             }
 
-            return Accepted(new {Token = await _authServices.CreateToken()});
+            return Accepted(new { Token = await _authServices.CreateToken() });
         }
     }
 }
