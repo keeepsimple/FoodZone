@@ -72,7 +72,14 @@ namespace FoodZone.API.Controllers
                 return Unauthorized(loginUserDTO);
             }
 
-            return Accepted(new { Token = await _authServices.CreateToken() });
+            var jwt = await _authServices.CreateToken();
+
+            Response.Cookies.Append(jwt, jwt, new CookieOptions
+            {
+                HttpOnly = true
+            });
+
+            return Ok(new { message = "success" });
         }
     }
 }

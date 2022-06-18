@@ -45,9 +45,10 @@ builder.Services.AddControllers();
 //add cors
 builder.Services.AddCors(o =>
 {
-    o.AddPolicy("AllowAll", bder => bder.AllowAnyOrigin()
-                                                           .AllowAnyMethod()
-                                                           .AllowAnyHeader());
+    o.AddPolicy("AllowAll", bder => bder.WithOrigins("http://localhost:3000")
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader()
+                                        .AllowCredentials());
 });
 
 //add automapper

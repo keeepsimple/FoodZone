@@ -10,12 +10,12 @@ namespace FoodZone.API.AdminController
     [ApiController]
     public class MenuManagementController : ControllerBase
     {
-        private readonly IMenuServices _foodServices;
+        private readonly IMenuServices _menuServices;
         private readonly IMapper _mapper;
 
         public MenuManagementController(IMenuServices menuServices, IMapper mapper)
         {
-            _foodServices = menuServices;
+            _menuServices = menuServices;
             _mapper = mapper;
         }
 
@@ -23,14 +23,14 @@ namespace FoodZone.API.AdminController
         [Route("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var menu = await _foodServices.GetAllAsync();
+            var menu = await _menuServices.GetAllAsync();
             return Ok(menu);
         }
 
         [HttpGet("{id:int}", Name = "GetMenu")]
         public async Task<IActionResult> GetMenu(int id)
         {
-            var menu = await _foodServices.GetByIdAsync(id);
+            var menu = await _menuServices.GetByIdAsync(id);
             var result = _mapper.Map<MenuDTO>(menu);
             return Ok(result);
         }
@@ -45,7 +45,7 @@ namespace FoodZone.API.AdminController
             }
 
             var menu = _mapper.Map<Menu>(menuDTO);
-            await _foodServices.AddAsync(menu);
+            await _menuServices.AddAsync(menu);
 
             return Ok(menu);
         }
@@ -58,14 +58,14 @@ namespace FoodZone.API.AdminController
                 return BadRequest(ModelState);
             }
 
-            var menu = await _foodServices.GetByIdAsync(id);
+            var menu = await _menuServices.GetByIdAsync(id);
             if(menu == null)
             {
                 return BadRequest(menu);
             }
 
             _mapper.Map(menuDTO, menu);
-            await _foodServices.UpdateAsync(menu);
+            await _menuServices.UpdateAsync(menu);
 
             return Ok(menu);
         }
@@ -78,13 +78,13 @@ namespace FoodZone.API.AdminController
                 return BadRequest();
             }
 
-            var menu = await _foodServices.GetByIdAsync(id);
+            var menu = await _menuServices.GetByIdAsync(id);
             if (menu == null)
             {
                 return BadRequest(menu);
             }
 
-            await _foodServices.DeleteAsync(menu);
+            await _menuServices.DeleteAsync(menu);
             return Ok();
         }
     }
