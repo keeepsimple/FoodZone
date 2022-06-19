@@ -17,7 +17,7 @@ namespace FoodZone.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -111,7 +111,7 @@ namespace FoodZone.Data.Migrations
                             Id = 1,
                             Description = "Có vị thanh ngọt của đào, vị chua dịu của những tép cam căng mọng, vị chát của trà, cùng hương thơm nồng đặc trưng của sả.",
                             Image = "tradaocamxa.jpg",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1465),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(622),
                             IsDeleted = false,
                             MenuId = 1,
                             Name = "Trà Đào Cam Sả",
@@ -126,7 +126,7 @@ namespace FoodZone.Data.Migrations
                             Id = 2,
                             Description = "Vị chua chua hòa quyện với vị ngọt từ hoa quả cùng cảm giác mát lạnh từ món ăn.",
                             Image = "suachuadanhda.jpg",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1466),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(624),
                             IsDeleted = false,
                             MenuId = 1,
                             Name = "Sữa Chua Đánh Đá",
@@ -141,7 +141,7 @@ namespace FoodZone.Data.Migrations
                             Id = 3,
                             Description = "Thịt bò được kho vừa mềm mà không bị dai, cà rốt giòn ngọt thấm vị nước sốt cay cay mặn mặn đậm đà, dậy mùi thơm phức từ sả rất hấp dẫn.",
                             Image = "thitbokhocarot.jpg",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1468),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(625),
                             IsDeleted = false,
                             MenuId = 2,
                             Name = "Thịt Bò Kho Cà Rốt",
@@ -156,7 +156,7 @@ namespace FoodZone.Data.Migrations
                             Id = 4,
                             Description = "Mùi vị thơm ngon và độ dai giòn của mực hòa với vị ngon của nhân bên trong. ",
                             Image = "mucvientuyethoa.jpg",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1469),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(626),
                             IsDeleted = false,
                             MenuId = 2,
                             Name = "Mực Viên Tuyết Hoa",
@@ -171,7 +171,7 @@ namespace FoodZone.Data.Migrations
                             Id = 5,
                             Description = "Ướp với nước sốt đặc biệt làm món ăn ngon ngọt thơm.",
                             Image = "canhganuongraucu.png",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1470),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(628),
                             IsDeleted = false,
                             MenuId = 3,
                             Name = "Cánh Gà Nướng Rau Củ",
@@ -186,7 +186,7 @@ namespace FoodZone.Data.Migrations
                             Id = 6,
                             Description = "Vị thơm của dứa thêm vào cho sườn heo một vị chua chua.",
                             Image = "suonheoomdua.png",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1472),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(629),
                             IsDeleted = false,
                             MenuId = 3,
                             Name = "Sườn Heo Om Dứa",
@@ -201,7 +201,7 @@ namespace FoodZone.Data.Migrations
                             Id = 7,
                             Description = "Vị thơm của cà thêm vào cho thịt heo vị ngon.",
                             Image = "catimhapthitheo.png",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1473),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(630),
                             IsDeleted = false,
                             MenuId = 4,
                             Name = "Cà Tím Hấp Thịt Heo",
@@ -216,7 +216,7 @@ namespace FoodZone.Data.Migrations
                             Id = 8,
                             Description = "Vị thơm của cà thêm vào cho thịt heo vị ngon.",
                             Image = "dauphuomvoitom.png",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1475),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(631),
                             IsDeleted = false,
                             MenuId = 4,
                             Name = "Đậu Phụ Om Với Tôm",
@@ -264,7 +264,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 1,
                             Description = "Mang lại một vị tươi mới",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1355),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(413),
                             IsDeleted = false,
                             Name = "Đồ Uống",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -273,7 +273,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 2,
                             Description = "Mỗi mùa mang đến một vị khác nhau",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1364),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(424),
                             IsDeleted = false,
                             Name = "Thực Đơn Theo Mùa",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -282,7 +282,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 3,
                             Description = "Mùa nào cũng có",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1391),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(425),
                             IsDeleted = false,
                             Name = "Thực Đơn Tối",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -291,7 +291,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 4,
                             Description = "Mùa nào cũng có",
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1392),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(426),
                             IsDeleted = false,
                             Name = "Thực Đơn Sáng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -454,7 +454,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 1,
                             BasicSalary = 3000000m,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1612),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(846),
                             IsDeleted = false,
                             Name = "Nhân viên 1",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -463,7 +463,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 2,
                             BasicSalary = 4000000m,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1614),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(847),
                             IsDeleted = false,
                             Name = "Nhân viên 2",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -472,7 +472,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 3,
                             BasicSalary = 5000000m,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1615),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(848),
                             IsDeleted = false,
                             Name = "Nhân viên 3",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -481,7 +481,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 4,
                             BasicSalary = 8000000m,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1616),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(849),
                             IsDeleted = false,
                             Name = "Quản lý 1",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -490,7 +490,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 5,
                             BasicSalary = 10000000m,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1617),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(850),
                             IsDeleted = false,
                             Name = "Quản lý 2",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -529,7 +529,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 1,
                             Capacity = 10,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1543),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(748),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -538,7 +538,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 2,
                             Capacity = 10,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1544),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(749),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -547,7 +547,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 3,
                             Capacity = 8,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1545),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(750),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -556,7 +556,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 4,
                             Capacity = 8,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1546),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(751),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -565,7 +565,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 5,
                             Capacity = 6,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1547),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(752),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -574,7 +574,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 6,
                             Capacity = 6,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1548),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(753),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -583,7 +583,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 7,
                             Capacity = 2,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1549),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(754),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -592,7 +592,7 @@ namespace FoodZone.Data.Migrations
                         {
                             Id = 8,
                             Capacity = 2,
-                            InsertedAt = new DateTime(2022, 6, 17, 13, 0, 50, 110, DateTimeKind.Local).AddTicks(1550),
+                            InsertedAt = new DateTime(2022, 6, 19, 0, 25, 50, 624, DateTimeKind.Local).AddTicks(754),
                             IsDeleted = false,
                             Status = 1,
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -667,6 +667,24 @@ namespace FoodZone.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "fec388f4-32c6-4e2c-bae0-d3c807612c6d",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "779265e1-f218-4161-aff7-2e697dd408f0",
+                            Email = "owner@foodzone.com",
+                            EmailConfirmed = false,
+                            FullName = "Quang",
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEEq8MUCPJS/GZLTz5Ngr6npdDecUkOoTTFwDygK5sxU5xu98QxkFpIZQMHoicNWF+Q==",
+                            PhoneNumber = "0985786750",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ff966643-b843-44dc-8a4c-985d24e8287f",
+                            TwoFactorEnabled = false,
+                            UserName = "owner@foodzone.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -699,28 +717,28 @@ namespace FoodZone.Data.Migrations
                         new
                         {
                             Id = "850d4e33-fcb4-417b-b738-67edfb69d5ee",
-                            ConcurrencyStamp = "ec444353-66e5-48ed-81c2-42d9668f87f2",
+                            ConcurrencyStamp = "2b65d4ec-3f43-4d67-8672-38e75eaf40ab",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "6db8e259-cc84-44f0-952a-20daf821a5ac",
-                            ConcurrencyStamp = "54bd66ce-8c03-4a66-800b-3a526acb73be",
+                            ConcurrencyStamp = "0442e20b-c219-43dc-903d-19a104cea932",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         },
                         new
                         {
                             Id = "96b48346-4528-47cb-be00-a3eeecc7b695",
-                            ConcurrencyStamp = "320bb7f0-5184-4485-9ac3-3498572c0e87",
+                            ConcurrencyStamp = "9eb65db5-3e70-4afc-b9b7-442b0c8a6b6b",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = "5188a7a7-5b1d-4c02-a47e-d032961253f9",
-                            ConcurrencyStamp = "52eb0b83-f89b-448c-84c7-068ee58f2fb0",
+                            ConcurrencyStamp = "984f8b7c-3ce2-417f-8438-e63ff6d8ec2a",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -779,10 +797,12 @@ namespace FoodZone.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -811,6 +831,13 @@ namespace FoodZone.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "fec388f4-32c6-4e2c-bae0-d3c807612c6d",
+                            RoleId = "5188a7a7-5b1d-4c02-a47e-d032961253f9"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -819,10 +846,12 @@ namespace FoodZone.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
