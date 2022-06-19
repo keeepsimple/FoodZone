@@ -14,5 +14,9 @@
 /src/FoodZone/.vs
 /src/FoodZone/FoodZone.Extensions/obj
 /src/FoodZone/FoodZone.API/logs
+<<<<<<< HEAD
 /src/FoodZone/FoodZone.Web/obj/Debug/net6.0
+=======
+/src/FoodZone/FoodZone.Web/bin/Debug/net6.0
+>>>>>>> origin/main
 /src/FoodZone/FoodZone.Web/obj

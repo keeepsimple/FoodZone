@@ -35,27 +35,44 @@ namespace FoodZone.Data
             builder.ApplyConfiguration(new TableConfiguration());
             builder.ApplyConfiguration(new SalaryConfiguration());
 
-            //var passwordHash = new PasswordHasher<Account>();
+            this.SeedAdmin(builder);
+            this.SeedUserRole(builder);
 
-            //var user = new Account
-            //{
-            //    Email = "owner@foodzone.com",
-            //    UserName = "owner@foodzone.com",
-            //    FullName = "Quang",
-            //    PhoneNumber = "0985786750",
-            //    Id = "fec388f4-32c6-4e2c-bae0-d3c807612c6d",
-            //    PasswordHash=passwordHash.HashPassword(null,"admin123")
-            //};
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                var tableName = entityType.GetTableName();
+                if (tableName.StartsWith("AspNet"))
+                {
+                    entityType.SetTableName(tableName.Substring(6));
+                }
+            }
+        }
 
-            //builder.Entity<Account>().HasData(user);
+        private void SeedAdmin(ModelBuilder modelBuilder)
+        {
+            var passwordHash = new PasswordHasher<Account>();
+            var admin = new Account
+            {
+                Email = "owner@foodzone.com",
+                UserName = "owner@foodzone.com",
+                FullName = "Quang",
+                PhoneNumber = "0985786750",
+                Id = "fec388f4-32c6-4e2c-bae0-d3c807612c6d",
+                PasswordHash = passwordHash.HashPassword(null, "admin123")
+            };
 
-            //builder.Entity<IdentityUserRole<string>>().HasData(
-            //    new IdentityUserRole<string>()
-            //    {
-            //        RoleId = "5188a7a7-5b1d-4c02-a47e-d032961253f9",
-            //        UserId = "fec388f4-32c6-4e2c-bae0-d3c807612c6d"
-            //    }
-            //    );
+            modelBuilder.Entity<Account>().HasData(admin);
+        }
+
+        private void SeedUserRole(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>()
+                {
+                    RoleId = "5188a7a7-5b1d-4c02-a47e-d032961253f9",
+                    UserId = "fec388f4-32c6-4e2c-bae0-d3c807612c6d"
+                }
+                );
         }
 
         public override int SaveChanges()
