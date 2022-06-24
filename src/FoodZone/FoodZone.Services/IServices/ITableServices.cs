@@ -3,7 +3,7 @@ using FoodZone.Services.BaseServices;
 
 namespace FoodZone.Services.IServices
 {
-    public interface ITableServices : IBaseServices<Table>
+    public interface ITableServices:IBaseServices<Table>
     {
     }
 }

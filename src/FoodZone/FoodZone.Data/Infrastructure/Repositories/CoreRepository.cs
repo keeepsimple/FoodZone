@@ -1,6 +1,10 @@
 ﻿using FoodZone.Models.BaseEntities;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace FoodZone.Data.Infrastructure.Repositories
 {
@@ -99,6 +103,28 @@ namespace FoodZone.Data.Infrastructure.Repositories
         {
             //_dbSet.AddOrUpdate(entity);
             _context.Entry(entity).State = EntityState.Modified;
+        }
+
+        public virtual IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>,
+            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "", bool canLoadDeleted = false)
+        {
+            IQueryable<TEntity> query = DbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (canLoadDeleted == false)
+            {
+                query = query.Where(x => x.IsDeleted == canLoadDeleted);
+            }
+
+            foreach (var includeProperty in includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return orderBy != null ? orderBy(query) : query;
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using FoodZone.Models.BaseEntities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodZone.Models.Common
 {
-    [Table("Menu", Schema = "common")]
     public class Menu : BaseEntity
     {
         [Required(ErrorMessage = "The {0} is required")]
@@ -12,7 +11,9 @@ namespace FoodZone.Models.Common
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The {0} is required")]
-        [StringLength(255, ErrorMessage = "The {0} must less than {1} characters")]
+        [StringLength(500, ErrorMessage = "The {0} must less than {1} characters")]
         public string Description { get; set; }
+
+        public virtual ICollection<MenuFood> MenuFoods { get; set; }
     }
 }

@@ -1,78 +1,60 @@
-﻿using FoodZone.Data.Configuration;
-using FoodZone.Models.BaseEntities;
+﻿using FoodZone.Models.BaseEntities;
 using FoodZone.Models.Common;
 using FoodZone.Models.Security;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Data.Entity;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace FoodZone.Data
 {
-    public class FoodZoneContext : IdentityDbContext<Account>
+    public class FoodZoneContext: IdentityDbContext<User>
     {
-        public FoodZoneContext(DbContextOptions opt) : base(opt)
+        public FoodZoneContext(): base("FoodZoneCnn")
         {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+        }
 
+        static FoodZoneContext()
+        {
+            // Set the database initializer which is run once during application start
+            // This seeds the database with admin user credentials and admin role
+            Database.SetInitializer<FoodZoneContext>(new DbInitializer());
+        }
+
+        public static FoodZoneContext Create()
+        {
+            return new FoodZoneContext();
         }
 
         public DbSet<Food> Foods { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<Payment> Payments { get; set; }
+        public DbSet<MenuFood> MenuFoods { get; set; }
+        public DbSet<Notify> Notifies { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<ReservationDetail> ReservationDetails { get; set; }
-        public DbSet<Salary> Salaries { get; set; }
         public DbSet<Table> Tables { get; set; }
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<UserBlog> UserBlogs { get; set; }
+        public DbSet<UserFood> UserFoods { get; set; }
+        public DbSet<UserVoucher> UserVouchers { get; set; }
+        public DbSet<Voucher> Vouchers { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(i => i.UserId);
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(i => i.Id);
+            modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.RoleId, i.UserId });
 
-            builder.ApplyConfiguration(new RoleConfiguration());
-            builder.ApplyConfiguration(new MenuConfiguration());
-            builder.ApplyConfiguration(new FoodConfiguration());
-            builder.ApplyConfiguration(new TableConfiguration());
-            builder.ApplyConfiguration(new SalaryConfiguration());
-
-            this.SeedAdmin(builder);
-            this.SeedUserRole(builder);
-
-            foreach (var entityType in builder.Model.GetEntityTypes())
-            {
-                var tableName = entityType.GetTableName();
-                if (tableName.StartsWith("AspNet"))
-                {
-                    entityType.SetTableName(tableName.Substring(6));
-                }
-            }
-        }
-
-        private void SeedAdmin(ModelBuilder modelBuilder)
-        {
-            var passwordHash = new PasswordHasher<Account>();
-            var admin = new Account
-            {
-                Email = "owner@foodzone.com",
-                UserName = "owner@foodzone.com",
-                FullName = "Quang",
-                PhoneNumber = "0985786750",
-                Id = "fec388f4-32c6-4e2c-bae0-d3c807612c6d",
-                PasswordHash = passwordHash.HashPassword(null, "admin123")
-            };
-
-            modelBuilder.Entity<Account>().HasData(admin);
-        }
-
-        private void SeedUserRole(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string>()
-                {
-                    RoleId = "5188a7a7-5b1d-4c02-a47e-d032961253f9",
-                    UserId = "fec388f4-32c6-4e2c-bae0-d3c807612c6d"
-                }
-                );
+            modelBuilder.Entity<User>().Ignore(c => c.AccessFailedCount)
+                                       .Ignore(c => c.LockoutEnabled)
+                                       .Ignore(c => c.LockoutEndDateUtc)
+                                       .Ignore(c => c.TwoFactorEnabled)
+                                       .Ignore(c => c.EmailConfirmed)
+                                       .Ignore(c => c.PhoneNumberConfirmed);
+            
+            modelBuilder.Entity<User>().ToTable("Users");
         }
 
         public override int SaveChanges()
@@ -81,10 +63,10 @@ namespace FoodZone.Data
             return base.SaveChanges();
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override async Task<int> SaveChangesAsync()
         {
             BeforeSaveChanges();
-            return await base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync();
         }
 
         private void BeforeSaveChanges()
