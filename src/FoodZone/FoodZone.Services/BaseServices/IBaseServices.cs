@@ -1,4 +1,7 @@
-﻿namespace FoodZone.Services.BaseServices
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace FoodZone.Services.BaseServices
 {
     public interface IBaseServices<TEntity>
     {

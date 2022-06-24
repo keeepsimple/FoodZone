@@ -1,4 +1,6 @@
-﻿namespace FoodZone.Models.BaseEntities
+﻿using System;
+
+namespace FoodZone.Models.BaseEntities
 {
     public interface IBaseEntity
     {

@@ -1,30 +1,23 @@
 ﻿using FoodZone.Models.BaseEntities;
 using FoodZone.Models.Security;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace FoodZone.Models.Common
 {
-    [Table("Reservations", Schema = "common")]
     public class Reservation : BaseEntity
     {
-        public DateTime ReservationDate { get; set; }
-
-        public int Status { get; set; }
-
-        [Required(ErrorMessage = "The {0} is required")]
-        [StringLength(255, ErrorMessage = "The {0} must between {2} and {1} characters", MinimumLength = 3)]
-        public string CancelReason { get; set; }
-
-        public string AccountId { get; set; }
-
-        public Account Account { get; set; }
-
         public int TableId { get; set; }
 
         public Table Table { get; set; }
 
-        public virtual ICollection<ReservationDetail> ReservationDetails { get; set; }
-        
+        public string UserId { get; set; }
+
+        public User User { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public int Status { get; set; }
+
+        public virtual ICollection<Notify> Notifies { get; set; }
     }
 }

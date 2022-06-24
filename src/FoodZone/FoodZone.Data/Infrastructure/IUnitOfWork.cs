@@ -2,6 +2,9 @@
 using FoodZone.Models.BaseEntities;
 using FoodZone.Models.Common;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FoodZone.Data.Infrastructure
@@ -18,21 +21,27 @@ namespace FoodZone.Data.Infrastructure
 
         #region Master Data
 
-        ICoreRepository<Menu> MenuRepository { get; }
+        ICoreRepository<Blog> BlogRepository { get; }
 
-        ICoreRepository<ReservationDetail> ReservationDetailRepository { get; }
+        ICoreRepository<Menu> MenuRepository { get; }
 
         ICoreRepository<Food> FoodRepository { get; }
 
+        ICoreRepository<MenuFood> MenuFoodRepository { get; }
+
+        ICoreRepository<Notify> NotifyRepository { get; }
+
         ICoreRepository<Reservation> ReservationRepository { get; }
 
-        ICoreRepository<Feedback> FeedbackRepository { get; }
-
-        ICoreRepository<Payment> PaymentRepository { get; }
-
-        ICoreRepository<Salary> SalaryRepository { get; }
-
         ICoreRepository<Table> TableRepository { get; }
+
+        ICoreRepository<UserBlog> UserBlogRepository { get; }
+
+        ICoreRepository<UserFood> UserFoodRepository { get; }
+
+        ICoreRepository<UserVoucher> UserVoucherRepository { get; }
+
+        ICoreRepository<Voucher> VoucherRepository { get; }
 
         #endregion
 

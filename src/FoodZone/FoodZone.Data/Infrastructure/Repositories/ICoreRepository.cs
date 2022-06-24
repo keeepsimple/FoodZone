@@ -1,4 +1,8 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace FoodZone.Data.Infrastructure.Repositories
 {
@@ -20,6 +24,11 @@ namespace FoodZone.Data.Infrastructure.Repositories
 
         IQueryable<TEntity> GetQuery(Expression<Func<TEntity, bool>> where);
 
+        IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>,
+            IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "", bool canLoadDeleted = false);
+
         void Update(TEntity entity);
     }
+
+
 }
