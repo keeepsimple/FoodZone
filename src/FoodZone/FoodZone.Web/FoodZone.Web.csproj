@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,7 +277,6 @@
     <Content Include="Areas\Identity\Views\Web.config" />
     <Content Include="Areas\Identity\Views\UsersAdmin\Index.cshtml" />
     <Content Include="Areas\Identity\Views\UsersAdmin\Edit.cshtml" />
-    <Content Include="Areas\Identity\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Identity\Views\RolesAdmin\Index.cshtml" />
     <Content Include="Areas\Identity\Views\RolesAdmin\Edit.cshtml" />
     <Content Include="Areas\Identity\Views\RolesAdmin\Create.cshtml" />
@@ -289,6 +289,7 @@
     <Content Include="Areas\Admin\Views\TableAdmin\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TableAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TableAdmin\Index.cshtml" />
+    <Content Include="Areas\Identity\Views\Shared\_LayoutAdmin.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -356,6 +357,8 @@
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Shared\_GetAllMenu.cshtml" />
+    <Content Include="Views\Menu\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

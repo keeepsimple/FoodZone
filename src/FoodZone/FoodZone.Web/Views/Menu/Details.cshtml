@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Food>
+
+@{
+    ViewBag.Title = ViewBag.Menu;
+}
+
+@foreach (var item in Model)
+{
+    <h1>@item.Name</h1>
+    <h3>@item.Price.ToString("F0")</h3>
+    <img src="~/Assets/images/@item.Image" />
+    <h4>@item.Description</h4>
+}

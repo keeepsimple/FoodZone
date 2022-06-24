@@ -32,7 +32,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("Contact", "Home", new { area = "" })">Contact</a>
                 </li>
-                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                @if (Request.IsAuthenticated && User.IsInRole("Manager"))
                 {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,8 +53,11 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
-                <h1>Left Menu</h1>
+            <div class="col-md-2">
+                <a class="nav-link" href="@Url.Action("Index", "MenuAdmin", new {area="admin"})">Quản lý Menu</a>
+                <a class="nav-link" href="@Url.Action("Index", "TableAdmin", new {area="admin"})">Quản lý Bàn</a>
+                <a class="nav-link" href="@Url.Action("Index", "UsersAdmin", new {area="identity"})">Quản lý Khách hàng</a>
+                <a class="nav-link" href="@Url.Action("Index", "RolesAdmin", new {area="identity"})">Quản lý Role</a>
             </div>
             <div class="col-md-9">
                 @RenderBody()
