@@ -189,8 +189,12 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FoodAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\TableAdminController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\BlogViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\FoodViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\MenuViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TableViewModel.cs" />
     <Compile Include="Areas\Identity\Controllers\RolesAdminController.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="Areas\Identity\IdentityAreaRegistration.cs" />
     <Compile Include="Areas\Identity\ViewModels\AdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -214,6 +219,7 @@
     <Content Include="Assets\css\Site.css" />
     <Content Include="Assets\images\bootstrap-solid.svg" />
     <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\customize.js" />
     <Content Include="Assets\js\jquery-3.4.1.js" />
     <Content Include="Assets\js\jquery-3.4.1.min.js" />
     <Content Include="Assets\js\jquery-3.4.1.slim.min.js" />
@@ -290,6 +296,12 @@
     <Content Include="Areas\Admin\Views\TableAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\TableAdmin\Index.cshtml" />
     <Content Include="Areas\Identity\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogAdmin\Edit.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -359,6 +371,9 @@
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Shared\_GetAllMenu.cshtml" />
     <Content Include="Views\Menu\Details.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

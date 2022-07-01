@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -56,6 +57,8 @@
             <div class="col-md-2">
                 <a class="nav-link" href="@Url.Action("Index", "MenuAdmin", new {area="admin"})">Quản lý Menu</a>
                 <a class="nav-link" href="@Url.Action("Index", "TableAdmin", new {area="admin"})">Quản lý Bàn</a>
+                <a class="nav-link" href="@Url.Action("Index", "FoodAdmin", new {area="admin"})">Quản lý Đồ Ăn</a>
+                <a class="nav-link" href="@Url.Action("Index", "BlogAdmin", new {area="admin"})">Quản lý Blog</a>
                 <a class="nav-link" href="@Url.Action("Index", "UsersAdmin", new {area="identity"})">Quản lý Khách hàng</a>
                 <a class="nav-link" href="@Url.Action("Index", "RolesAdmin", new {area="identity"})">Quản lý Role</a>
             </div>

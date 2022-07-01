@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace FoodZone.Web.Areas.Admin.ViewModels
 {
@@ -12,5 +13,9 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public IEnumerable<int> SelectedFoodIds { get; set; }
+
+        public IEnumerable<SelectListItem> Foods { get; set; }
     }
 }
