@@ -3,21 +3,21 @@
 ################################################################################
 
 /src/FoodZone/.vs/FoodZone/v17
-/src/FoodZone/FoodZone.Models/bin/Debug
+/src/FoodZone/FoodZone.Models/bin
 /src/FoodZone/FoodZone.Models/obj
-/src/FoodZone/FoodZone.API/bin/Debug
+/src/FoodZone/FoodZone.API/bin
 /src/FoodZone/FoodZone.API/obj
-/src/FoodZone/FoodZone.Data/bin/Debug
+/src/FoodZone/FoodZone.Data/bin
 /src/FoodZone/FoodZone.Data/obj
-/src/FoodZone/FoodZone.Services/bin/Debug
+/src/FoodZone/FoodZone.Services/bin
 /src/FoodZone/FoodZone.Services/obj
 /src/FoodZone/.vs
 /src/FoodZone/FoodZone.Extensions/obj
 /src/FoodZone/FoodZone.API/logs
 <<<<<<< HEAD
-/src/FoodZone/FoodZone.Web/obj/Debug
+/src/FoodZone/FoodZone.Web/obj
 =======
-/src/FoodZone/FoodZone.Web/bin/Debug
+/src/FoodZone/FoodZone.Web/bin
 >>>>>>> origin/main
 /src/FoodZone/FoodZone.Web/obj
 /src/FoodZone/packages
