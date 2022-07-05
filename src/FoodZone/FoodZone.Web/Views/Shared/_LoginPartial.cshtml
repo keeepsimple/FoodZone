@@ -1,0 +1,17 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
+        @Html.AntiForgeryToken()
+        <li>
+            <a class="menu-text" href="@Url.Action("Index", "Manage", new { area = "" })">Hello @User.Identity.GetUserName()!</a>
+        </li>
+        <li>
+            <a class="menu-text" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        </li>
+    </form>
+}
+else
+{
+    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+}
