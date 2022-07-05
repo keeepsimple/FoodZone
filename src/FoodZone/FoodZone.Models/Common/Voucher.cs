@@ -7,6 +7,9 @@ namespace FoodZone.Models.Common
     public class Voucher : BaseEntity
     {
         [Required(ErrorMessage = "The {0} is required")]
+        public string Title { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
         public string Code { get; set; }
 
         [Required(ErrorMessage = "The {0} is required")]

@@ -67,6 +67,10 @@
     <Compile Include="Migrations\202206231502488_InitCreate.designer.cs">
       <DependentUpon>202206231502488_InitCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207050258414_UpdateVoucherModel.cs" />
+    <Compile Include="Migrations\202207050258414_UpdateVoucherModel.designer.cs">
+      <DependentUpon>202207050258414_UpdateVoucherModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,6 +87,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202206231502488_InitCreate.resx">
       <DependentUpon>202206231502488_InitCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207050258414_UpdateVoucherModel.resx">
+      <DependentUpon>202207050258414_UpdateVoucherModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
