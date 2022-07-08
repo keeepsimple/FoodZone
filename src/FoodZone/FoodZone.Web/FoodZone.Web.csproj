@@ -193,10 +193,12 @@
     <Compile Include="Areas\Admin\Controllers\FoodAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\TableAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VoucherAdminController.cs" />
     <Compile Include="Areas\Admin\ViewModels\BlogViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\FoodViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\MenuViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TableViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\VoucherViewModel.cs" />
     <Compile Include="Areas\Identity\Controllers\RolesAdminController.cs" />
     <Compile Include="Areas\Identity\Controllers\UserAdminController.cs" />
     <Compile Include="Areas\Identity\IdentityAreaRegistration.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
+    <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -303,6 +306,9 @@
     <Content Include="Areas\Admin\Views\BlogAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\BlogAdmin\Create.cshtml" />
     <Content Include="Areas\Admin\Views\BlogAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\VoucherAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\VoucherAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\VoucherAdmin\Edit.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -375,6 +381,8 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Voucher\Index.cshtml" />
+    <Content Include="Views\Voucher\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

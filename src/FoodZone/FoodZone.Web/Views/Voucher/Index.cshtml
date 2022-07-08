@@ -1,16 +1,16 @@
-﻿@model PagedList.PagedList<Blog>
+﻿@model PagedList.PagedList<Voucher>
 @{
-    ViewBag.Title = "Tin Tức";
+    ViewBag.Title = "Ưu Đãi";
 }
 <div class="breadcrumbs-area position-relative">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
                 <div class="breadcrumb-content position-relative section-content">
-                    <h3 class="title-3">Tin Tức</h3>
+                    <h3 class="title-3">Ưu Đãi</h3>
                     <ul>
-                        <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
-                        <li>Tin Tức</li>
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li>Ưu Đãi</li>
                     </ul>
                 </div>
             </div>
@@ -22,7 +22,7 @@
         <div class="row mb-30">
             @if (!Model.Any())
             {
-                <h3 class="text-center">Không tìm thấy Tin Tức nào.</h3>
+                <h3 class="text-center">Không tìm thấy ưu đãi nào.</h3>
             }
             else
             {
@@ -31,8 +31,7 @@
                     <div class="card w-75">
                         <div class="card-body">
                             <h5 class="card-title">@item.Title</h5>
-                            <p class="card-text">@item.ShortDescription</p>
-                            <a href="@Url.Action("Details", "Blog", new {blogId = item.Id})" class="btn btn-primary">Read more</a>
+                            <a href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})" class="btn btn-primary">Read more</a>
                         </div>
                     </div>
                 }
@@ -45,10 +44,10 @@
                             ViewBag.PageRange = 3;
                         }
                         <li class="page-item">
-                            <a href="@Url.Action("Index", "Blog", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
+                            <a href="@Url.Action("Index", "Voucher", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
                                class="btn page-link @prevDisabled"><<</a>
                         <li class="page-item">
-                            <a href="@Url.Action("Index", "Blog", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
+                            <a href="@Url.Action("Index", "Voucher", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
                                class="btn page-link @prevDisabled"><</a>
                         </li>
                         @for (int i = 1; i <= Model.PageCount; i++)
@@ -57,15 +56,15 @@
                             {
                                 <li class="page-item">
                                     <a class="@(i == Model.PageNumber ? "Current" : "") page-link"
-                                       href="@Url.Action("Index", "Blog", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                                       href="@Url.Action("Index", "Voucher", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
                                 </li>
                             }
                         }
                         <li class="page-item">
-                            <a href="@Url.Action("Index", "Blog", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                            <a href="@Url.Action("Index", "Voucher", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
                                class="btn page-link @nextDisabled">></a>
                         <li class="page-item">
-                            <a href="@Url.Action("Index", "Blog", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                            <a href="@Url.Action("Index", "Voucher", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
                                class="btn page-link @nextDisabled">>></a>
                     </ul>
                 </nav>

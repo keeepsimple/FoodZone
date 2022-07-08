@@ -101,18 +101,21 @@ namespace FoodZone.Services.BaseServices
         {
             if (!isIncludeDelete)
             {
-                return _unitOfWork.CoreRepository<TEntity>().GetQuery(x => x.IsDeleted == isIncludeDelete).ToList();
+                return _unitOfWork.CoreRepository<TEntity>().GetQuery(x => x.IsDeleted == isIncludeDelete)
+                    .OrderByDescending(m => m.InsertedAt).ToList();
             }
-            return _unitOfWork.CoreRepository<TEntity>().GetQuery().ToList();
+            return _unitOfWork.CoreRepository<TEntity>().GetQuery().OrderByDescending(m => m.InsertedAt).ToList();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync(bool isIncludeDelete = false)
         {
             if (!isIncludeDelete)
             {
-                return await _unitOfWork.CoreRepository<TEntity>().GetQuery(x => x.IsDeleted == isIncludeDelete).ToListAsync();
+                return await _unitOfWork.CoreRepository<TEntity>().GetQuery(x => x.IsDeleted == isIncludeDelete)
+                    .OrderByDescending(m => m.InsertedAt).ToListAsync();
             }
-            return await _unitOfWork.CoreRepository<TEntity>().GetQuery().ToListAsync();
+            return await _unitOfWork.CoreRepository<TEntity>().GetQuery()
+                .OrderByDescending(m => m.InsertedAt).ToListAsync();
         }
 
         public virtual TEntity GetById(int id)

@@ -13,7 +13,7 @@ namespace FoodZone.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202207050258414_UpdateVoucherModel"; }
+            get { return "202207050335128_UpdateVoucherModel"; }
         }
         
         string IMigrationMetadata.Source

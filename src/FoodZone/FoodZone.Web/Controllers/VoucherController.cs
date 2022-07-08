@@ -1,5 +1,4 @@
 ﻿using FoodZone.Services.IServices;
-using FoodZone.Services.Services;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -10,13 +9,13 @@ using System.Web.Mvc;
 
 namespace FoodZone.Web.Controllers
 {
-    public class BlogController : Controller
+    public class VoucherController:Controller
     {
-        private readonly IBlogServices _blogServices;
+        private readonly IVoucherServices _voucherServices;
 
-        public BlogController(IBlogServices blogServices)
+        public VoucherController(IVoucherServices voucherServices)
         {
-            _blogServices = blogServices;
+            _voucherServices = voucherServices;
         }
 
         [HttpGet]
@@ -33,26 +32,26 @@ namespace FoodZone.Web.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var blogs = await _blogServices.GetAllAsync();
+            var vouchers = await _voucherServices.GetAllAsync();
             if (!string.IsNullOrEmpty(searchString))
             {
-                blogs = blogs.Where(s => s.Title.Contains(searchString)).ToList();
+                vouchers = vouchers.Where(s => s.Title.Contains(searchString)).ToList();
             }
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(blogs.ToPagedList(pageNumber, pageSize));
+            return View(vouchers.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Details(int blogId)
+        public ActionResult Details(int voucherId)
         {
-            var blog = _blogServices.GetById(blogId);
-            if (blog == null)
+            var voucher = _voucherServices.GetById(voucherId);
+            if (voucher == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Blog = blog.Title;
-            return View(blog);
+            ViewBag.Voucher = voucher.Title;
+            return View(voucher);
         }
     }
 }

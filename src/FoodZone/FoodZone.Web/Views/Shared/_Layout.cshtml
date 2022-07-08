@@ -76,13 +76,13 @@
 
                                 <li>
                                     <a href="@Url.Action("Index", "Blog", new {area = ""})">
-                                        <span class="menu-text"> Blog</span>
+                                        <span class="menu-text"> Tin tức</span>
 
                                     </a>
 
                                 </li>
                                 <li>
-                                    <a href="voucher.html">
+                                    <a href="@Url.Action("Index", "Voucher", new {area = ""})">
                                         <span class="menu-text"> Ưu đãi</span>
                                     </a>
                                 </li>
@@ -94,7 +94,7 @@
                                 {
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Admin Dashboard
+                                            Quản lý Nhà Hàng
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin", new { area = "Identity" })">Users Admin</a>

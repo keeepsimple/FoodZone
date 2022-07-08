@@ -3,7 +3,7 @@
     <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
         @Html.AntiForgeryToken()
         <li>
-            <a class="menu-text" href="@Url.Action("Index", "Manage", new { area = "" })">Hello @User.Identity.GetUserName()!</a>
+            <a class="menu-text" href="@Url.Action("Index", "Manage", new { area = "" })">Chào @User.Identity.GetUserName()!</a>
         </li>
         <li>
             <a class="menu-text" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>

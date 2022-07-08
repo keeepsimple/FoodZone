@@ -1,4 +1,5 @@
 ﻿using FoodZone.Models.BaseEntities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,6 +15,11 @@ namespace FoodZone.Models.Common
 
         [Required(ErrorMessage = "The {0} is required")]
         public string Content { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public DateTime ExpiredDate { get; set; }
+
+        public int Status { get; set; }
 
         [Required(ErrorMessage = "The {0} is required")]
         public int Level { get; set; }
