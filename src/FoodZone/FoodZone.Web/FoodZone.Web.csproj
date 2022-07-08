@@ -205,6 +205,7 @@
     <Compile Include="Areas\Identity\ViewModels\AdminViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -383,10 +384,12 @@
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Voucher\Index.cshtml" />
     <Content Include="Views\Voucher\Details.cshtml" />
+    <Content Include="Views\Shared\_FoodByCate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Food\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -7,11 +7,13 @@ namespace FoodZone.Web.Controllers
     {
         private readonly IMenuServices _menuServices;
         private readonly IFoodServices _foodServices;
+        private readonly ICategoryServices _categoryServices;
 
-        public MenuController(IMenuServices menuServices, IFoodServices foodServices)
+        public MenuController(IMenuServices menuServices, IFoodServices foodServices, ICategoryServices categoryServices)
         {
             _menuServices = menuServices;
             _foodServices = foodServices;
+            _categoryServices = categoryServices;
         }
 
         public ActionResult GetAllMenu()
@@ -28,7 +30,15 @@ namespace FoodZone.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.Menu = menu.Name;
-            return View();
+            var categories = _categoryServices.GetCategoryByMenu(menuId);
+            
+            return View(categories);
+        }
+
+        public ActionResult GetFoodByCate(int cateId)
+        {
+            var foods = _foodServices.GetFoodsByCategory(cateId);
+            return PartialView("_FoodByCate", foods);
         }
     }
 }

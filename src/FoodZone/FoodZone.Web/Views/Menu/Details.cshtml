@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Food>
+﻿@model IEnumerable<Category>
 
 @{
     ViewBag.Title = ViewBag.Menu;
@@ -24,10 +24,8 @@
             @foreach (var item in Model)
             {
                 <h1>@item.Name</h1>
-                <h3>@item.Price.ToString("F0")</h3>
-                <img src="~/Assets/images/@item.Image" />
-                <h4>@item.Description</h4>
+                @Html.Action("GetFoodByCate", new {cateId = item.Id})
             }
-        </div>
+        </div>  
     </div>
 </div>
