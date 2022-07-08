@@ -13,9 +13,9 @@ namespace FoodZone.Services.Services
         {
         }
 
-        public IEnumerable<Food> GetFoodByMenu(int menuId)
+        public IEnumerable<Food> GetFoodsByCategory(int categoryId)
         {
-            return _unitOfWork.FoodRepository.GetQuery(f => f.MenuFoods.Any(m => m.MenuId == menuId)).ToList();
+            return _unitOfWork.FoodRepository.GetQuery(x => x.CategoryId == categoryId).ToList();
         }
     }
 }

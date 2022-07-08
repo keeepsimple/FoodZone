@@ -18,6 +18,6 @@ namespace FoodZone.Models.Common
         [Required(ErrorMessage = "The {0} is required")]
         public int Status { get; set; }
 
-        public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<ReservationDetail> ReservationsDetails { get; set; }
     }
 }

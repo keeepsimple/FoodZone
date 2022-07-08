@@ -24,9 +24,9 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label class="control-label" for="Menu">Food</label>
+            <label class="control-label" for="Menu">Categories</label>
             <div class="">
-                @Html.ListBoxFor(model => model.SelectedFoodIds, Model.Foods, new { @class = "select-multiple", style = "width:100%" })
+                @Html.ListBoxFor(model => model.SelectedCategoryIds, Model.Categories, new { @class = "select-multiple", style = "width:100%" })
             </div>
         </div>
 

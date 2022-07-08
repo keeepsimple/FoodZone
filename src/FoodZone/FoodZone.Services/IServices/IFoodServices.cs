@@ -6,6 +6,6 @@ namespace FoodZone.Services.IServices
 {
     public interface IFoodServices : IBaseServices<Food>
     {
-        IEnumerable<Food> GetFoodByMenu(int menuId);
+        IEnumerable<Food> GetFoodsByCategory(int categoryId);
     }
 }

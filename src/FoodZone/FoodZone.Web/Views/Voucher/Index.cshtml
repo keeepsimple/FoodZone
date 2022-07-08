@@ -28,10 +28,21 @@
             {
                 foreach (var item in Model)
                 {
-                    <div class="card w-75">
-                        <div class="card-body">
-                            <h5 class="card-title">@item.Title</h5>
-                            <a href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})" class="btn btn-primary">Read more</a>
+                    <div class="col-12 col-md-6 col-lg-4 col-custom mb-30">
+                        <div class="blog-lst">
+                            <div class="single-blog">
+                                <div class="blog-image">
+                                    <a class="d-block" href="blog-details-fullwidth.html">
+                                        <img src="assets/images/blog/blog1.jpg" alt="Blog Image" class="w-100">
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-text">
+                                        <h4><a href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})">@item.Title</a></h4>
+                                        <p>Lorem ipsu dolor sit amet cons elits cumque adipisicing, sed do incid eiusmod tempor ut labore et dolore eveniet .</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }

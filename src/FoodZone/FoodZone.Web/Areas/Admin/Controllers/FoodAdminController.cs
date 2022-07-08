@@ -14,14 +14,10 @@ namespace FoodZone.Web.Areas.Admin.Controllers
     public class FoodAdminController : Controller
     {
         private readonly IFoodServices _foodServices;
-        private readonly IMenuServices _menuServices;
-        private readonly IMenuFoodServices _menuFoodServices;
 
-        public FoodAdminController(IFoodServices foodServices, IMenuServices menuServices, IMenuFoodServices menuFoodServices)
+        public FoodAdminController(IFoodServices foodServices)
         {
             _foodServices = foodServices;
-            _menuServices = menuServices;
-            _menuFoodServices = menuFoodServices;
         }
 
         [HttpGet]

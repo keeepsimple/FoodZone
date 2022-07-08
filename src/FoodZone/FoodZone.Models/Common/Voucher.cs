@@ -17,6 +17,12 @@ namespace FoodZone.Models.Common
         public string Content { get; set; }
 
         [Required(ErrorMessage = "The {0} is required")]
+        public string Image { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
+        public string ShortDescription { get; set; }
+
+        [Required(ErrorMessage = "The {0} is required")]
         public DateTime ExpiredDate { get; set; }
 
         public int Status { get; set; }

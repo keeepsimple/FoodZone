@@ -24,8 +24,14 @@ namespace FoodZone.Data.Infrastructure
         private ICoreRepository<Food> _foodRepository;
         public ICoreRepository<Food> FoodRepository => _foodRepository ?? new CoreRepository<Food>(_dbContext);
 
-        private ICoreRepository<MenuFood> _menuFoodRepository;
-        public ICoreRepository<MenuFood> MenuFoodRepository => _menuFoodRepository ?? new CoreRepository<MenuFood>(_dbContext);
+        private ICoreRepository<MenuCategory> _menuCategoryRepository;
+        public ICoreRepository<MenuCategory> MenuCategoryRepository => _menuCategoryRepository ?? new CoreRepository<MenuCategory>(_dbContext);
+
+        private ICoreRepository<Category> _categoryRepository;  
+        public ICoreRepository<Category> CategoryRepository => _categoryRepository ?? new CoreRepository<Category>(_dbContext);
+
+        private ICoreRepository<ReservationDetail> _reservationDetailRepository;
+        public ICoreRepository<ReservationDetail> ReservationDetailRepository => _reservationDetailRepository ?? new CoreRepository<ReservationDetail>(_dbContext);
 
         private ICoreRepository<Notify> _notifyRepository;
         public ICoreRepository<Notify> NotifyRepository => _notifyRepository ?? new CoreRepository<Notify>(_dbContext);
@@ -39,8 +45,8 @@ namespace FoodZone.Data.Infrastructure
         private ICoreRepository<UserBlog> _userBlogRepository;
         public ICoreRepository<UserBlog> UserBlogRepository => _userBlogRepository ?? new CoreRepository<UserBlog>(_dbContext);
 
-        private ICoreRepository<UserFood> _userFoodRepository;
-        public ICoreRepository<UserFood> UserFoodRepository => _userFoodRepository ?? new CoreRepository<UserFood>(_dbContext);
+        private ICoreRepository<UserMenu> _userMenuRepository;
+        public ICoreRepository<UserMenu> UserMenuRepository => _userMenuRepository ?? new CoreRepository<UserMenu>(_dbContext);
 
         private ICoreRepository<UserVoucher> _userVoucherRepository;
         public ICoreRepository<UserVoucher> UserVoucherRepository => _userVoucherRepository ?? new CoreRepository<UserVoucher>(_dbContext);

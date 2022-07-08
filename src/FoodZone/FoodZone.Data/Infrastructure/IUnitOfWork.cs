@@ -27,7 +27,11 @@ namespace FoodZone.Data.Infrastructure
 
         ICoreRepository<Food> FoodRepository { get; }
 
-        ICoreRepository<MenuFood> MenuFoodRepository { get; }
+        ICoreRepository<Category> CategoryRepository { get; }
+
+        ICoreRepository<MenuCategory> MenuCategoryRepository { get; }
+
+        ICoreRepository<ReservationDetail> ReservationDetailRepository { get; }
 
         ICoreRepository<Notify> NotifyRepository { get; }
 
@@ -37,7 +41,7 @@ namespace FoodZone.Data.Infrastructure
 
         ICoreRepository<UserBlog> UserBlogRepository { get; }
 
-        ICoreRepository<UserFood> UserFoodRepository { get; }
+        ICoreRepository<UserMenu> UserMenuRepository { get; }
 
         ICoreRepository<UserVoucher> UserVoucherRepository { get; }
 

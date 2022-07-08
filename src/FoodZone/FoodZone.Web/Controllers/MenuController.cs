@@ -28,8 +28,7 @@ namespace FoodZone.Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.Menu = menu.Name;
-            var foods = _foodServices.GetFoodByMenu(menuId);
-            return View(foods);
+            return View();
         }
     }
 }

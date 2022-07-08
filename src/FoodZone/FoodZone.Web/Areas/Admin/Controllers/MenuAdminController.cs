@@ -15,14 +15,14 @@ namespace FoodZone.Web.Areas.Admin.Controllers
     public class MenuAdminController : Controller
     {
         private readonly IMenuServices _menuServices;
-        private readonly IMenuFoodServices _menuFoodServices;
-        private readonly IFoodServices _foodServices;
+        private readonly IMenuCategoryServices _menuCategoryServices;
+        private readonly ICategoryServices _categoryServices;
 
-        public MenuAdminController(IMenuServices menuServices, IMenuFoodServices menuFoodServices, IFoodServices foodServices)
+        public MenuAdminController(IMenuServices menuServices, IMenuCategoryServices menuCategoryServices, ICategoryServices categoryServices)
         {
             _menuServices = menuServices;
-            _menuFoodServices = menuFoodServices;
-            _foodServices = foodServices;
+            _menuCategoryServices = menuCategoryServices;
+            _categoryServices = categoryServices;
         }
 
         public ActionResult Index()
@@ -34,7 +34,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var menuViewModel = new MenuViewModel();
-            menuViewModel.Foods = _foodServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
+            menuViewModel.Categories = _categoryServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
             return View(menuViewModel);
         }
 
@@ -53,7 +53,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 var result = await _menuServices.AddAsync(menu);
                 if (result > 0)
                 {
-                    await GetSelectedMenuFoodFromIds(model.SelectedFoodIds, menu);
+                    await GetSelectedMenuFoodFromIds(model.SelectedCategoryIds, menu);
                     TempData["Message"] = "Tạo thành công.";
                     return RedirectToAction("Index");
                 }
@@ -62,35 +62,35 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     TempData["Message"] = "Tạo thất bại. Thử lại sau nhé!";
                 }
             }
-            model.Foods = _foodServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
+            model.Categories = _categoryServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
 
             return View(model);
         }
 
-        private async Task GetSelectedMenuFoodFromIds(IEnumerable<int> selectedFoodIds, Menu menu)
+        private async Task GetSelectedMenuFoodFromIds(IEnumerable<int> selectedCategoryIds, Menu menu)
         {
-            foreach (var item in selectedFoodIds)
+            foreach (var item in selectedCategoryIds)
             {
-                var menuFood = new MenuFood
+                var menuCategory = new MenuCategory
                 {
                     MenuId = menu.Id,
-                    FoodId = item
+                    CategoryId = item
                 };
-                await _menuFoodServices.AddAsync(menuFood);
+                await _menuCategoryServices.AddAsync(menuCategory);
             }
         }
 
-        private async Task UpdateSelectedFoodFromIds(IEnumerable<int> selectedFoodIds, Menu menu)
+        private async Task UpdateSelectedFoodFromIds(IEnumerable<int> selectedCategoryIds, Menu menu)
         {
-            _menuFoodServices.RemoveMenuFoodsByMenu(menu.Id);
-            foreach (var item in selectedFoodIds)
+            _menuCategoryServices.RemoveMenuCategoriesByMenu(menu.Id);
+            foreach (var item in selectedCategoryIds)
             {
-                var menuFood = new MenuFood
+                var menuCategory = new MenuCategory
                 {
                     MenuId = menu.Id,
-                    FoodId = item
+                    CategoryId = item
                 };
-                await _menuFoodServices.AddAsync(menuFood);
+                await _menuCategoryServices.AddAsync(menuCategory);
             }
         }
 
@@ -112,10 +112,10 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             {
                 Name = menu.Name,
                 Description = menu.Description,
-                SelectedFoodIds = _menuFoodServices.GetFoodIdByMenu(menu.Id)
+                SelectedCategoryIds = _menuCategoryServices.GetCategoryIdByMenu(menu.Id)
             };
-            menuViewModel.Foods = _foodServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
-            ViewBag.FoodList = _foodServices.GetAll();
+            menuViewModel.Categories = _categoryServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
+            ViewBag.CategoryList = _categoryServices.GetAll();
 
             return View(menuViewModel);
         }
@@ -137,7 +137,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
                 var result = await _menuServices.UpdateAsync(menu);
 
-                await UpdateSelectedFoodFromIds(menuViewModel.SelectedFoodIds, menu);
+                await UpdateSelectedFoodFromIds(menuViewModel.SelectedCategoryIds, menu);
 
                 if (result)
                 {

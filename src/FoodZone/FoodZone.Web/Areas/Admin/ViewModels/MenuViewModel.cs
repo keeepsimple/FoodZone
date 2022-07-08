@@ -14,8 +14,8 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
 
         public string Description { get; set; }
 
-        public IEnumerable<int> SelectedFoodIds { get; set; }
+        public IEnumerable<int> SelectedCategoryIds { get; set; }
 
-        public IEnumerable<SelectListItem> Foods { get; set; }
+        public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }

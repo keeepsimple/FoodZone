@@ -104,19 +104,124 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        TableId = c.Int(nullable: false),
                         UserId = c.String(maxLength: 128),
                         PhoneNumber = c.String(),
                         Status = c.Int(nullable: false),
+                        Name = c.String(),
+                        Hours = c.DateTime(nullable: false),
+                        Adult = c.Int(nullable: false),
+                        Child = c.Int(nullable: false),
+                        Note = c.String(),
                         IsDeleted = c.Boolean(nullable: false),
                         InsertedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Tables", t => t.TableId, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.UserId)
-                .Index(t => t.TableId)
                 .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.ReservationDetails",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        TableId = c.Int(nullable: false),
+                        ReservationId = c.Int(nullable: false),
+                        MenuId = c.Int(nullable: false),
+                        FoodId = c.Int(nullable: false),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        IsDeleted = c.Boolean(nullable: false),
+                        InsertedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Foods", t => t.FoodId, cascadeDelete: true)
+                .ForeignKey("dbo.Menus", t => t.MenuId, cascadeDelete: true)
+                .ForeignKey("dbo.Reservations", t => t.ReservationId, cascadeDelete: true)
+                .ForeignKey("dbo.Tables", t => t.TableId, cascadeDelete: true)
+                .Index(t => t.TableId)
+                .Index(t => t.ReservationId)
+                .Index(t => t.MenuId)
+                .Index(t => t.FoodId);
+            
+            CreateTable(
+                "dbo.Foods",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Image = c.String(nullable: false),
+                        Description = c.String(nullable: false, maxLength: 500),
+                        CategoryId = c.Int(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                        InsertedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.CategoryId);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
+                        InsertedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.MenuCategories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CategoryId = c.Int(nullable: false),
+                        MenuId = c.Int(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                        InsertedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.Menus", t => t.MenuId, cascadeDelete: true)
+                .Index(t => t.CategoryId)
+                .Index(t => t.MenuId);
+            
+            CreateTable(
+                "dbo.Menus",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Description = c.String(nullable: false, maxLength: 500),
+                        IsDeleted = c.Boolean(nullable: false),
+                        InsertedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.UserMenus",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        MenuId = c.Int(nullable: false),
+                        Comment = c.String(),
+                        Rate = c.Int(nullable: false),
+                        IsDeleted = c.Boolean(nullable: false),
+                        InsertedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Menus", t => t.MenuId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.MenuId);
             
             CreateTable(
                 "dbo.Tables",
@@ -148,70 +253,6 @@
                 .Index(t => t.IdentityRole_Id);
             
             CreateTable(
-                "dbo.UserFoods",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(maxLength: 128),
-                        FoodId = c.Int(nullable: false),
-                        Comment = c.String(),
-                        Rate = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        InsertedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Foods", t => t.FoodId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.UserId)
-                .Index(t => t.UserId)
-                .Index(t => t.FoodId);
-            
-            CreateTable(
-                "dbo.Foods",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Image = c.String(nullable: false),
-                        Description = c.String(nullable: false, maxLength: 500),
-                        IsDeleted = c.Boolean(nullable: false),
-                        InsertedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.MenuFoods",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        FoodId = c.Int(nullable: false),
-                        MenuId = c.Int(nullable: false),
-                        IsDeleted = c.Boolean(nullable: false),
-                        InsertedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Foods", t => t.FoodId, cascadeDelete: true)
-                .ForeignKey("dbo.Menus", t => t.MenuId, cascadeDelete: true)
-                .Index(t => t.FoodId)
-                .Index(t => t.MenuId);
-            
-            CreateTable(
-                "dbo.Menus",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Description = c.String(nullable: false, maxLength: 500),
-                        IsDeleted = c.Boolean(nullable: false),
-                        InsertedAt = c.DateTime(nullable: false),
-                        UpdatedAt = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.UserVouchers",
                 c => new
                     {
@@ -233,8 +274,13 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Title = c.String(nullable: false),
                         Code = c.String(nullable: false),
                         Content = c.String(nullable: false),
+                        Image = c.String(nullable: false),
+                        ShortDescription = c.String(nullable: false),
+                        ExpiredDate = c.DateTime(nullable: false),
+                        Status = c.Int(nullable: false),
                         Level = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
                         InsertedAt = c.DateTime(nullable: false),
@@ -258,29 +304,37 @@
             DropForeignKey("dbo.IdentityUserRoles", "IdentityRole_Id", "dbo.IdentityRoles");
             DropForeignKey("dbo.UserVouchers", "VoucherId", "dbo.Vouchers");
             DropForeignKey("dbo.UserVouchers", "UserId", "dbo.Users");
-            DropForeignKey("dbo.UserFoods", "UserId", "dbo.Users");
-            DropForeignKey("dbo.UserFoods", "FoodId", "dbo.Foods");
-            DropForeignKey("dbo.MenuFoods", "MenuId", "dbo.Menus");
-            DropForeignKey("dbo.MenuFoods", "FoodId", "dbo.Foods");
             DropForeignKey("dbo.UserBlogs", "UserId", "dbo.Users");
             DropForeignKey("dbo.IdentityUserRoles", "UserId", "dbo.Users");
             DropForeignKey("dbo.Notifies", "UserId", "dbo.Users");
             DropForeignKey("dbo.Reservations", "UserId", "dbo.Users");
-            DropForeignKey("dbo.Reservations", "TableId", "dbo.Tables");
+            DropForeignKey("dbo.ReservationDetails", "TableId", "dbo.Tables");
+            DropForeignKey("dbo.ReservationDetails", "ReservationId", "dbo.Reservations");
+            DropForeignKey("dbo.ReservationDetails", "MenuId", "dbo.Menus");
+            DropForeignKey("dbo.ReservationDetails", "FoodId", "dbo.Foods");
+            DropForeignKey("dbo.UserMenus", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserMenus", "MenuId", "dbo.Menus");
+            DropForeignKey("dbo.MenuCategories", "MenuId", "dbo.Menus");
+            DropForeignKey("dbo.MenuCategories", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Foods", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Notifies", "ReservationId", "dbo.Reservations");
             DropForeignKey("dbo.IdentityUserLogins", "User_Id", "dbo.Users");
             DropForeignKey("dbo.IdentityUserClaims", "UserId", "dbo.Users");
             DropForeignKey("dbo.UserBlogs", "BlogId", "dbo.Blogs");
             DropIndex("dbo.UserVouchers", new[] { "VoucherId" });
             DropIndex("dbo.UserVouchers", new[] { "UserId" });
-            DropIndex("dbo.MenuFoods", new[] { "MenuId" });
-            DropIndex("dbo.MenuFoods", new[] { "FoodId" });
-            DropIndex("dbo.UserFoods", new[] { "FoodId" });
-            DropIndex("dbo.UserFoods", new[] { "UserId" });
             DropIndex("dbo.IdentityUserRoles", new[] { "IdentityRole_Id" });
             DropIndex("dbo.IdentityUserRoles", new[] { "UserId" });
+            DropIndex("dbo.UserMenus", new[] { "MenuId" });
+            DropIndex("dbo.UserMenus", new[] { "UserId" });
+            DropIndex("dbo.MenuCategories", new[] { "MenuId" });
+            DropIndex("dbo.MenuCategories", new[] { "CategoryId" });
+            DropIndex("dbo.Foods", new[] { "CategoryId" });
+            DropIndex("dbo.ReservationDetails", new[] { "FoodId" });
+            DropIndex("dbo.ReservationDetails", new[] { "MenuId" });
+            DropIndex("dbo.ReservationDetails", new[] { "ReservationId" });
+            DropIndex("dbo.ReservationDetails", new[] { "TableId" });
             DropIndex("dbo.Reservations", new[] { "UserId" });
-            DropIndex("dbo.Reservations", new[] { "TableId" });
             DropIndex("dbo.Notifies", new[] { "ReservationId" });
             DropIndex("dbo.Notifies", new[] { "UserId" });
             DropIndex("dbo.IdentityUserLogins", new[] { "User_Id" });
@@ -290,12 +344,14 @@
             DropTable("dbo.IdentityRoles");
             DropTable("dbo.Vouchers");
             DropTable("dbo.UserVouchers");
-            DropTable("dbo.Menus");
-            DropTable("dbo.MenuFoods");
-            DropTable("dbo.Foods");
-            DropTable("dbo.UserFoods");
             DropTable("dbo.IdentityUserRoles");
             DropTable("dbo.Tables");
+            DropTable("dbo.UserMenus");
+            DropTable("dbo.Menus");
+            DropTable("dbo.MenuCategories");
+            DropTable("dbo.Categories");
+            DropTable("dbo.Foods");
+            DropTable("dbo.ReservationDetails");
             DropTable("dbo.Reservations");
             DropTable("dbo.Notifies");
             DropTable("dbo.IdentityUserLogins");

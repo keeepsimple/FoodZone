@@ -16,7 +16,7 @@ namespace FoodZone.Models.Security
 
         public virtual ICollection<UserBlog> UserBlogs { get; set; }
 
-        public virtual ICollection<UserFood> UserFoods { get; set; }
+        public virtual ICollection<UserMenu> UserMenus { get; set; }
 
         public virtual ICollection<UserVoucher> UserVouchers { get; set; }
 

@@ -50,13 +50,15 @@ namespace FoodZone.Web
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<ITableServices, TableServices>();
             container.RegisterType<IBlogServices, BlogServices>();
+            container.RegisterType<ICategoryServices, CategoryServices>();
             container.RegisterType<IFoodServices, FoodServices>();
-            container.RegisterType<IMenuFoodServices, MenuFoodServices>();
+            container.RegisterType<IMenuCategoryServices, MenuCategoryServices>();
             container.RegisterType<IMenuServices, MenuServices>();
             container.RegisterType<INotifyServices, NotifyServices>();
             container.RegisterType<IReservationServices, ReservationServices>();
+            container.RegisterType<IReservationDetailsServices, ReservationDetailServices>();
             container.RegisterType<IUserBlogServices, UserBlogServices>();
-            container.RegisterType<IUserFoodServices, UserFoodServices>();
+            container.RegisterType<IUserMenuServices, UserMenuServices>();
             container.RegisterType<IUserVoucherServices, UserVoucherServices>();
             container.RegisterType<IVoucherServices, VoucherServices>();
             container.RegisterType<AccountController>(new InjectionConstructor());

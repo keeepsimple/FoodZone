@@ -63,13 +63,9 @@
     <Compile Include="Infrastructure\Repositories\CoreRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ICoreRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202206231502488_InitCreate.cs" />
-    <Compile Include="Migrations\202206231502488_InitCreate.designer.cs">
-      <DependentUpon>202206231502488_InitCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207050335128_UpdateVoucherModel.cs" />
-    <Compile Include="Migrations\202207050335128_UpdateVoucherModel.designer.cs">
-      <DependentUpon>202207050335128_UpdateVoucherModel.cs</DependentUpon>
+    <Compile Include="Migrations\202207080405276_InitCreate.cs" />
+    <Compile Include="Migrations\202207080405276_InitCreate.designer.cs">
+      <DependentUpon>202207080405276_InitCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,11 +81,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202206231502488_InitCreate.resx">
-      <DependentUpon>202206231502488_InitCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207050335128_UpdateVoucherModel.resx">
-      <DependentUpon>202207050335128_UpdateVoucherModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207080405276_InitCreate.resx">
+      <DependentUpon>202207080405276_InitCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
