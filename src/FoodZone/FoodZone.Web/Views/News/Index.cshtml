@@ -1,0 +1,85 @@
+﻿@model PagedList.PagedList<News>
+@{
+    ViewBag.Title = "Tin Tức";
+}
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Tin Tức</h3>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                        <li>Tin Tức</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shop-collection-area gray-bg pt-no-text pb-no-text">
+    <div class="container custom-area">
+        <div class="row mb-30">
+            @if (!Model.Any())
+            {
+                <h3 class="text-center">Không tìm thấy Tin Tức nào.</h3>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-12 col-md-6 col-lg-4 col-custom mb-30">
+                        <div class="blog-lst">
+                            <div class="single-blog">
+                                <div class="blog-image">
+                                    <a class="d-block" href="blog-details-fullwidth.html">
+                                        <img src="assets/images/blog/blog1.jpg" alt="News Image" class="w-100">
+                                    </a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="blog-text">
+                                        <h4><a href="@Url.Action("Details", "News", new {newsId = item.Id})">@item.Title</a></h4>
+                                        <p>@item.ShortDescription</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        @{
+                            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                            ViewBag.PageRange = 3;
+                        }
+                        <li class="page-item">
+                            <a href="@Url.Action("Index", "News", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
+                               class="btn page-link @prevDisabled"><<</a>
+                        <li class="page-item">
+                            <a href="@Url.Action("Index", "News", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
+                               class="btn page-link @prevDisabled"><</a>
+                        </li>
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
+                            {
+                                <li class="page-item">
+                                    <a class="@(i == Model.PageNumber ? "Current" : "") page-link"
+                                       href="@Url.Action("Index", "News", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                                </li>
+                            }
+                        }
+                        <li class="page-item">
+                            <a href="@Url.Action("Index", "News", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                               class="btn page-link @nextDisabled">></a>
+                        <li class="page-item">
+                            <a href="@Url.Action("Index", "News", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                               class="btn page-link @nextDisabled">>></a>
+                    </ul>
+                </nav>
+            }
+        </div>
+    </div>
+</div>

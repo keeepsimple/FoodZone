@@ -35,7 +35,7 @@ else
                     </a>
                 </td>
                 <td class="col-md-4">
-                    @item.Price
+                    @item.Price.ToString("N0")
                 </td>
                 <td class="col-md-4">
                     <form action="@Url.Action("Delete", "FoodAdmin", new { id = item.Id })" method="post">

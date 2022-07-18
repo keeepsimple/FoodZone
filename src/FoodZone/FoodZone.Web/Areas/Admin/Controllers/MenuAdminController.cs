@@ -47,13 +47,14 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 var menu = new Menu
                 {
                     Name = model.Name,
-                    Description = model.Description
+                    Description = model.Description,
+                    Price = model.Price,
                 };
 
                 var result = await _menuServices.AddAsync(menu);
                 if (result > 0)
                 {
-                    await GetSelectedMenuFoodFromIds(model.SelectedCategoryIds, menu);
+                    await GetSelectedCategoriesFromIds(model.SelectedCategoryIds, menu);
                     TempData["Message"] = "Tạo thành công.";
                     return RedirectToAction("Index");
                 }
@@ -67,7 +68,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        private async Task GetSelectedMenuFoodFromIds(IEnumerable<int> selectedCategoryIds, Menu menu)
+        private async Task GetSelectedCategoriesFromIds(IEnumerable<int> selectedCategoryIds, Menu menu)
         {
             foreach (var item in selectedCategoryIds)
             {
@@ -80,7 +81,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             }
         }
 
-        private async Task UpdateSelectedFoodFromIds(IEnumerable<int> selectedCategoryIds, Menu menu)
+        private async Task UpdateSelectedCategoryFromIds(IEnumerable<int> selectedCategoryIds, Menu menu)
         {
             _menuCategoryServices.RemoveMenuCategoriesByMenu(menu.Id);
             foreach (var item in selectedCategoryIds)
@@ -112,7 +113,8 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             {
                 Name = menu.Name,
                 Description = menu.Description,
-                SelectedCategoryIds = _menuCategoryServices.GetCategoryIdByMenu(menu.Id)
+                SelectedCategoryIds = _menuCategoryServices.GetCategoryIdByMenu(menu.Id),
+                Price = menu.Price
             };
             menuViewModel.Categories = _categoryServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
             ViewBag.CategoryList = _categoryServices.GetAll();
@@ -134,10 +136,11 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
                 menu.Name = menuViewModel.Name;
                 menu.Description = menuViewModel.Description;
+                menu.Price = menuViewModel.Price;
 
                 var result = await _menuServices.UpdateAsync(menu);
 
-                await UpdateSelectedFoodFromIds(menuViewModel.SelectedCategoryIds, menu);
+                await UpdateSelectedCategoryFromIds(menuViewModel.SelectedCategoryIds, menu);
 
                 if (result)
                 {

@@ -63,9 +63,37 @@
     <Compile Include="Infrastructure\Repositories\CoreRepository.cs" />
     <Compile Include="Infrastructure\Repositories\ICoreRepository.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\202207080405276_InitCreate.cs" />
-    <Compile Include="Migrations\202207080405276_InitCreate.designer.cs">
-      <DependentUpon>202207080405276_InitCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202207130317450_InitCreate.cs" />
+    <Compile Include="Migrations\202207130317450_InitCreate.designer.cs">
+      <DependentUpon>202207130317450_InitCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207131558567_UpdateCategoryModel.cs" />
+    <Compile Include="Migrations\202207131558567_UpdateCategoryModel.designer.cs">
+      <DependentUpon>202207131558567_UpdateCategoryModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207141644525_UpdateOrderModel.cs" />
+    <Compile Include="Migrations\202207141644525_UpdateOrderModel.designer.cs">
+      <DependentUpon>202207141644525_UpdateOrderModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207141652221_UpdateOrderModelP2.cs" />
+    <Compile Include="Migrations\202207141652221_UpdateOrderModelP2.designer.cs">
+      <DependentUpon>202207141652221_UpdateOrderModelP2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207141720194_UpdateUserModel.cs" />
+    <Compile Include="Migrations\202207141720194_UpdateUserModel.designer.cs">
+      <DependentUpon>202207141720194_UpdateUserModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207150424038_UpdateReservationDetailModel.cs" />
+    <Compile Include="Migrations\202207150424038_UpdateReservationDetailModel.designer.cs">
+      <DependentUpon>202207150424038_UpdateReservationDetailModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207151252512_UpdateReservationModel3.cs" />
+    <Compile Include="Migrations\202207151252512_UpdateReservationModel3.designer.cs">
+      <DependentUpon>202207151252512_UpdateReservationModel3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207160318000_UpdateMenuAndReservationDetailModel.cs" />
+    <Compile Include="Migrations\202207160318000_UpdateMenuAndReservationDetailModel.designer.cs">
+      <DependentUpon>202207160318000_UpdateMenuAndReservationDetailModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,8 +109,29 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207080405276_InitCreate.resx">
-      <DependentUpon>202207080405276_InitCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207130317450_InitCreate.resx">
+      <DependentUpon>202207130317450_InitCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207131558567_UpdateCategoryModel.resx">
+      <DependentUpon>202207131558567_UpdateCategoryModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207141644525_UpdateOrderModel.resx">
+      <DependentUpon>202207141644525_UpdateOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207141652221_UpdateOrderModelP2.resx">
+      <DependentUpon>202207141652221_UpdateOrderModelP2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207141720194_UpdateUserModel.resx">
+      <DependentUpon>202207141720194_UpdateUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207150424038_UpdateReservationDetailModel.resx">
+      <DependentUpon>202207150424038_UpdateReservationDetailModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207151252512_UpdateReservationModel3.resx">
+      <DependentUpon>202207151252512_UpdateReservationModel3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207160318000_UpdateMenuAndReservationDetailModel.resx">
+      <DependentUpon>202207160318000_UpdateMenuAndReservationDetailModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

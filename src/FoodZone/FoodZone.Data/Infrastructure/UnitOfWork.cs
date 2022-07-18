@@ -15,8 +15,8 @@ namespace FoodZone.Data.Infrastructure
             _dbContext = dbContext;
         }
 
-        private ICoreRepository<Blog> _blogRepository;
-        public ICoreRepository<Blog> BlogRepository => _blogRepository ?? new CoreRepository<Blog>(_dbContext);
+        private ICoreRepository<News> _blogRepository;
+        public ICoreRepository<News> BlogRepository => _blogRepository ?? new CoreRepository<News>(_dbContext);
 
         private ICoreRepository<Menu> _menuRepository;
         public ICoreRepository<Menu> MenuRepository => _menuRepository ?? new CoreRepository<Menu>(_dbContext);
@@ -41,9 +41,6 @@ namespace FoodZone.Data.Infrastructure
 
         private ICoreRepository<Table> _tableRepository;
         public ICoreRepository<Table> TableRepository => _tableRepository ?? new CoreRepository<Table>(_dbContext);
-
-        private ICoreRepository<UserBlog> _userBlogRepository;
-        public ICoreRepository<UserBlog> UserBlogRepository => _userBlogRepository ?? new CoreRepository<UserBlog>(_dbContext);
 
         private ICoreRepository<UserMenu> _userMenuRepository;
         public ICoreRepository<UserMenu> UserMenuRepository => _userMenuRepository ?? new CoreRepository<UserMenu>(_dbContext);

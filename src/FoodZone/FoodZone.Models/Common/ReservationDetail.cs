@@ -21,10 +21,12 @@ namespace FoodZone.Models.Common
 
         public Menu Menu { get; set; }
 
-        public int FoodId { get; set; }
+        public int? FoodId { get; set; }
 
         public Food Food { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal MenuPrice { get; set; }
+
+        public decimal? FoodPrice { get; set; }
     }
 }

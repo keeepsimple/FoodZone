@@ -14,6 +14,8 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
 
         public string Description { get; set; }
 
+        public decimal Price { get; set; }
+
         public IEnumerable<int> SelectedCategoryIds { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }

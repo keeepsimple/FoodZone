@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Table>
+
+
+<h3>@ViewBag.Table</h3>
+
+@foreach (var item in Model)
+{
+    if (item.Status == 0)
+    {
+        <a href="@Url.Action("AddTable", "Table", new {tableId = item.Id})" class="btn btn-success">Bàn @item.NumberTable trống</a>
+        <p>Số lượng: @item.Capacity</p>
+    }
+    else if (item.Status == 1)
+    {
+        <button type="button" class="btn btn-warning">Bàn @item.NumberTable chờ Khách</button>
+        <p>Số lượng: @item.Capacity</p>
+    }
+    else if (item.Status == 2)
+    {
+        <button type="button" class="btn btn-danger">Bàn @item.NumberTable Khách đã đến</button>
+        <p>Số lượng: @item.Capacity</p>
+    }
+}

@@ -67,6 +67,9 @@ namespace FoodZone.Web.ViewModels
         public string Username { get; set; }
 
         [Required]
+        public string Fullname { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

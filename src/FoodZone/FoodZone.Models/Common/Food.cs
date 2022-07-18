@@ -20,7 +20,7 @@ namespace FoodZone.Models.Common
         [StringLength(500, ErrorMessage = "The {0} must less than {1} characters")]
         public string Description { get; set; }
 
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         public Category Category { get; set; }
     }

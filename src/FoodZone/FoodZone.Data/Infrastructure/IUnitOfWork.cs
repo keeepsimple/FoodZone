@@ -21,7 +21,7 @@ namespace FoodZone.Data.Infrastructure
 
         #region Master Data
 
-        ICoreRepository<Blog> BlogRepository { get; }
+        ICoreRepository<News> BlogRepository { get; }
 
         ICoreRepository<Menu> MenuRepository { get; }
 
@@ -38,8 +38,6 @@ namespace FoodZone.Data.Infrastructure
         ICoreRepository<Reservation> ReservationRepository { get; }
 
         ICoreRepository<Table> TableRepository { get; }
-
-        ICoreRepository<UserBlog> UserBlogRepository { get; }
 
         ICoreRepository<UserMenu> UserMenuRepository { get; }
 

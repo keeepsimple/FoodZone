@@ -30,7 +30,7 @@ namespace FoodZone.Data
         }
 
         public DbSet<Food> Foods { get; set; }
-        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<News> News { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<MenuCategory> MenuCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -38,13 +38,13 @@ namespace FoodZone.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ReservationDetail> ReservationDetails { get; set; }
         public DbSet<Table> Tables { get; set; }
-        public DbSet<UserBlog> UserBlogs { get; set; }
         public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<UserVoucher> UserVouchers { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(i => i.UserId);
             modelBuilder.Entity<IdentityRole>().HasKey<string>(i => i.Id);
             modelBuilder.Entity<IdentityUserRole>().HasKey(i => new { i.RoleId, i.UserId });

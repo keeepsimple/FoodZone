@@ -1,4 +1,7 @@
+using FoodZone.Data;
 using FoodZone.Data.Infrastructure;
+using FoodZone.Data.Infrastructure.Repositories;
+using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
 using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Identity.Controllers;
@@ -47,9 +50,14 @@ namespace FoodZone.Web
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
+            container.RegisterSingleton<FoodZoneContext, FoodZoneContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
+            container.RegisterType<ICoreRepository<Menu>, CoreRepository<Menu>>();
+            container.RegisterType<ICoreRepository<Reservation>, CoreRepository<Reservation>>();
+            container.RegisterType<ICoreRepository<ReservationDetail>, CoreRepository<ReservationDetail>>();
+            container.RegisterType<ICheckoutServices, CheckoutServices>();
             container.RegisterType<ITableServices, TableServices>();
-            container.RegisterType<IBlogServices, BlogServices>();
+            container.RegisterType<INewsServices, NewsServices>();
             container.RegisterType<ICategoryServices, CategoryServices>();
             container.RegisterType<IFoodServices, FoodServices>();
             container.RegisterType<IMenuCategoryServices, MenuCategoryServices>();
@@ -57,7 +65,6 @@ namespace FoodZone.Web
             container.RegisterType<INotifyServices, NotifyServices>();
             container.RegisterType<IReservationServices, ReservationServices>();
             container.RegisterType<IReservationDetailsServices, ReservationDetailServices>();
-            container.RegisterType<IUserBlogServices, UserBlogServices>();
             container.RegisterType<IUserMenuServices, UserMenuServices>();
             container.RegisterType<IUserVoucherServices, UserVoucherServices>();
             container.RegisterType<IVoucherServices, VoucherServices>();

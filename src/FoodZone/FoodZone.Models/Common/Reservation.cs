@@ -15,9 +15,11 @@ namespace FoodZone.Models.Common
 
         public int Status { get; set; }
 
+        public decimal TotalPrice { get; set; }
+
         public string Name { get; set; }
 
-        public DateTime Hours { get; set; }
+        public DateTime ReservationDate { get; set; }
 
         public int Adult { get; set; }
 

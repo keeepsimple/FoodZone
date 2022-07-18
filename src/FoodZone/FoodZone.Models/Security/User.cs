@@ -10,11 +10,13 @@ namespace FoodZone.Models.Security
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser
     {
+        public string FullName { get; set; }
+
         public string Token { get; set; }
 
         public int Level { get; set; }
 
-        public virtual ICollection<UserBlog> UserBlogs { get; set; }
+        public virtual ICollection<News> News { get; set; }
 
         public virtual ICollection<UserMenu> UserMenus { get; set; }
 

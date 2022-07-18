@@ -7,5 +7,7 @@ namespace FoodZone.Services.IServices
     public interface ICategoryServices:IBaseServices<Category>
     {
         IEnumerable<Category> GetCategoryByMenu(int menuId);
+
+        IEnumerable<int> GetFoodIdByCategory(int cateId);
     }
 }

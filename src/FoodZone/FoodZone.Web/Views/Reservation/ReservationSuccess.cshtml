@@ -1,0 +1,29 @@
+﻿@model ReservationViewModel
+@{
+    ViewBag.Title = "Đặt Bàn Thành Công";
+}
+
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Đặt Bàn Thành Công</h3>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Reservation")">Đặt Bàn</a></li>
+                        <li>Đặt Bàn Thành Công</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shop-collection-area gray-bg pt-no-text pb-no-text">
+    <div class="container custom-area">
+        <div class="row mb-30">
+            <div class="col-md-6">
+                <h3>@ViewBag.ReservationSuccess</h3>
+            </div>
+        </div>
+    </div>
+</div>

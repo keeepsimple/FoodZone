@@ -23,6 +23,9 @@ else
             <th class="col-md-4">
                 Mô Tả
             </th>
+            <th class="col-md-4">
+                Giá
+            </th>
             <th class="col-md-4">Quản Lý</th>
         </tr>
 
@@ -38,9 +41,12 @@ else
                     @item.Description
                 </td>
                 <td class="col-md-4">
+                    @item.Price.ToString("N0")
+                </td>
+                <td class="col-md-4">
                     <form action="@Url.Action("Delete", "MenuAdmin", new { id = item.Id })" method="post">
                         <a href="@Url.Action("Edit", "MenuAdmin", new { id = item.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                        <button type="submit" onclick="return confirm('Bạn có muốn xóa Danh Mục @item.Name này?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        <button type="submit" onclick="return confirm('Bạn có muốn xóa Thực Đơn @item.Name này?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>

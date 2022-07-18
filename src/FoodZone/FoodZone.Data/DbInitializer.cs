@@ -22,6 +22,7 @@ namespace FoodZone.Data
                     Id = 1,
                     Name = "Buffet 199k",
                     Description = "Buffet 199k",
+                    Price = 199000,
                     InsertedAt = DateTime.Now
                 },
                 new Menu
@@ -29,6 +30,7 @@ namespace FoodZone.Data
                     Id = 2,
                     Name = "Buffet 299k",
                     Description = "Buffet 299k",
+                    Price = 299000,
                     InsertedAt = DateTime.Now
                 },
                 new Menu
@@ -36,6 +38,7 @@ namespace FoodZone.Data
                     Id = 3,
                     Name = "Buffet 399k",
                     Description = "Buffet 399k",
+                    Price=399000,
                     InsertedAt = DateTime.Now
                 },
                 new Menu
@@ -43,6 +46,7 @@ namespace FoodZone.Data
                     Id = 4,
                     Name = "Thực Đơn Đặc Biệt",
                     Description = "Thực Đơn Đặc Biệt",
+                    Price=0,
                     InsertedAt = DateTime.Now
                 }
             };
@@ -355,6 +359,57 @@ namespace FoodZone.Data
 
             context.MenuCategories.AddRange(menuCategories);
 
+            var tables = new List<Table>
+            {
+                new Table
+                {
+                    Id=1,
+                    Capacity = 2,
+                    Floor=1,
+                    InsertedAt = DateTime.Now,
+                    NumberTable=1,
+                    Status = 0
+                },
+                new Table
+                {
+                    Id=2,
+                    Capacity = 4,
+                    Floor=1,
+                    InsertedAt = DateTime.Now,
+                    NumberTable=2,
+                    Status = 0
+                },
+                new Table
+                {
+                    Id=3,
+                    Capacity = 6,
+                    Floor=1,
+                    InsertedAt = DateTime.Now,
+                    NumberTable=3,
+                    Status = 0
+                },
+                new Table
+                {
+                    Id=4,
+                    Capacity = 8,
+                    Floor=1,
+                    InsertedAt = DateTime.Now,
+                    NumberTable=4,
+                    Status = 0
+                },
+                new Table
+                {
+                    Id=5,
+                    Capacity = 8,
+                    Floor=1,
+                    InsertedAt = DateTime.Now,
+                    NumberTable=5,
+                    Status = 0
+                }
+            };
+
+            context.Tables.AddRange(tables);
+
             context.SaveChanges();
         }
 
@@ -393,7 +448,7 @@ namespace FoodZone.Data
             var user = userManager.FindByName(email);
             if (user == null)
             {
-                user = new User { UserName = "Manager", Email = email, Level = 0, PhoneNumber = "0985786750" };
+                user = new User { UserName = "Manager", FullName="Manager", Email = email, Level = 0, PhoneNumber = "0985786750" };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }

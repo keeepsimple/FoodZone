@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="BaseEntities\BaseEntity.cs" />
     <Compile Include="BaseEntities\IBaseEntity.cs" />
-    <Compile Include="Common\Blog.cs" />
+    <Compile Include="Common\News.cs" />
     <Compile Include="Common\Category.cs" />
     <Compile Include="Common\Food.cs" />
     <Compile Include="Common\Menu.cs" />
@@ -68,7 +68,6 @@
     <Compile Include="Common\Reservation.cs" />
     <Compile Include="Common\ReservationDetail.cs" />
     <Compile Include="Common\Table.cs" />
-    <Compile Include="Common\UserBlog.cs" />
     <Compile Include="Common\UserMenu.cs" />
     <Compile Include="Common\UserVoucher.cs" />
     <Compile Include="Common\Voucher.cs" />
