@@ -22,8 +22,6 @@ namespace FoodZone.Models.Security
 
         public virtual ICollection<UserVoucher> UserVouchers { get; set; }
 
-        public virtual ICollection<Notify> Notifies { get; set; }
-
         public virtual ICollection<Reservation> Reservations { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

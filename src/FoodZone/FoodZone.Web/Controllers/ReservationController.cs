@@ -17,16 +17,19 @@ namespace FoodZone.Web.Controllers
         private readonly IReservationDetailsServices _reservationDetailsServices;
         private readonly ICheckoutServices _checkoutServices;
         private readonly IMenuServices _menuServices;
+        private readonly ITableServices _tableServices;
 
         public ReservationController(IReservationServices reservationServices, 
-            IReservationDetailsServices reservationDetailsServices, 
-            ICheckoutServices checkoutServices, 
-            IMenuServices menuServices)
+            IReservationDetailsServices reservationDetailsServices,
+            ICheckoutServices checkoutServices,
+            IMenuServices menuServices,
+            ITableServices tableServices)
         {
             _reservationServices = reservationServices;
             _reservationDetailsServices = reservationDetailsServices;
             _checkoutServices = checkoutServices;
             _menuServices = menuServices;
+            _tableServices = tableServices;
         }
 
         private UserManager _userManager;
@@ -80,6 +83,7 @@ namespace FoodZone.Web.Controllers
                         MenuPrice = menu.Price
                     };
                     reservationDetails.Add(reservationDetail);
+                    UpdateTableStatus(item.Id, 1);
                 }
 
                 var reservation = new Reservation
@@ -109,6 +113,13 @@ namespace FoodZone.Web.Controllers
             var user = UserManager.FindById(userId);
             ViewBag.ReservationSuccess = "Cảm ơn "+ user.FullName + " đã đặt bàn, mong bạn sẽ đến đúng giờ nhé!";
             return View();
+        }
+
+        private void UpdateTableStatus(int tableId, int status)
+        {
+            var table = _tableServices.GetById(tableId);
+            table.Status = status;
+            _tableServices.Update(table);
         }
     }
 }

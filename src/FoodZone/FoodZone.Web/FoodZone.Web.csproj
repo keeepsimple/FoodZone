@@ -204,6 +204,7 @@
     <Compile Include="Areas\Admin\ViewModels\NewsViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\FoodViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\MenuViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ReservationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TableViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\VoucherViewModel.cs" />
     <Compile Include="Areas\Identity\Controllers\RolesAdminController.cs" />

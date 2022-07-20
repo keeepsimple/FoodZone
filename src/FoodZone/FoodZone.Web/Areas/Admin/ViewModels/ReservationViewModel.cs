@@ -1,15 +1,17 @@
-﻿using FoodZone.Models.BaseEntities;
+﻿using FoodZone.Models.Common;
 using FoodZone.Models.Security;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace FoodZone.Models.Common
+namespace FoodZone.Web.Areas.Admin.ViewModels
 {
-    public class Reservation : BaseEntity
+    public class ReservationViewModel
     {
-        public string UserId { get; set; }
+        public int Id { get; set; }
 
-        public User User { get; set; }
+        public string UserId { get; set; }
 
         public string PhoneNumber { get; set; }
 
@@ -28,7 +30,5 @@ namespace FoodZone.Models.Common
         public string Note { get; set; }
 
         public string CancelReason { get; set; }
-
-        public virtual ICollection<ReservationDetail> ReservationDetails { get; set; }
     }
 }

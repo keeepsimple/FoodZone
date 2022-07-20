@@ -33,8 +33,6 @@ namespace FoodZone.Data.Infrastructure
 
         ICoreRepository<ReservationDetail> ReservationDetailRepository { get; }
 
-        ICoreRepository<Notify> NotifyRepository { get; }
-
         ICoreRepository<Reservation> ReservationRepository { get; }
 
         ICoreRepository<Table> TableRepository { get; }

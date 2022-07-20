@@ -33,9 +33,6 @@ namespace FoodZone.Data.Infrastructure
         private ICoreRepository<ReservationDetail> _reservationDetailRepository;
         public ICoreRepository<ReservationDetail> ReservationDetailRepository => _reservationDetailRepository ?? new CoreRepository<ReservationDetail>(_dbContext);
 
-        private ICoreRepository<Notify> _notifyRepository;
-        public ICoreRepository<Notify> NotifyRepository => _notifyRepository ?? new CoreRepository<Notify>(_dbContext);
-
         private ICoreRepository<Reservation> _reservationRepository;
         public ICoreRepository<Reservation> ReservationRepository => _reservationRepository ?? new CoreRepository<Reservation>(_dbContext);
 

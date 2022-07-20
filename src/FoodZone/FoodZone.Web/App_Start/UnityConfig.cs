@@ -62,7 +62,6 @@ namespace FoodZone.Web
             container.RegisterType<IFoodServices, FoodServices>();
             container.RegisterType<IMenuCategoryServices, MenuCategoryServices>();
             container.RegisterType<IMenuServices, MenuServices>();
-            container.RegisterType<INotifyServices, NotifyServices>();
             container.RegisterType<IReservationServices, ReservationServices>();
             container.RegisterType<IReservationDetailsServices, ReservationDetailServices>();
             container.RegisterType<IUserMenuServices, UserMenuServices>();

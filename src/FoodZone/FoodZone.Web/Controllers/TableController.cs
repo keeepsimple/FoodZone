@@ -32,14 +32,14 @@ namespace FoodZone.Web.Controllers
             }
 
             List<Table> tables = (List<Table>)Session["table"];
-            if(tables == null)
+            if (tables == null)
             {
                 tables = new List<Table>();
             }
 
             foreach (var item in tables.ToList())
             {
-                if(item.Id == tableId)
+                if (item.Id == tableId)
                 {
                     tables.Remove(item);
                     Session["table"] = tables;
