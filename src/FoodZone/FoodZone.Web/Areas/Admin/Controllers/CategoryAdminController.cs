@@ -24,6 +24,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
+
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (searchString != null)
@@ -56,7 +57,9 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+
         [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> Create(CategoryViewModel model)
         {
             if (ModelState.IsValid)
@@ -135,7 +138,9 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+
         [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> Edit(CategoryViewModel model)
         {
             if (ModelState.IsValid)
