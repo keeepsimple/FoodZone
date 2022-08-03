@@ -92,7 +92,9 @@ namespace FoodZone.Web.Controllers
                     Child = reservationViewModel.Child,
                     Name = reservationViewModel.CusName,
                     PhoneNumber = reservationViewModel.PhoneNumber,
-                    ReservationDate = reservationViewModel.ReservationDate.AddHours(reservationViewModel.Hours).AddMinutes(reservationViewModel.Minute),
+                    ReservationDate = DateTime.Parse(reservationViewModel.ReservationDate)
+                                              .AddHours(reservationViewModel.Hours)
+                                              .AddMinutes(reservationViewModel.Minute),
                     Note = reservationViewModel.Note,
                     Status = 0,
                     TotalPrice = menuPrice*reservationViewModel.Adult + menuPrice*reservationViewModel.Child - (reservationViewModel.Child*50000),

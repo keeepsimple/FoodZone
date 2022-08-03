@@ -6,6 +6,10 @@ using FoodZone.Services.IServices;
 using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Identity.Controllers;
 using FoodZone.Web.Controllers;
+using Hangfire.Client;
+using Hangfire.Common;
+using Hangfire.States;
+using Hangfire;
 using System;
 
 using Unity;
@@ -43,6 +47,7 @@ namespace FoodZone.Web
         /// allows resolving a concrete type even if it was not previously
         /// registered.
         /// </remarks>
+        [Obsolete]
         public static void RegisterTypes(IUnityContainer container)
         {
             // NOTE: To load from web.config uncomment the line below.
@@ -71,6 +76,13 @@ namespace FoodZone.Web
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<RolesAdminController>(new InjectionConstructor());
             container.RegisterType<UsersAdminController>(new InjectionConstructor());
+            container.RegisterType<JobStorage>(new InjectionFactory(c => JobStorage.Current));
+            container.RegisterType<IJobFilterProvider, JobFilterAttributeFilterProvider>(new InjectionConstructor(true));
+            container.RegisterType<IBackgroundJobFactory, BackgroundJobFactory>();
+            container.RegisterType<IRecurringJobManager, RecurringJobManager>();
+            container.RegisterType<IBackgroundJobClient, BackgroundJobClient>();
+            container.RegisterType<IBackgroundJobStateChanger, BackgroundJobStateChanger>();
         }
     }
+    
 }

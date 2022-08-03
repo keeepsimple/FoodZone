@@ -4,17 +4,6 @@
 }
 <div class="breadcrumbs-area position-relative">
     <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="breadcrumb-content position-relative section-content">
-                    <h3 class="title-3">Ưu Đãi</h3>
-                    <ul>
-                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                        <li>Ưu Đãi</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <div class="shop-collection-area gray-bg pt-no-text pb-no-text">
@@ -33,20 +22,34 @@
                             <div class="single-blog">
                                 <div class="blog-image">
                                     <a class="d-block" href="blog-details-fullwidth.html">
-                                        <img src="assets/images/blog/blog1.jpg" alt="Blog Image" class="w-100">
+                                        <img src="assets/images/@item.Image" alt="Blog Image" class="w-100">
                                     </a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="blog-text">
                                         <h4><a href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})">@item.Title</a></h4>
-                                        <p>Lorem ipsu dolor sit amet cons elits cumque adipisicing, sed do incid eiusmod tempor ut labore et dolore eveniet .</p>
+                                        <p>@item.ShortDescription</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
-
+                <div class="row">
+                    <div class="col-sm-12 col-custom">
+                        <div class="toolbar-bottom">
+                            <div class="pagination">
+                                <ul>
+                                    <li class="current">1</li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li class="next"><a href="#">next</a></li>
+                                    <li><a href="#">&gt;&gt;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         @{

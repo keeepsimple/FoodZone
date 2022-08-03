@@ -1,20 +1,21 @@
-﻿using FoodZone.Services.IServices;
-using FoodZone.Services.Services;
+﻿using FoodZone.Models.Common;
+using FoodZone.Services.IServices;
 using FoodZone.Web.Areas.Admin.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace FoodZone.Web.Areas.Admin.Controllers
 {
-    public class ReservationAdminController:Controller
+    [Authorize(Roles = "Manager,Staff")]
+    public class ReservationAdminController : Controller
     {
         private readonly IReservationServices _reservationServices;
         private readonly IReservationDetailsServices _reservationDetailServices;
+        private readonly ITableServices _tableServices;
+        private readonly IMenuServices _menuServices;
+        private readonly IFoodServices _foodServices;
 
         private UserManager _userManager;
         public UserManager UserManager
@@ -23,10 +24,17 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             private set => _userManager = value;
         }
 
-        public ReservationAdminController(IReservationServices reservationServices, IReservationDetailsServices reservationDetailServices)
+        public ReservationAdminController(IReservationServices reservationServices,
+            IReservationDetailsServices reservationDetailServices,
+            ITableServices tableServices,
+            IMenuServices menuServices,
+            IFoodServices foodServices)
         {
             _reservationServices = reservationServices;
             _reservationDetailServices = reservationDetailServices;
+            _tableServices = tableServices;
+            _menuServices = menuServices;
+            _foodServices = foodServices;
         }
 
         public ActionResult Index()
@@ -42,7 +50,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var reservation= _reservationServices.GetById((int)id);
+            var reservation = _reservationServices.GetById((int)id);
 
             if (reservation == null)
             {
@@ -74,18 +82,31 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var reservation = _reservationServices.GetById(model.Id);
-                if(reservation == null)
+                if (reservation == null)
                 {
                     return HttpNotFound();
                 }
 
-                if(model.Status == 0)
+                if (reservation.Status == 0)
                 {
                     reservation.Status = 1;
-                }else if(model.Status == 1)
-                {
-                    reservation.Status=2;
                 }
+                else if (reservation.Status == 1)
+                {
+                    reservation.Status = 2;
+
+                }
+                else if (reservation.Status == 2)
+                {
+                    reservation.Status = 3;
+                }
+
+                if (!string.IsNullOrEmpty(model.CancelReason))
+                {
+                    reservation.Status = 4;
+                }
+
+                ChangeTableStatus(reservation);
 
                 reservation.CancelReason = model.CancelReason;
 
@@ -102,6 +123,49 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 }
             }
             return View(model);
+        }
+
+        private void ChangeTableStatus(Reservation reservation)
+        {
+            var details = _reservationDetailServices.GetReservationDetailsByReservation(reservation.Id);
+
+            foreach (var item in details)
+            {
+                var table = _tableServices.GetById(item.TableId);
+                if (reservation.Status == 2)
+                {
+                    table.Status = 2;
+                }
+                else if (reservation.Status == 3 || reservation.Status == 4)
+                {
+                    table.Status = 0;
+                }
+                _tableServices.Update(table);
+            }
+        }
+
+        public ActionResult GetReservationDetails(int reservationId)
+        {
+            var list = _reservationDetailServices.GetReservationDetailsByReservation(reservationId);
+            return PartialView(list);
+        }
+
+        public string GetFoodName(int foodId)
+        {
+            var food = _foodServices.GetById(foodId);
+            return food.Name;
+        }
+
+        public int GetTableNumber(int tableId)
+        {
+            var table = _tableServices.GetById(tableId);
+            return table.NumberTable;
+        }
+
+        public string GetMenuName(int menuId)
+        {
+            var menu = _menuServices.GetById(menuId);
+            return menu.Name;
         }
     }
 }

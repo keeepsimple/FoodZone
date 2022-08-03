@@ -16,23 +16,16 @@ namespace FoodZone.Web.Controllers
             _categoryServices = categoryServices;
         }
 
-        public ActionResult GetAllMenu()
+        public ActionResult GetAll()
         {
             var menu = _menuServices.GetAll();
-            return PartialView("_GetAllMenu",menu);
+            return View(menu);
         }
 
-        public ActionResult Details(int menuId)
+        public ActionResult GetCategoryByMenu(int menuId)
         {
-            var menu = _menuServices.GetById(menuId);
-            if(menu == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Menu = menu.Name;
             var categories = _categoryServices.GetCategoryByMenu(menuId);
-            
-            return View(categories);
+            return PartialView("_GetCategoryByMenu", categories);
         }
 
         public ActionResult GetFoodByCate(int cateId)

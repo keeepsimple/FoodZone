@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ReservationDetail>
+<br />
+<br />
+<center>
+    <table class="table table-condensed">
+        <tr class="d-flex center-title">
+            <th class="col-md-2">Bàn</th>
+            <th class="col-md-2">Combo</th>
+            <th class="col-md-2">Đồ Ăn</th>
+            <th class="col-md-2">Giá</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="d-flex center-title">
+                <td class="col-md-2">@Html.Action("GetTableNumber", "ReservationAdmin", new { tableId = item.TableId })</td>
+                <td class="col-md-2">@Html.Action("GetMenuName", "ReservationAdmin", new { menuId = item.MenuId })</td>
+                @if (item.FoodId != null)
+                {
+                    <td class="col-md-2">@Html.Action("GetFoodName", "ReservationAdmin", new { foodId = item.FoodId })</td>
+                    <td class="col-md-2">@(item.FoodPrice+item.MenuPrice)</td>
+}
+else
+                {
+                <td class="col-md-2">Khong</td>
+                <td class="col-md-2">@(item.MenuPrice.ToString("N0"))</td>
+                }
+            </tr>
+        }
+    </table>
+</center>

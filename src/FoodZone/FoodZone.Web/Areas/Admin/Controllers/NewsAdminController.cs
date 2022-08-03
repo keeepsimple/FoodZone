@@ -58,10 +58,19 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> Create(NewsViewModel model)
+        public async Task<ActionResult> Create(NewsViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (uploadImage != null)
+                {
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
+                }
+
+                model.Image = fileName;
 
                 var news = new News
                 {
@@ -115,10 +124,22 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> Edit(NewsViewModel model)
+        public async Task<ActionResult> Edit(NewsViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (uploadImage != null && uploadImage.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
+                }
+
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    model.Image = fileName;
+                }
 
                 var news = _newsServices.GetById(model.Id);
                 if(news == null)

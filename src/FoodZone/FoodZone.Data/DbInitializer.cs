@@ -59,7 +59,6 @@ namespace FoodZone.Data
                 Name = "Lõi vai Wagyu",
                 Description = "Lõi vai Wagyu",
                 Price = 269000,
-                Image = "loivaiwagyu.png",
                 InsertedAt = DateTime.Now
             };
             var food2 = new Food
@@ -68,7 +67,6 @@ namespace FoodZone.Data
                 Name = "Tôm Sú",
                 Description = "Tôm Sú",
                 Price = 199000,
-                Image = "tomsu.jpg",
                 InsertedAt = DateTime.Now
             };
             var food3 = new Food
@@ -77,7 +75,6 @@ namespace FoodZone.Data
                 Name = "Ngọc kê gà",
                 Description = "Ngọc kê gà",
                 Price = 50000,
-                Image = "menu-upsale_ngoc-ke-ga.jpg",
                 InsertedAt = DateTime.Now
             };
             var food4 = new Food
@@ -86,7 +83,6 @@ namespace FoodZone.Data
                 Name = "Vịt quay Đài Loan",
                 Description = "Vịt quay Đài Loan",
                 Price = 179000,
-                Image = "menu-upsale_vit-quay-dai-loan.jpg",
                 InsertedAt = DateTime.Now
             };
             var food5 = new Food
@@ -95,7 +91,6 @@ namespace FoodZone.Data
                 Name = "Bò ướp sốt",
                 Description = "Bò ướp sốt đặc biệt",
                 Price = 199000,
-                Image = "menu-upsale_bo-uop-sot.jpg",
                 InsertedAt = DateTime.Now
             };
             var food6 = new Food
@@ -104,7 +99,6 @@ namespace FoodZone.Data
                 Name = "Nước cam nguyên chất",
                 Description = "Nước cam nguyên chất",
                 Price = 35000,
-                Image = "nuoccam.png",
                 InsertedAt = DateTime.Now
             };
             var food7 = new Food
@@ -113,7 +107,6 @@ namespace FoodZone.Data
                 Name = "Mojito Beer",
                 Description = "Mojito Beer",
                 Price = 45000,
-                Image = "mojitobeer.png",
                 InsertedAt = DateTime.Now
             };
             var food8 = new Food
@@ -122,7 +115,6 @@ namespace FoodZone.Data
                 Name = "Rượu rơm vàng mơ rừng",
                 Description = "Rượu rơm vàng mơ rừng 300ML",
                 Price = 300000,
-                Image = "ruouromvangmorung.png",
                 InsertedAt = DateTime.Now
             };
             var food9 = new Food
@@ -131,7 +123,6 @@ namespace FoodZone.Data
                 Name = "Vodka Alligator",
                 Description = "Vodka Alligator xanh 500ML",
                 Price = 350000,
-                Image = "ruouromvangmorung.png",
                 InsertedAt = DateTime.Now
             };
             var food10 = new Food
@@ -140,7 +131,6 @@ namespace FoodZone.Data
                 Name = "Lẩu cà chua",
                 Description = "Lẩu cà chua",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
             var food11 = new Food
@@ -149,7 +139,6 @@ namespace FoodZone.Data
                 Name = "Lẩu Thái",
                 Description = "Lẩu Thái",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
             var food12 = new Food
@@ -158,7 +147,6 @@ namespace FoodZone.Data
                 Name = "Lẩu Đài Bắc",
                 Description = "Lẩu Đài Bắc",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
             var food13 = new Food
@@ -167,7 +155,6 @@ namespace FoodZone.Data
                 Name = "Ba chỉ bò Mỹ",
                 Description = "Ba chỉ bò Mỹ",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
             var food14 = new Food
@@ -176,7 +163,6 @@ namespace FoodZone.Data
                 Name = "Bắp heo Mỹ cuộn",
                 Description = "Bắp heo Mỹ cuộn",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
             var food15 = new Food
@@ -185,7 +171,6 @@ namespace FoodZone.Data
                 Name = "Chân gà rút xương",
                 Description = "Chân gà rút xương",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
             var food16 = new Food
@@ -194,7 +179,6 @@ namespace FoodZone.Data
                 Name = "Bạch tuộc baby",
                 Description = "Bạch tuộc baby",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
             var food17 = new Food
@@ -203,7 +187,6 @@ namespace FoodZone.Data
                 Name = "Sủi cảo kim ngân",
                 Description = "Sủi cảo kim ngân",
                 Price = 0,
-                Image = "laucachua.jpg",
                 InsertedAt = DateTime.Now
             };
 

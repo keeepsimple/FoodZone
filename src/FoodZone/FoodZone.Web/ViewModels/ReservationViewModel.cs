@@ -20,7 +20,7 @@ namespace FoodZone.Web.ViewModels
         public bool HaveSpecialMenu { get; set; }
 
         [Required(ErrorMessage = "Ngày đặt bàn không được bỏ trống")]
-        public DateTime ReservationDate { get; set; } = DateTime.Now;
+        public string ReservationDate { get; set; } = DateTime.Now.ToShortDateString();
 
         [Required(ErrorMessage = "Giờ đặt hàng không được bỏ trống")]
         public int Hours { get; set; }

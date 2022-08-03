@@ -99,6 +99,10 @@
     <Compile Include="Migrations\202207200221099_UpdateReservationModelAndDeleteNotify.designer.cs">
       <DependentUpon>202207200221099_UpdateReservationModelAndDeleteNotify.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208021133321_UpdateFoodModel.cs" />
+    <Compile Include="Migrations\202208021133321_UpdateFoodModel.designer.cs">
+      <DependentUpon>202208021133321_UpdateFoodModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -115,6 +119,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202207130317450_InitCreate.resx">
       <DependentUpon>202207130317450_InitCreate.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207131558567_UpdateCategoryModel.resx">
       <DependentUpon>202207131558567_UpdateCategoryModel.cs</DependentUpon>
@@ -139,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207200221099_UpdateReservationModelAndDeleteNotify.resx">
       <DependentUpon>202207200221099_UpdateReservationModelAndDeleteNotify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208021133321_UpdateFoodModel.resx">
+      <DependentUpon>202208021133321_UpdateFoodModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

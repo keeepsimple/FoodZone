@@ -8,9 +8,12 @@ using System.Web.Mvc;
 using System.Net;
 using System;
 using System.Collections.Generic;
+using System.Web;
+using System.IO;
 
 namespace FoodZone.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class VoucherAdminController : Controller
     {
         private readonly IVoucherServices _voucherServices;
@@ -35,7 +38,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var vouchers = await _voucherServices.GetAllAsync();
-            AutoUpdateExpiredDate(vouchers);
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -58,44 +60,30 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             return d1.CompareTo(d2);
         }
 
-        private void AutoUpdateExpiredDate(IEnumerable<Voucher> vouchers)
-        {
-            foreach (var item in vouchers)
-            {
-                var checkExpired = CompareDate(DateTime.Now, item.ExpiredDate);
-                if (checkExpired <= 0)
-                {
-                    item.Status = 1;
-                }
-                else
-                {
-                    item.Status = 0;
-                }
-                _voucherServices.Update(item);
-            }
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> Create(VoucherViewModel model)
+        public async Task<ActionResult> Create(VoucherViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
-                var checkExpired = CompareDate(DateTime.Now, model.ExpiredDate);
-                if(checkExpired <= 0)
+                string fileName = "";
+                if (uploadImage != null)
                 {
-                    model.Status = 1;
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
                 }
-                else
-                {
-                    model.Status = 0;
-                }
+
+                model.Image = fileName;
+
                 var voucher = new Voucher
                 {
                     Title = model.Title,
                     Code = model.Code,
                     Content = model.Content,
+                    Image = model.Image,
+                    ShortDescription = model.ShortDescription,
                     ExpiredDate = model.ExpiredDate,
                     Level = model.Level,
                     Status = model.Status
@@ -136,6 +124,8 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 Title = voucher.Title,
                 Content = voucher.Content,
                 Level = voucher.Level,
+                ShortDescription= voucher.ShortDescription,
+                Image = voucher.Image,
                 ExpiredDate = voucher.ExpiredDate,
                 Status = voucher.Status,
                 Code = voucher.Code
@@ -147,10 +137,22 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> Edit(VoucherViewModel model)
+        public async Task<ActionResult> Edit(VoucherViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (uploadImage != null && uploadImage.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
+                }
+
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    model.Image = fileName;
+                }
 
                 var voucher = _voucherServices.GetById(model.Id);
                 if (voucher == null)
@@ -170,6 +172,8 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
                 voucher.Title = model.Title;
                 voucher.Level = model.Level;
+                voucher.Image = model.Image;
+                voucher.ShortDescription = model.ShortDescription;
                 voucher.Content = model.Content;
                 voucher.ExpiredDate = model.ExpiredDate;
                 voucher.Code = model.Code;

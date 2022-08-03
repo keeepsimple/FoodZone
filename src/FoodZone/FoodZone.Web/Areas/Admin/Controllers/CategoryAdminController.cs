@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace FoodZone.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class CategoryAdminController : Controller
     {
         private readonly ICategoryServices _categoryServices;

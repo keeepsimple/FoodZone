@@ -62,7 +62,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 {
                     Description = model.Description,
                     Name = model.Name,
-                    Image = model.Image,
                     Price = model.Price
                 };
                 var result = await _foodServices.AddAsync(food);
@@ -87,7 +86,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             {
                 Id = food.Id,
                 Description = food.Description,
-                Image = food.Image,
                 Name = food.Name,
                 Price = food.Price
             };
@@ -111,7 +109,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
                 food.Name = model.Name;
                 food.Description = model.Description;
-                food.Image = food.Image;
                 food.Price = model.Price;
                 var result = await _foodServices.UpdateAsync(food);
 
