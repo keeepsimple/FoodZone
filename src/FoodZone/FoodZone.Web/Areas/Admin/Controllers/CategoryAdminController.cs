@@ -25,6 +25,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
+
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (searchString != null)
@@ -39,6 +40,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var categories = await _categoryServices.GetAllAsync();
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 categories = categories.Where(s => s.Name.Contains(searchString)).ToList();
@@ -46,6 +48,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+
             return View(categories.ToPagedList(pageNumber, pageSize));
         }
 
@@ -53,11 +56,14 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         {
             var categoryViewModel = new CategoryViewModel();
             categoryViewModel.Foods = _foodServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
+            
             return View(categoryViewModel);
         }
 
         [HttpPost]
+
         [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> Create(CategoryViewModel model)
         {
             if (ModelState.IsValid)
@@ -68,6 +74,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 };
 
                 var result = await _categoryServices.AddAsync(category);
+
                 if (result > 0)
                 {
                     await GetSelectedFoodsFromIds(model.SelectedFoodIds, category);
@@ -79,6 +86,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     TempData["Message"] = "Tạo thất bại. Thử lại sau nhé!";
                 }
             }
+
             model.Foods = _foodServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
 
             return View(model);
@@ -87,6 +95,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         private async Task GetSelectedFoodsFromIds(IEnumerable<int> selectedFoodIds, Category category)
         {
             List<Food> foods = new List<Food>();
+
             foreach (var item in selectedFoodIds)
             {
                 var food = await _foodServices.GetByIdAsync(item);
@@ -100,13 +109,16 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         private async Task UpdateSelectedFoodFromIds(IEnumerable<int> selectedFoodIds, Category category)
         {
             List<Food> foods = new List<Food>();
+
             category.Foods = foods;
             _categoryServices.Update(category);
+
             foreach (var item in selectedFoodIds)
             {
                 var food = await _foodServices.GetByIdAsync(item);
                 foods.Add(food);
             }
+
             category.Foods = foods;
             _categoryServices.Update(category);
         }
@@ -119,6 +131,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             }
 
             var category = await _categoryServices.GetByIdAsync((int)id);
+
             if (category == null)
             {
                 return HttpNotFound();
@@ -129,6 +142,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 Name = category.Name,
                 SelectedFoodIds = _categoryServices.GetFoodIdByCategory(category.Id)
             };
+
             categoryViewModel.Foods = _foodServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
             ViewBag.FoodList = _foodServices.GetAll();
 
@@ -136,12 +150,15 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+
         [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> Edit(CategoryViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var category = await _categoryServices.GetByIdAsync(model.Id);
+
                 if (category == null)
                 {
                     return HttpNotFound();
@@ -161,8 +178,10 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 {
                     TempData["Message"] = "Cập nhật thất bại.";
                 }
+
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
 
@@ -170,6 +189,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var result = await _categoryServices.DeleteAsync(id);
+
             if (result)
             {
                 TempData["Message"] = "Xóa thành công.";
@@ -178,6 +198,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             {
                 TempData["Message"] = "Xóa thất bại!";
             }
+
             return RedirectToAction("Index");
         }
     }
