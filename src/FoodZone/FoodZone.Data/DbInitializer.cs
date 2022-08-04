@@ -57,7 +57,6 @@ namespace FoodZone.Data
             {
                 Id = 1,
                 Name = "Lõi vai Wagyu",
-                Description = "Lõi vai Wagyu",
                 Price = 269000,
                 InsertedAt = DateTime.Now
             };
@@ -65,7 +64,6 @@ namespace FoodZone.Data
             {
                 Id = 2,
                 Name = "Tôm Sú",
-                Description = "Tôm Sú",
                 Price = 199000,
                 InsertedAt = DateTime.Now
             };
@@ -73,7 +71,6 @@ namespace FoodZone.Data
             {
                 Id = 3,
                 Name = "Ngọc kê gà",
-                Description = "Ngọc kê gà",
                 Price = 50000,
                 InsertedAt = DateTime.Now
             };
@@ -81,7 +78,6 @@ namespace FoodZone.Data
             {
                 Id = 4,
                 Name = "Vịt quay Đài Loan",
-                Description = "Vịt quay Đài Loan",
                 Price = 179000,
                 InsertedAt = DateTime.Now
             };
@@ -89,7 +85,6 @@ namespace FoodZone.Data
             {
                 Id = 5,
                 Name = "Bò ướp sốt",
-                Description = "Bò ướp sốt đặc biệt",
                 Price = 199000,
                 InsertedAt = DateTime.Now
             };
@@ -97,7 +92,6 @@ namespace FoodZone.Data
             {
                 Id = 6,
                 Name = "Nước cam nguyên chất",
-                Description = "Nước cam nguyên chất",
                 Price = 35000,
                 InsertedAt = DateTime.Now
             };
@@ -105,7 +99,6 @@ namespace FoodZone.Data
             {
                 Id = 7,
                 Name = "Mojito Beer",
-                Description = "Mojito Beer",
                 Price = 45000,
                 InsertedAt = DateTime.Now
             };
@@ -113,7 +106,6 @@ namespace FoodZone.Data
             {
                 Id = 8,
                 Name = "Rượu rơm vàng mơ rừng",
-                Description = "Rượu rơm vàng mơ rừng 300ML",
                 Price = 300000,
                 InsertedAt = DateTime.Now
             };
@@ -121,7 +113,6 @@ namespace FoodZone.Data
             {
                 Id = 9,
                 Name = "Vodka Alligator",
-                Description = "Vodka Alligator xanh 500ML",
                 Price = 350000,
                 InsertedAt = DateTime.Now
             };
@@ -129,7 +120,6 @@ namespace FoodZone.Data
             {
                 Id = 10,
                 Name = "Lẩu cà chua",
-                Description = "Lẩu cà chua",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -137,7 +127,6 @@ namespace FoodZone.Data
             {
                 Id = 11,
                 Name = "Lẩu Thái",
-                Description = "Lẩu Thái",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -145,7 +134,6 @@ namespace FoodZone.Data
             {
                 Id = 12,
                 Name = "Lẩu Đài Bắc",
-                Description = "Lẩu Đài Bắc",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -153,7 +141,6 @@ namespace FoodZone.Data
             {
                 Id = 13,
                 Name = "Ba chỉ bò Mỹ",
-                Description = "Ba chỉ bò Mỹ",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -161,7 +148,6 @@ namespace FoodZone.Data
             {
                 Id = 14,
                 Name = "Bắp heo Mỹ cuộn",
-                Description = "Bắp heo Mỹ cuộn",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -169,7 +155,6 @@ namespace FoodZone.Data
             {
                 Id = 15,
                 Name = "Chân gà rút xương",
-                Description = "Chân gà rút xương",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -177,7 +162,6 @@ namespace FoodZone.Data
             {
                 Id = 16,
                 Name = "Bạch tuộc baby",
-                Description = "Bạch tuộc baby",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -185,7 +169,6 @@ namespace FoodZone.Data
             {
                 Id = 17,
                 Name = "Sủi cảo kim ngân",
-                Description = "Sủi cảo kim ngân",
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
@@ -196,6 +179,7 @@ namespace FoodZone.Data
                 {
                     Id = 1,
                     Name = "Thực đơn đặc biệt",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food1, food2, food3, food4, food5},
                     InsertedAt = DateTime.Now
                 },
@@ -203,6 +187,7 @@ namespace FoodZone.Data
                 {
                     Id = 2,
                     Name = "Nước lẩu",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food10,food11,food12},
                     InsertedAt = DateTime.Now
                 },
@@ -210,6 +195,7 @@ namespace FoodZone.Data
                 {
                     Id=3,
                     Name="Bò",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food13},
                     InsertedAt = DateTime.Now
                 },
@@ -217,18 +203,21 @@ namespace FoodZone.Data
                 {
                     Id=4,
                     Name="Heo",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food14},
                     InsertedAt = DateTime.Now
                 },new Category
                 {
                     Id=5,
                     Name="Gà",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food15},
                     InsertedAt = DateTime.Now
                 },new Category
                 {
                     Id=6,
                     Name="Hải sản",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food16},
                     InsertedAt = DateTime.Now
                 }
@@ -236,6 +225,7 @@ namespace FoodZone.Data
                 {
                     Id=7,
                     Name="Đồ viên và dimsum",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food17},
                     InsertedAt = DateTime.Now
                 },
@@ -243,6 +233,7 @@ namespace FoodZone.Data
                 {
                     Id=8,
                     Name="Đồ uống",
+                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
                     Foods = new List<Food>{food6, food7, food8,food9},
                     InsertedAt = DateTime.Now
                 }
@@ -341,57 +332,6 @@ namespace FoodZone.Data
             };
 
             context.MenuCategories.AddRange(menuCategories);
-
-            var tables = new List<Table>
-            {
-                new Table
-                {
-                    Id=1,
-                    Capacity = 2,
-                    Floor=1,
-                    InsertedAt = DateTime.Now,
-                    NumberTable=1,
-                    Status = 0
-                },
-                new Table
-                {
-                    Id=2,
-                    Capacity = 4,
-                    Floor=1,
-                    InsertedAt = DateTime.Now,
-                    NumberTable=2,
-                    Status = 0
-                },
-                new Table
-                {
-                    Id=3,
-                    Capacity = 6,
-                    Floor=1,
-                    InsertedAt = DateTime.Now,
-                    NumberTable=3,
-                    Status = 0
-                },
-                new Table
-                {
-                    Id=4,
-                    Capacity = 8,
-                    Floor=1,
-                    InsertedAt = DateTime.Now,
-                    NumberTable=4,
-                    Status = 0
-                },
-                new Table
-                {
-                    Id=5,
-                    Capacity = 8,
-                    Floor=1,
-                    InsertedAt = DateTime.Now,
-                    NumberTable=5,
-                    Status = 0
-                }
-            };
-
-            context.Tables.AddRange(tables);
 
             context.SaveChanges();
         }

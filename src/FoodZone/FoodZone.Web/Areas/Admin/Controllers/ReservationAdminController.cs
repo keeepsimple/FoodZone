@@ -67,7 +67,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 PhoneNumber = reservation.PhoneNumber,
                 ReservationDate = reservation.ReservationDate,
                 Status = reservation.Status,
-                TotalPrice = reservation.TotalPrice,
                 UserId = reservation.UserId,
                 CancelReason = reservation.CancelReason
             };

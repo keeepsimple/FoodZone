@@ -7,19 +7,21 @@ namespace FoodZone.Models.Common
 {
     public class News : BaseEntity
     {
-        [Required(ErrorMessage = "The {0} is required")]
-        [StringLength(255, ErrorMessage = "The {0} must between {2} and {1} characters", MinimumLength = 3)]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Ảnh")]
         public string Image { get; set; }
 
-        [Required(ErrorMessage = "The {0} is required")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Nội dung")]
         public string Content { get; set; }
 
-        [Required(ErrorMessage = "The {0} is required")]
-        [StringLength(500, ErrorMessage = "The {0} must less than {1} characters")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [StringLength(500, ErrorMessage = "Mô tả không lớn hơn 500 ký tự")]
         public string ShortDescription { get; set; }
 
-        [Required(ErrorMessage = "The {0} is required")]
-        [StringLength(255, ErrorMessage = "The {0} must between {2} and {1} characters", MinimumLength = 3)]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [StringLength(255, ErrorMessage = "Tên phải từ {2} đến {1} ký tự", MinimumLength = 3)]
+        [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
 
         public string UserId { get; set; }

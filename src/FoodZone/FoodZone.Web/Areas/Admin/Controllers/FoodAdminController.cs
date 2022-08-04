@@ -60,7 +60,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             {
                 var food = new Food
                 {
-                    Description = model.Description,
                     Name = model.Name,
                     Price = model.Price
                 };
@@ -85,7 +84,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             var foodViewModel = new FoodViewModel
             {
                 Id = food.Id,
-                Description = food.Description,
                 Name = food.Name,
                 Price = food.Price
             };
@@ -108,7 +106,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 }
 
                 food.Name = model.Name;
-                food.Description = model.Description;
                 food.Price = model.Price;
                 var result = await _foodServices.UpdateAsync(food);
 

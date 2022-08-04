@@ -10,10 +10,12 @@ namespace FoodZone.Web.Controllers
     public class HomeController : Controller
     {
         private readonly INewsServices _newsServices;
+        private readonly IVoucherServices _voucherServices;
 
-        public HomeController(INewsServices newsServices)
+        public HomeController(INewsServices newsServices, IVoucherServices voucherServices)
         {
             _newsServices = newsServices;
+            _voucherServices = voucherServices;
         }
 
         public ActionResult Index()
@@ -25,6 +27,12 @@ namespace FoodZone.Web.Controllers
         {
             var news = _newsServices.GetAll().OrderByDescending(x => x.InsertedAt).Take(3);
             return PartialView("_HomeNews", news);
+        }
+
+        public ActionResult GetLastestVoucher()
+        {
+            var vouchers = _voucherServices.GetAll().OrderByDescending(x => x.InsertedAt).Take(3);
+            return PartialView("_HomeVoucher", vouchers);
         }
 
         public ActionResult About()

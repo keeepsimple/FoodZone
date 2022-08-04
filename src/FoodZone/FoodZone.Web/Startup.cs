@@ -17,15 +17,9 @@ namespace FoodZone.Web
 {
     public partial class Startup
     {
-        private readonly IReservationServices _reservationServices;
-        private readonly IReservationDetailsServices _reservationDetailServices;
-        private readonly ITableServices _tableServices;
 
         public Startup()
         {
-            _reservationServices = DependencyResolver.Current.GetService<IReservationServices>();
-            _reservationDetailServices = DependencyResolver.Current.GetService<IReservationDetailsServices>();
-            _tableServices = DependencyResolver.Current.GetService<ITableServices>();
         }
 
         private IEnumerable<IDisposable> GetHangfireServers()

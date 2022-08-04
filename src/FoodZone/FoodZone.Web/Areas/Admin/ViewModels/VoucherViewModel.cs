@@ -7,28 +7,34 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Không để trống")]
-        [StringLength(255, ErrorMessage = "Tiêu đề phải từ {2} đến {1} ký tự", MinimumLength = 3)]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [StringLength(255, ErrorMessage = "Tên phải từ {2} đến {1} ký tự", MinimumLength = 3)]
+        [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Không để trống")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Mã giảm giá")]
         public string Code { get; set; }
 
-        public string Image { get; set; }
-
-        [Required(ErrorMessage = "Không để trống")]
-        [StringLength(500, ErrorMessage = "Mô tả ngắn không lớn hơn 500 ký tự")]
-        public string ShortDescription { get; set; }
-
-        [Required(ErrorMessage = "Không để trống")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Nội dung")]
         public string Content { get; set; }
 
-        [Required(ErrorMessage = "Không để trống")]
-        public int Status { get; set; }
+        [Display(Name = "Ảnh")]
+        public string Image { get; set; }
 
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Mô tả ngắn")]
+        public string ShortDescription { get; set; }
+
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Ngày hết hiệu lực")]
         public DateTime ExpiredDate { get; set; } = DateTime.Now;
 
-        [Required(ErrorMessage = "Không để trống")]
+        public int Status { get; set; }
+
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Cấp độ")]
         public int Level { get; set; }
     }
 }

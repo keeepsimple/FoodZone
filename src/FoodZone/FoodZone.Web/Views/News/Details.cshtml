@@ -3,27 +3,32 @@
     ViewBag.Title = ViewBag.News;
 }
 
-<div class="breadcrumbs-area position-relative">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="breadcrumb-content position-relative section-content">
-                    <h3 class="title-3">@ViewBag.News</h3>
-                    <ul>
-                        <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
-                        <li><a href="@Url.Action("Index","News")">Tin Tức</a></li>
-                    </ul>
+<div class="blog-area-wrapper">
+    <!-- Blog Main Area Start Here -->
+    <div class="blog-main-area">
+        <div class="container container-default custom-area">
+            <div class="row">
+                <div class="col-12 col-custom widget-mt">
+                    <!-- Blog Details wrapper Area Start -->
+                    <div class="blog-post-details">
+                        <figure class="blog-post-thumb mb-5">
+                            <img src="~/assets/images/@Model.Image" alt="Blog Image">
+                        </figure>
+                        <section class="blog-post-wrapper product-summery">
+                            <div class="section-content section-title">
+                                <h2 class="section-title-2 mb-3">@Model.Title</h2>
+                                <div class="blog-post-info">
+                                    <span>Ngày tạo: @Model.InsertedAt.ToString("dd/MM/yyyy")</span>
+                                </div>
+                                <p class="mb-5">
+                                    @Html.Raw(Model.Content)
+                                </p>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="shop-collection-area gray-bg pt-no-text pb-no-text">
-    <div class="container custom-area">
-        <div class="row mb-30">
-            <div>
-                @Html.Raw(Model.Content)
-            </div>
-        </div>
-    </div>
+    <!-- Blog Main Area End Here -->
 </div>

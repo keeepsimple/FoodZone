@@ -102,8 +102,6 @@ namespace FoodZone.Web
             #region formatter
             string text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
             string html = "Please confirm your account by clicking this link: " + message.Body + "<br/>";
-
-            html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser:" + message.Body);
             #endregion
 
             MailMessage msg = new MailMessage();

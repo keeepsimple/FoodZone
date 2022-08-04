@@ -8,15 +8,14 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Không để trống")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
         [StringLength(255, ErrorMessage = "Tên phải từ {2} đến {1} ký tự", MinimumLength = 3)]
+        [Display(Name = "Tên")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Không để trống")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Range(0, int.MaxValue, ErrorMessage = "Vui lòng nhập giá trị lớn hơn {1}")]
+        [Display(Name = "Giá")]
         public decimal Price { get; set; }
-
-        [Required(ErrorMessage = "Không để trống")]
-        [StringLength(500, ErrorMessage = "Mô tả không lớn hơn 500 ký tự")]
-        public string Description { get; set; }
     }
 }

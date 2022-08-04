@@ -103,6 +103,10 @@
     <Compile Include="Migrations\202208021133321_UpdateFoodModel.designer.cs">
       <DependentUpon>202208021133321_UpdateFoodModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208040953588_RemovePropertiesFromModels.cs" />
+    <Compile Include="Migrations\202208040953588_RemovePropertiesFromModels.designer.cs">
+      <DependentUpon>202208040953588_RemovePropertiesFromModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -147,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208021133321_UpdateFoodModel.resx">
       <DependentUpon>202208021133321_UpdateFoodModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208040953588_RemovePropertiesFromModels.resx">
+      <DependentUpon>202208040953588_RemovePropertiesFromModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

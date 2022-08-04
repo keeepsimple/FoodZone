@@ -97,7 +97,6 @@ namespace FoodZone.Web.Controllers
                                               .AddMinutes(reservationViewModel.Minute),
                     Note = reservationViewModel.Note,
                     Status = 0,
-                    TotalPrice = menuPrice*reservationViewModel.Adult + menuPrice*reservationViewModel.Child - (reservationViewModel.Child*50000),
                     UserId = User.Identity.GetUserId()
                 };
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - FoodZone</title>
 
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
@@ -15,8 +15,6 @@
     ============================================ -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/Assets/css/vendor/bootstrap.min.css">
-
-    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css.map">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="~/Assets/css/vendor/font.awesome.min.css">
     <!-- Linear Icons CSS -->
@@ -48,7 +46,7 @@
     <!-- Header Area Start Here -->
     <header class="main-header-area">
         <!-- Main Header Area Start -->
-        <div class="main-header header-transparent header-sticky">
+        <div class="main-header  header-sticky sticky">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-2 col-xl-2 col-md-6 col-6 col-custom">
@@ -191,11 +189,14 @@
                 </div>
             </div>
         </aside>
-
     </header>
 
 
     @RenderBody()
+
+    <a class="scroll-to-top" href="#">
+        <i class="lnr lnr-arrow-up"></i>
+    </a>
 
     @Html.Partial("_Footer")
 

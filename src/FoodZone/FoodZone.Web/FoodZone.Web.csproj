@@ -427,6 +427,7 @@
     <Content Include="Views\Reservation\ReservationSuccess.cshtml" />
     <Content Include="Views\Home\_HomeNews.cshtml" />
     <Content Include="Views\Home\_HomeVoucher.cshtml" />
+    <Content Include="Views\Home\_CustomerFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

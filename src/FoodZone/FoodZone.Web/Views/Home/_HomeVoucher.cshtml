@@ -19,18 +19,17 @@
                         <div class="single-blog">
                             <div class="blog-image">
                                 <a class="d-block" href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})">
-                                    <img src="assets/images/blog/blog1.jpg" alt="Blog Image" class="w-100">
+                                    <img src="~/assets/images/@item.Image" alt="Blog Image" class="w-100">
                                 </a>
                             </div>
                             <div class="blog-content">
                                 <div class="blog-text">
-                                    <h4><a href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})">Standard blog post one</a></h4>
+                                    <h4><a href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})">@item.Title</a></h4>
                                     <div class="blog-post-info">
-                                        <span><a href="#">By admin</a></span>
-                                        <span>December 18, 2020</span>
+                                        <span>@item.InsertedAt.ToString("dd/MM/yyyy")</span>
                                     </div>
-                                    <p>Lorem ipsu dolor sit amet cons elits cumque adipisicing, sed do incid eiusmod tempor ut labore et dolore eveniet .</p>
-                                    <a href="detail-blog.html" class="readmore">Read More <i class="fa fa-long-arrow-right"></i></a>
+                                    <p>@item.ShortDescription</p>
+                                    <a href="@Url.Action("Details", "Voucher", new {voucherId = item.Id})" class="readmore">Đọc thêm <i class="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>

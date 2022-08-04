@@ -14,67 +14,50 @@
 
 
 @{
-    ViewBag.Title = ViewBag.Menu;
+    ViewBag.Title = "Thực Đơn";
 }
-<div class="breadcrumbs-area position-relative">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="breadcrumb-content position-relative section-content">
-                    <h3 class="title-3">@ViewBag.Menu</h3>
-                    <ul>
-                        <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
-                        <li>@ViewBag.Menu</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="single-product-main-area">
-    <div class="container container-default custom-area">
-        <div class="row mt-no-text">
-            <div class="col-lg-12 col-custom">
-                <div class="tab-content mb-text" id="myTabContent">
-                    <ul class="nav nav-tabs nav-menu-custom" id="myTab" role="tablist">
-                        @for (int i = 0; i < menuArray.Count(); i++)
-                        {
-                            if (menuArray[i].Id == 1)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link active text-uppercase" id="@(menu + menuArray[i].Id)" data-toggle="tab" href="@(menu + menuArray[i].Id)" role="tab" aria-selected="true" >@menuArray[i].Name</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="@(menu + menuArray[i].Id)" data-toggle="tab" href="@(menu + menuArray[i].Id)" role="tab" aria-selected="false">@menuArray[i].Name</a>
-                                </li>
-                            }
-                            
-                        }
-                    </ul>
+<div class="container container-default custom-area body-custom-menu">
+    <div class="row">
+        <div class="col-lg-12 col-custom">
+            <div class="tab-content mb-text" id="myTabContent">
+                <ul class="nav nav-tabs nav-menu-custom" id="myTab" role="tablist">
                     @for (int i = 0; i < menuArray.Count(); i++)
                     {
                         if (menuArray[i].Id == 1)
                         {
-                            <div class="tab-pane fade show active" id="@(tabSelect + menuArray[i].Id)" role="tabpanel" aria-labelledby="@(menu + menuArray[i].Id)">
-                                @Html.Action("GetCategoryByMenu", "Menu", new { menuId = menuArray[i].Id })
-                            </div>
-
+                            <li class="nav-item">
+                                <a class="nav-link active text-uppercase" id="@(menu + menuArray[i].Id)" data-toggle="tab" href="@(menu + menuArray[i].Id)" role="tab" aria-selected="true">@menuArray[i].Name</a>
+                            </li>
                         }
                         else
                         {
-                            <div class="tab-pane fade" id="@(tabSelect + menuArray[i].Id)" role="tabpanel" aria-labelledby="@(menu + menuArray[i].Id)">
-                                @Html.Action("GetCategoryByMenu", "Menu", new { menuId = menuArray[i].Id })
-                            </div>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="@(menu + menuArray[i].Id)" data-toggle="tab" href="@(menu + menuArray[i].Id)" role="tab" aria-selected="false">@menuArray[i].Name</a>
+                            </li>
                         }
 
                     }
+                </ul>
+                @for (int i = 0; i < menuArray.Count(); i++)
+                {
+                    if (menuArray[i].Id == 1)
+                    {
+                        <div class="tab-pane fade show active" id="@(tabSelect + menuArray[i].Id)" role="tabpanel" aria-labelledby="@(menu + menuArray[i].Id)">
+                            @Html.Action("GetCategoryByMenu", "Menu", new { menuId = menuArray[i].Id })
+                        </div>
 
-                </div>
+                    }
+                    else
+                    {
+                        <div class="tab-pane fade" id="@(tabSelect + menuArray[i].Id)" role="tabpanel" aria-labelledby="@(menu + menuArray[i].Id)">
+                            @Html.Action("GetCategoryByMenu", "Menu", new { menuId = menuArray[i].Id })
+                        </div>
+                    }
+
+                }
+
             </div>
         </div>
-
     </div>
+
 </div>

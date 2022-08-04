@@ -37,11 +37,6 @@
             <p class="form-control">@Model.Child</p>
         </div>
 
-        <div class="form-group col-md-6">
-            Tong gia
-            <p class="form-control">@Model.TotalPrice.ToString("N0")</p>
-        </div>
-
         <div class="form-group col-md-12">
             @Html.Action("GetReservationDetails", "ReservationAdmin", new { reservationId = Model.Id })
         </div>
@@ -49,7 +44,7 @@
         <div class="form-group col-md-6">
             Li do huy
             @Html.TextAreaFor(model => model.CancelReason, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.CancelReason, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group col-md-6">
