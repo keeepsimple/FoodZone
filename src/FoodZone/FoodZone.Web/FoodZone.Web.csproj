@@ -247,6 +247,7 @@
     <Compile Include="ViewModels\HangfireAuthFilter.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\ReservationViewModel.cs" />
+    <Compile Include="ViewModels\TableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\bootstrap.min.css" />
@@ -428,6 +429,7 @@
     <Content Include="Views\Home\_HomeNews.cshtml" />
     <Content Include="Views\Home\_HomeVoucher.cshtml" />
     <Content Include="Views\Home\_CustomerFeedback.cshtml" />
+    <Content Include="Views\Shared\_GetByFloor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -60,21 +60,18 @@ namespace FoodZone.Web.Controllers
         [HttpPost]
         public ActionResult Index(ReservationViewModel reservationViewModel)
         {
-            var tables = Session["table"];
-            var listTable = (List<Table>)tables;
-
-            if (listTable.Count == 0)
-            {
-                return View("Index", "Reservation");
-            }
-
             var menu = _menuServices.GetById(reservationViewModel.MenuId);
             decimal menuPrice = menu.Price;
-
+            string str = reservationViewModel.TableFloorCapacity;
+            string[] floorCapacity = str.Split('-');
+            decimal capacity = Convert.ToDecimal(floorCapacity[0]);
+            int floor = Convert.ToInt32(floorCapacity[1]);
+            decimal tableNeed = Math.Ceiling((reservationViewModel.Adult + reservationViewModel.Child)/capacity);
+            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Capacity == capacity && x.Status == 0).Take((int)tableNeed).ToList();
             if (ModelState.IsValid)
             {
                 var reservationDetails = new List<ReservationDetail>();
-                foreach (var item in listTable)
+                foreach (var item in tables)
                 {
                     var reservationDetail = new ReservationDetail
                     {
@@ -101,7 +98,6 @@ namespace FoodZone.Web.Controllers
                 };
 
                 _checkoutServices.Checkout(reservation, reservationDetails);
-                listTable.Clear();
                 return RedirectToAction("ReservationSuccess", "Reservation");
             }
             ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
@@ -122,5 +118,6 @@ namespace FoodZone.Web.Controllers
             table.Status = status;
             _tableServices.Update(table);
         }
+
     }
 }

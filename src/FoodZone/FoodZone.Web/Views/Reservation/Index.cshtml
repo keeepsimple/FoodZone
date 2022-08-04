@@ -7,10 +7,11 @@
 <div class="contact-us-area mt-5">
     <div class="container custom-area col">
         <div class="row">
-            <div class="col">
-                <div class="booking-box">
-                    @using (Html.BeginForm("Index", "Reservation", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
+            @using (Html.BeginForm("Index", "Reservation", FormMethod.Post, new { @class = "row", role = "form" }))
+            {
+                <div class="col">
+                    <div class="booking-box">
+
                         @Html.AntiForgeryToken()
                         <div class="comment-box">
                             <h5 class="text-uppercase">Đặt bàn</h5>
@@ -47,15 +48,14 @@
                                         <div class="title-booking">Chọn thời gian đến</div>
                                         <div class="display-flex-row">
                                             <div class="title-time">Giờ</div>
-                                            <select class="form-select select-time" aria-label="Default select example" name="hour" aria-placeholder="Chọn giờ">
+                                            <select class="form-select select-time" aria-label="Default select example" name="Hours" aria-placeholder="Chọn giờ">
                                                 @for (int i = 11; i <= 21; i++)
                                                 {
                                                     <option value="@i">@i h</option>
                                                 }
-
                                             </select>
                                             <div class="title-time">Phút</div>
-                                            <select class="form-select select-time" aria-label="Default select example" name="minute" aria-placeholder="Chọn giờ">
+                                            <select class="form-select select-time" aria-label="Default select example" name="Minute" aria-placeholder="Chọn giờ">
                                                 <option value="00">00</option>
                                                 <option value="15">15</option>
                                                 <option value="30">30</option>
@@ -89,185 +89,21 @@
                                         Đặt
                                         bàn
                                     </button>
+
                                 </div>
                             </div>
                         </div>
 
-                    }
-
-                </div>
-            </div>
-            <div class="col">
-                <div class="booking-box">
-                    <div class="comment-box">
-                        <h5 class="text-uppercase">Chọn bàn</h5>
-                        <div class="tab-content mb-text display-flex-col" id="myTabContent">
-                            <ul class="nav nav-tabs nav-menu-custom nav-tabs-floor-booking" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active text-uppercase" id="floor-tab1" data-toggle="tab" href="#floor-1" role="tab" aria-selected="true">Tầng 1</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="floor-tab2" data-toggle="tab" href="#floor-2" role="tab" aria-selected="false">Tầng 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="floor-tab2" data-toggle="tab" href="#floor-2" role="tab" aria-selected="false">Tầng 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="floor-tab2" data-toggle="tab" href="#floor-2" role="tab" aria-selected="false">Tầng 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="floor-tab2" data-toggle="tab" href="#floor-2" role="tab" aria-selected="false">Tầng 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="floor-tab2" data-toggle="tab" href="#floor-2" role="tab" aria-selected="false">Tầng 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="floor-tab2" data-toggle="tab" href="#floor-2" role="tab" aria-selected="false">Tầng 2</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-uppercase" id="floor-tab2" data-toggle="tab" href="#floor-2" role="tab" aria-selected="false">Tầng 2</a>
-                                </li>
-
-
-
-                            </ul>
-                            <div class="tab-pane fade show active display-flex-col" id="floor-1" role="tabpanel" aria-labelledby="floor-tab1">
-
-
-                                <div class="contructor-floor">
-                                    <div class="object recepter-style">
-                                        Cửa ra vào | Lễ tân
-                                    </div>
-
-                                    <div class="object window-style-left window-1">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-2">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-3">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-4">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-5">
-                                        |
-                                    </div>
-
-                                    <div class="object section-table-style table-2">
-                                        <input class="form-check-input input-custom-table" name="ban" type="radio" value="1" id="ban2nguoi1">
-                                        <label class="form-check-label label-table" for="ban2nguoi1">
-                                            <img src="~/assets/images/booking/stand.png" alt="">
-                                            <div>
-                                                Khu vực bàn 2 người<br>
-                                                Ghi chú: có nhiều cửa sổ và có không gian riêng tư<br>
-                                                <br>
-                                                Số lượng còn: 2
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="object section-table-style table-6">
-                                        <input class="form-check-input input-custom-table" name="ban" type="radio" value="2" id="ban6nguoi1">
-                                        <label class="form-check-label label-table" for="ban6nguoi1">
-                                            <img src="~/assets/images/booking/stand.png" alt="">
-                                            <div>
-                                                Khu vực bàn 6 người<br>
-                                                Ghi chú: bàn số lượng lớn thích hợp đi nhiều người<br>
-                                                <br>
-                                                Số lượng còn: 2
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="object section-table-style8 table-8">
-                                        <input class="form-check-input input-custom-table" name="ban" type="radio" value="3" id="ban8nguoi1">
-                                        <label class="form-check-label label-table" for="ban8nguoi1">
-                                            <img src="~/assets/images/booking/stand.png" alt="">
-                                            <div>
-                                                Khu vực bàn 8 người<br>
-                                                Ghi chú: bàn số lượng lớn thích hợp đi nhiều người <br>
-                                                khuyến khích dành cho đại gia đình hoặc công ty <br>
-                                                <br>
-                                                Số lượng còn: 2
-                                            </div>
-                                        </label>
-                                    </div>
-
-                                </div>
-
-
-
-                            </div>
-                            <div class="tab-pane fade display-flex-col" id="floor-2" role="tabpanel" aria-labelledby="floor-tab2">
-                                <div class="contructor-floor">
-                                    <div class="object recepter-style">
-                                        Cửa ra vào | Lễ tân
-                                    </div>
-
-                                    <div class="object window-style-left window-1">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-2">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-3">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-4">
-                                        |
-                                    </div>
-                                    <div class="object window-style-left window-5">
-                                        |
-                                    </div>
-
-                                    <div class="object section-table-style table-2">
-                                        <input class="form-check-input input-custom-table" name="ban" type="radio" value="4" id="ban2nguoi2">
-                                        <label class="form-check-label label-table" for="ban2nguoi2">
-                                            <img src="~/assets/images/booking/stand.png" alt="">
-                                            <div>
-                                                Khu vực bàn 2 người<br>
-                                                Ghi chú: có nhiều cửa sổ và có không gian riêng tư<br>
-                                                <br>
-                                                Số lượng còn: 2
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="object section-table-style table-6">
-                                        <input class="form-check-input input-custom-table" name="ban" type="radio" value="5" id="ban6nguoi2">
-                                        <label class="form-check-label label-table" for="ban6nguoi2">
-                                            <img src="~/assets/images/booking/stand.png" alt="">
-                                            <div>
-                                                Khu vực bàn 6 người<br>
-                                                Ghi chú: bàn số lượng lớn thích hợp đi nhiều người<br>
-                                                <br>
-                                                Số lượng còn: 2
-                                            </div>
-                                        </label>
-                                    </div>
-                                    <div class="object section-table-style8 table-8">
-                                        <input class="form-check-input input-custom-table" name="ban" type="radio" value="6" id="ban8nguoi2">
-                                        <label class="form-check-label label-table" for="ban8nguoi2">
-                                            <img src="~/assets/images/booking/stand.png" alt="">
-                                            <div>
-                                                Khu vực bàn 8 người<br>
-                                                Ghi chú: bàn số lượng lớn thích hợp đi nhiều người <br>
-                                                khuyến khích dành cho đại gia đình hoặc công ty <br>
-                                                <br>
-                                                Số lượng còn: 2
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-</div>
+                @Html.Action("GetAll", "Table")
+            }
 
-@section scripts{
-    <script src="~/Assets/js/customize.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-}
+        </div>
+    </div>
+
+    @section scripts{
+        <script src="~/Assets/js/customize.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    }

@@ -36,7 +36,7 @@ namespace FoodZone.Web.ViewModels
 
         public string Note { get; set; }
 
-        public List<Table> Tables { get; set; }
+        public string TableFloorCapacity { get; set; }
 
         public int MenuId { get; set; }
     }

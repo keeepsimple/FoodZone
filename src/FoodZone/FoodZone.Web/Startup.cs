@@ -1,5 +1,3 @@
-using FoodZone.Services.IServices;
-using FoodZone.Services.Services;
 using FoodZone.Web.Helpers;
 using FoodZone.Web.ViewModels;
 using Hangfire;
@@ -9,7 +7,6 @@ using Microsoft.Owin;
 using Owin;
 using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
 using Unity;
 
 [assembly: OwinStartup(typeof(FoodZone.Web.Startup))]

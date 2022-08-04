@@ -1,23 +1,177 @@
 ﻿@model IEnumerable<Table>
+@{
+    string floorId = "floor-";
+    string floorHref = "#floor-";
+    string floorTab = "floor-tab";
+    var tables = new List<Table>();
 
+    foreach (var item in Model)
+    {
+        tables.Add(item);
+    }
 
-<h3>@ViewBag.Table</h3>
+    var listFloor = new List<int>();
+    for (int f = 0; f < tables.Count() - 1; f++)
+    {
+        listFloor.Add(tables[f].Floor);
+    }
 
-@foreach (var item in Model)
-{
-    if (item.Status == 0)
-    {
-        <a href="@Url.Action("AddTable", "Table", new {tableId = item.Id})" class="btn btn-success">Bàn @item.NumberTable trống</a>
-        <p>Số lượng: @item.Capacity</p>
-    }
-    else if (item.Status == 1)
-    {
-        <button type="button" class="btn btn-warning">Bàn @item.NumberTable chờ Khách</button>
-        <p>Số lượng: @item.Capacity</p>
-    }
-    else if (item.Status == 2)
-    {
-        <button type="button" class="btn btn-danger">Bàn @item.NumberTable Khách đã đến</button>
-        <p>Số lượng: @item.Capacity</p>
-    }
+    var listFloorNoDup = listFloor.Distinct().OrderBy(x => x).ToList();
 }
+<div class="col">
+    <div class="booking-box">
+        <div class="comment-box">
+            <h5 class="text-uppercase">Chọn bàn</h5>
+            <div class="tab-content mb-text display-flex-col" id="myTabContent">
+                <ul class="nav nav-tabs nav-menu-custom nav-tabs-floor-booking" id="myTab" role="tablist">
+                    @for (int i = 0; i < listFloorNoDup.Count(); i++)
+                    {
+                        if (listFloorNoDup[i] == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link active text-uppercase" id="@(floorTab + listFloorNoDup[i])" data-toggle="tab" href="@(floorHref + listFloorNoDup[i])" role="tab" aria-selected="true">Tầng @listFloorNoDup[i]</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="@(floorTab + listFloorNoDup[i])" data-toggle="tab" href="@(floorHref + listFloorNoDup[i])" role="tab" aria-selected="false">Tầng @listFloorNoDup[i]</a>
+                            </li>
+                        }
+                    }
+                </ul>
+                @for (int i = 0; i < listFloorNoDup.Count(); i++)
+                {
+                    if (listFloorNoDup[i] == 1)
+                    {
+                        <div class="tab-pane fade show active display-flex-col" id="@(floorId + listFloorNoDup[i])" role="tabpanel" aria-labelledby="@(floorTab + listFloorNoDup[i])">
+                            <div class="contructor-floor">
+                                <div class="object recepter-style">
+                                    Cửa ra vào | Lễ tân
+                                </div>
+
+                                <div class="object window-style-left window-1">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-2">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-3">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-4">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-5">
+                                    |
+                                </div>
+
+                                <div class="object section-table-style table-2">
+                                    <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio" value="2-1" id="ban2nguoi1" onclick="onClick()">
+                                    <label class="form-check-label label-table" for="ban2nguoi1">
+                                        <img src="~/assets/images/booking/stand.png" alt="">
+                                        <div>
+                                            Khu vực bàn 2 người<br>
+                                            Ghi chú: có nhiều cửa sổ và có không gian riêng tư<br>
+                                            <br>
+                                            Số lượng còn: @ViewBag.Cap2f1
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="object section-table-style table-6">
+                                    <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio" value="6-1" id="ban6nguoi1" onclick="onClick()">
+                                    <label class="form-check-label label-table" for="ban6nguoi1">
+                                        <img src="~/assets/images/booking/stand.png" alt="">
+                                        <div>
+                                            Khu vực bàn 6 người<br>
+                                            Ghi chú: bàn số lượng lớn thích hợp đi nhiều người<br>
+                                            <br>
+                                            Số lượng còn: @ViewBag.Cap6f1
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="object section-table-style8 table-8">
+                                    <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio" value="8-1" id="ban8nguoi1" onclick="onClick()">
+                                    <label class="form-check-label label-table" for="ban8nguoi1">
+                                        <img src="~/assets/images/booking/stand.png" alt="">
+                                        <div>
+                                            Khu vực bàn 8 người<br>
+                                            Ghi chú: bàn số lượng lớn thích hợp đi nhiều người <br>
+                                            khuyến khích dành cho đại gia đình hoặc công ty <br>
+                                            <br>
+                                            Số lượng còn: @ViewBag.Cap8f1
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="tab-pane fade display-flex-col" id="@(floorId + listFloorNoDup[i])" role="tabpanel" aria-labelledby="@(floorTab + listFloorNoDup[i])">
+                            <div class="contructor-floor">
+
+                                <div class="object window-style-left window-1">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-2">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-3">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-4">
+                                    |
+                                </div>
+                                <div class="object window-style-left window-5">
+                                    |
+                                </div>
+                                <div class="object section-table-style table-2">
+                                    <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio" value="2-2" id="ban2nguoi2" onclick="onClick()">
+                                    <label class="form-check-label label-table" for="ban2nguoi2">
+                                        <img src="~/assets/images/booking/stand.png" alt="">
+                                        <div>
+                                            Khu vực bàn 2 người<br>
+                                            Ghi chú: có nhiều cửa sổ và có không gian riêng tư<br>
+                                            <br>
+                                            Số lượng còn: @ViewBag.Cap2f2
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="object section-table-style table-6">
+                                    <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio" value="6-2" id="ban6nguoi2" onclick="onClick()">
+                                    <label class="form-check-label label-table" for="ban6nguoi2">
+                                        <img src="~/assets/images/booking/stand.png" alt="">
+                                        <div>
+                                            Khu vực bàn 6 người<br>
+                                            Ghi chú: bàn số lượng lớn thích hợp đi nhiều người<br>
+                                            <br>
+                                            Số lượng còn: @ViewBag.Cap6f2
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="object section-table-style8 table-8">
+                                    <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio" value="8-2" id="ban8nguoi2" onclick="onClick()">
+                                    <label class="form-check-label label-table" for="ban8nguoi2">
+                                        <img src="~/assets/images/booking/stand.png" alt="">
+                                        <div>
+                                            Khu vực bàn 8 người<br>
+                                            Ghi chú: bàn số lượng lớn thích hợp đi nhiều người <br>
+                                            khuyến khích dành cho đại gia đình hoặc công ty <br>
+                                            <br>
+                                            Số lượng còn: @ViewBag.Cap8f2
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
