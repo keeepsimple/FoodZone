@@ -107,6 +107,14 @@
     <Compile Include="Migrations\202208040953588_RemovePropertiesFromModels.designer.cs">
       <DependentUpon>202208040953588_RemovePropertiesFromModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208050515396_UpdateModelsHaveImage.cs" />
+    <Compile Include="Migrations\202208050515396_UpdateModelsHaveImage.designer.cs">
+      <DependentUpon>202208050515396_UpdateModelsHaveImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208051023505_ModifyReservationModel.cs" />
+    <Compile Include="Migrations\202208051023505_ModifyReservationModel.designer.cs">
+      <DependentUpon>202208051023505_ModifyReservationModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -154,6 +162,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208040953588_RemovePropertiesFromModels.resx">
       <DependentUpon>202208040953588_RemovePropertiesFromModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208050515396_UpdateModelsHaveImage.resx">
+      <DependentUpon>202208050515396_UpdateModelsHaveImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208051023505_ModifyReservationModel.resx">
+      <DependentUpon>202208051023505_ModifyReservationModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

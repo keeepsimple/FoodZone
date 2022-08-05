@@ -1,6 +1,7 @@
 ﻿using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
 using FoodZone.Web.Areas.Admin.ViewModels;
+using FoodZone.Web.Helpers;
 using Microsoft.AspNet.Identity.Owin;
 using System.Net;
 using System.Web;
@@ -59,8 +60,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
             var model = new ReservationViewModel
             {
-                Adult = reservation.Adult,
-                Child = reservation.Child,
+                Capacity = reservation.Capacity,
                 Id = reservation.Id,
                 Name = reservation.Name,
                 Note = reservation.Note,
@@ -106,7 +106,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 }
 
                 ChangeTableStatus(reservation);
-
+                TableHub.BroadcastData();
                 reservation.CancelReason = model.CancelReason;
 
                 var result = _reservationServices.Update(reservation);

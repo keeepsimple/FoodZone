@@ -31,12 +31,8 @@ namespace FoodZone.Models.Common
         public DateTime ReservationDate { get; set; }
 
         [Required(ErrorMessage = "{0} không được bỏ trống")]
-        [Display(Name = "Người lớn")]
-        public int Adult { get; set; }
-
-        [Required(ErrorMessage = "{0} không được bỏ trống")]
-        [Display(Name = "Trẻ Con")]
-        public int Child { get; set; }
+        [Display(Name = "Số người")]
+        public int Capacity { get; set; }
 
         [StringLength(500, ErrorMessage = "{0} không lớn hơn 500 ký tự")]
         [Display(Name = "Ghi chú")]

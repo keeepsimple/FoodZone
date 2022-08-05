@@ -52,9 +52,9 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 };
 
                 var result = await _menuServices.AddAsync(menu);
+                await GetSelectedCategoriesFromIds(model.SelectedCategoryIds, menu);
                 if (result > 0)
                 {
-                    await GetSelectedCategoriesFromIds(model.SelectedCategoryIds, menu);
                     TempData["Message"] = "Tạo thành công.";
                     return RedirectToAction("Index");
                 }
@@ -152,6 +152,8 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            menuViewModel.Categories = _categoryServices.GetAll().Select(t => new SelectListItem { Value = t.Id.ToString(), Text = t.Name });
+            ViewBag.CategoryList = _categoryServices.GetAll();
             return View(menuViewModel);
         }
 

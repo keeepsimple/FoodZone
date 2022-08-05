@@ -24,9 +24,8 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
 
         public DateTime ReservationDate { get; set; }
 
-        public int Adult { get; set; }
-
-        public int Child { get; set; }
+        [Display(Name = "Số người")]
+        public int Capacity { get; set; }
 
         [StringLength(500, ErrorMessage = "{0} không lớn hơn 500 ký tự")]
         [Display(Name = "Ghi chú")]

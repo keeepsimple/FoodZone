@@ -38,6 +38,7 @@ namespace FoodZone.Web.Helpers
                         var command = "Update [Tables] Set Status = 0, UpdatedAt = GETDATE() Where Id = @id";
                         var id = new SqlParameter("@id", item);
                         ctx.Database.ExecuteSqlCommand(command, id);
+                        TableHub.BroadcastData();
                     }
                 }
             }

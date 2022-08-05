@@ -7,7 +7,6 @@ namespace FoodZone.Models.Common
 {
     public class News : BaseEntity
     {
-        [Required(ErrorMessage = "{0} không được bỏ trống")]
         [Display(Name = "Ảnh")]
         public string Image { get; set; }
 

@@ -13,11 +13,7 @@ namespace FoodZone.Web.ViewModels
         [Required(ErrorMessage = "Số điện thoại không được bỏ trống")]
         public string PhoneNumber { get; set; }
 
-        public decimal TotalPrice { get; set; }
-
         public int Status { get; set; }
-
-        public bool HaveSpecialMenu { get; set; }
 
         [Required(ErrorMessage = "Ngày đặt bàn không được bỏ trống")]
         public string ReservationDate { get; set; } = DateTime.Now.ToShortDateString();
@@ -28,11 +24,9 @@ namespace FoodZone.Web.ViewModels
         [Required(ErrorMessage = "Giờ đặt hàng không được bỏ trống")]
         public int Minute { get; set; }
 
-        [Required(ErrorMessage = "Số lượng người lớn không được bỏ trống")]
-        public int Adult { get; set; }
-
-        [Required(ErrorMessage = "Số lượng trẻ em không được bỏ trống")]
-        public int Child { get; set; }
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Display(Name = "Số người")]
+        public int Capacity { get; set; }
 
         public string Note { get; set; }
 

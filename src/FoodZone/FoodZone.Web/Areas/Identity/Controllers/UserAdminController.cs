@@ -111,9 +111,6 @@ namespace FoodZone.Web.Areas.Identity.Controllers
                     return HttpNotFound();
                 }
 
-                user.UserName = editUser.Email;
-                user.Email = editUser.Email;
-
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
 
                 selectedRole = selectedRole ?? new string[] { };

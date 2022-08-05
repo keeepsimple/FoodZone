@@ -20,7 +20,6 @@ namespace FoodZone.Models.Common
         [Display(Name = "Nội dung")]
         public string Content { get; set; }
 
-        [Required(ErrorMessage = "{0} không được bỏ trống")]
         [Display(Name = "Ảnh")]
         public string Image { get; set; }
 

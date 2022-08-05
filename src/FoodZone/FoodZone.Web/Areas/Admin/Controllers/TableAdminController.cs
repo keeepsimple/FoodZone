@@ -2,6 +2,7 @@
 using FoodZone.Services.IServices;
 using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Admin.ViewModels;
+using FoodZone.Web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var tableViewModel = new TableViewModel();
+            var lastestTableNumber = _tableServices.GetAll().Select(x => x.NumberTable).FirstOrDefault();
+            tableViewModel.NumberTable = lastestTableNumber + 1;
             return View(tableViewModel);
         }
 
@@ -48,11 +51,12 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     NumberTable = model.NumberTable,
                     Status = 0
                 };
-
+                
                 var result = await _tableServices.AddAsync(table);
                 if (result > 0)
                 {
                     TempData["Message"] = "Tạo thành công.";
+                    TableHub.BroadcastData();
                     return RedirectToAction("Index");
                 }
                 else
@@ -108,6 +112,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 var result = await _tableServices.UpdateAsync(table);
                 if (result)
                 {
+                    TableHub.BroadcastData();
                     TempData["Message"] = "Cập nhật thành công.";
                 }
                 else
@@ -125,6 +130,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             var result = await _tableServices.DeleteAsync(id);
             if (result)
             {
+                TableHub.BroadcastData();
                 TempData["Message"] = "Xóa thành công.";
             }
             else

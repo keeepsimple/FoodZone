@@ -1,5 +1,6 @@
 ﻿using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
+using FoodZone.Web.Helpers;
 using FoodZone.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -64,10 +65,11 @@ namespace FoodZone.Web.Controllers
             decimal menuPrice = menu.Price;
             string str = reservationViewModel.TableFloorCapacity;
             string[] floorCapacity = str.Split('-');
-            decimal capacity = Convert.ToDecimal(floorCapacity[0]);
+            decimal tableCapacity = Convert.ToDecimal(floorCapacity[0]);
             int floor = Convert.ToInt32(floorCapacity[1]);
-            decimal tableNeed = Math.Ceiling((reservationViewModel.Adult + reservationViewModel.Child)/capacity);
-            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Capacity == capacity && x.Status == 0).Take((int)tableNeed).ToList();
+            decimal tableNeed = Math.Ceiling((reservationViewModel.Capacity)/tableCapacity);
+            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Capacity == tableCapacity && x.Status == 0).Take((int)tableNeed).ToList();
+            
             if (ModelState.IsValid)
             {
                 var reservationDetails = new List<ReservationDetail>();
@@ -81,12 +83,12 @@ namespace FoodZone.Web.Controllers
                     };
                     reservationDetails.Add(reservationDetail);
                     UpdateTableStatus(item.Id, 1);
+                    TableHub.BroadcastData();
                 }
 
                 var reservation = new Reservation
                 {
-                    Adult = reservationViewModel.Adult,
-                    Child = reservationViewModel.Child,
+                    Capacity = reservationViewModel.Capacity,
                     Name = reservationViewModel.CusName,
                     PhoneNumber = reservationViewModel.PhoneNumber,
                     ReservationDate = DateTime.Parse(reservationViewModel.ReservationDate)
