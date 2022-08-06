@@ -46,6 +46,7 @@ namespace FoodZone.Web
             BackgroundJobFunction job = new BackgroundJobFunction();
             RecurringJob.AddOrUpdate(() => job.AutoCancelReservation(), Cron.Minutely);
             RecurringJob.AddOrUpdate(() => job.AutoExpireVoucher(), Cron.Daily);
+            RecurringJob.AddOrUpdate(() => job.ResetAllTable(), Cron.Hourly);
 
             app.UseHangfireDashboard("/hangfire", new DashboardOptions()
             {

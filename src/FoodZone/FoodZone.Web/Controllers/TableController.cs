@@ -22,26 +22,38 @@ namespace FoodZone.Web.Controllers
         public ActionResult GetAll()
         {
             var tables = _tableServices.GetAll();
-            var cap2f1 = tables.Where(x => x.Capacity == 2 && x.Floor == 1 && x.Status == 0).Count();
-            var cap6f1 = tables.Where(x => x.Capacity == 6 && x.Floor == 1 && x.Status == 0).Count();
-            var cap8f1 = tables.Where(x => x.Capacity == 8 && x.Floor == 1 && x.Status == 0).Count();
-            ViewBag.Cap2f1 = cap2f1;
-            ViewBag.Cap6f1 = cap6f1;
-            ViewBag.Cap8f1 = cap8f1;
-            var cap2f2 = tables.Where(x => x.Capacity == 2 && x.Floor == 2 && x.Status == 0).Count();
-            var cap6f2 = tables.Where(x => x.Capacity == 6 && x.Floor == 2 && x.Status == 0).Count();
-            var cap8f2 = tables.Where(x => x.Capacity == 8 && x.Floor == 2 && x.Status == 0).Count();
-            ViewBag.Cap2f2 = cap2f2;
-            ViewBag.Cap6f2 = cap6f2;
-            ViewBag.Cap8f2 = cap8f2;
             return PartialView("_ListTable", tables);
         }
 
-        //public ActionResult GetByFloor(int floor)
-        //{
-        //    var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Status == 0).ToList();
+        public ActionResult GetTablesByCapacity(int floor)
+        {
+            var capacities = GetCapacity();
+            var listTable = new List<TableViewModel>();
+            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Status == 0).ToList();
 
-        //    return PartialView("_GetByFloor", tables);
-        //}
+            foreach (var item in capacities)
+            {
+                var model = new TableViewModel
+                {
+                    Floor = floor,
+                    Capacity = item,
+                    Count = CountTableByCapacity(tables, floor, item)
+                };
+                listTable.Add(model);
+            }
+
+            return PartialView("_TableArea",listTable);
+        }
+
+        public List<int> GetCapacity()
+        {
+            var tables = _tableServices.GetAll();
+            return tables.Select(x => x.Capacity).Distinct().ToList();
+        }
+
+        public int CountTableByCapacity(IEnumerable<Table> tables,int floor, int capacity)
+        {
+            return tables.Where(x => x.Floor == floor && x.Capacity == capacity && x.Status == 0).Count();
+        }
     }
 }

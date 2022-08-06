@@ -26,12 +26,13 @@ namespace FoodZone.Web.Helpers
                 ctx.Database.ExecuteSqlCommand(command);
             }
         }
+
         public void UpdateTable()
         {
-            using(var ctx = new FoodZoneContext())
+            using (var ctx = new FoodZoneContext())
             {
                 var ids = ctx.Database.SqlQuery<int>("Select t.Id from Tables as t Right Join ReservationDetails as rd on t.Id = rd.TableId right join Reservations as r on rd.ReservationId = r.Id Where DATEADD(minute, 15, r.ReservationDate) <= GETDATE() and r.Status = 1 and t.Status = 1").ToList();
-                if(ids.Count() > 0)
+                if (ids.Count() > 0)
                 {
                     foreach (var item in ids)
                     {
@@ -44,11 +45,32 @@ namespace FoodZone.Web.Helpers
             }
         }
 
+        public void ResetAllTable()
+        {
+            var getToday = DateTime.Now.ToString("MM-dd-yyyy");
+            string resetTime = "";
+            if (DateTime.Now.Hour < 16)
+            {
+                resetTime = DateTime.Parse(getToday).AddHours(15).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            else
+            {
+                resetTime = DateTime.Parse(getToday).AddHours(22).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            using (var ctx = new FoodZoneContext())
+            {
+                var command = "Update Tables Set Status = 0, UpdatedAt = GETDATE() WHERE GETDATE() >= @resetTime";
+                var reset = new SqlParameter("@resetTime", resetTime);
+                ctx.Database.ExecuteSqlCommand(command, reset);
+                TableHub.BroadcastData();
+            }
+        }
+
         public void AutoExpireVoucher()
         {
             using (var ctx = new FoodZoneContext())
             {
-                var command = "Update Vouchers Set Status = 0, UpdatedAt = GETDATE() Where ExpiredDate <= GETDATE()";
+                var command = "Update Vouchers Set Status = 0, UpdatedAt = GETDATE() Where ExpiredDate >= GETDATE()";
                 ctx.Database.ExecuteSqlCommand(command);
             }
         }

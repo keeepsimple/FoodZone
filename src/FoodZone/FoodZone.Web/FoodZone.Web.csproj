@@ -209,6 +209,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodAdminController.cs" />
@@ -252,7 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\login-admin.css" />
     <Content Include="Assets\css\Site.css" />
+    <Content Include="Assets\css\style.css" />
     <Content Include="Assets\images\bootstrap-solid.svg" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\customize.js" />
@@ -347,6 +350,7 @@
     <Content Include="Areas\Admin\Views\ReservationAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ReservationAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ReservationAdmin\GetReservationDetails.cshtml" />
+    <Content Include="Views\Dashboard\Login.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -431,6 +435,7 @@
     <Content Include="Views\Home\_HomeVoucher.cshtml" />
     <Content Include="Views\Home\_CustomerFeedback.cshtml" />
     <Content Include="Views\Shared\_GetByFloor.cshtml" />
+    <Content Include="Views\Shared\_TableArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
