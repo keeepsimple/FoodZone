@@ -39,6 +39,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var news = await _newsServices.GetAllAsync();
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 news = news.Where(s => s.Title.Contains(searchString)).ToList();
@@ -46,6 +47,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+
             return View(news.ToPagedList(pageNumber, pageSize));
         }
 
@@ -56,13 +58,16 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+
         [ValidateAntiForgeryToken]
+
         [ValidateInput(false)]
         public async Task<ActionResult> Create(NewsViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
                 string fileName = "";
+
                 if (uploadImage != null)
                 {
                     fileName = Path.GetFileName(uploadImage.FileName);
@@ -81,6 +86,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 };
 
                 var result = await _newsServices.AddAsync(news);
+
                 if (result > 0)
                 {
                     TempData["Message"] = "Tạo thành công.";
@@ -122,13 +128,16 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+
         [ValidateAntiForgeryToken]
+
         [ValidateInput(false)]
         public async Task<ActionResult> Edit(NewsViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
                 string fileName = "";
+
                 if (uploadImage != null && uploadImage.ContentLength > 0)
                 {
                     fileName = Path.GetFileName(uploadImage.FileName);
@@ -171,6 +180,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var result = _newsServices.Delete(id);
+
             if (result)
             {
                 TempData["Message"] = "Xóa thành công.";
