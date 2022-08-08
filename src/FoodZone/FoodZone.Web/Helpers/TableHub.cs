@@ -3,13 +3,13 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace FoodZone.Web.Helpers
 {
-    [HubName("TableHub")]
+    [HubName("tableHub")]
     public class TableHub : Hub
     {
         public static void BroadcastData()
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<TableHub>();
-            context.Clients.All.refrestAllTable();
+            context.Clients.All.refreshAllTable();
         }
     }
 }

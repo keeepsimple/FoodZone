@@ -40,6 +40,7 @@ namespace FoodZone.Web
         {
             app.UseHangfireAspNet(GetHangfireServers);
             ConfigureAuth(app);
+            app.MapSignalR();
             var container = new UnityContainer();
             GlobalConfiguration.Configuration.UseActivator(new UnityJobActivator(container));
 

@@ -25,8 +25,10 @@ namespace FoodZone.Web.ViewModels
         public int Minute { get; set; }
 
         [Required(ErrorMessage = "{0} không được bỏ trống")]
-        [Display(Name = "Số người")]
+        [Display(Name = "Số lượng bàn")]
         public int Capacity { get; set; }
+
+        public string Code { get; set; }
 
         public string Note { get; set; }
 

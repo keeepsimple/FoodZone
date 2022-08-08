@@ -86,7 +86,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     ShortDescription = model.ShortDescription,
                     ExpiredDate = model.ExpiredDate,
                     Level = model.Level,
-                    Status = model.Status
+                    Status = 1
                 };
 
                 var result = await _voucherServices.AddAsync(voucher);

@@ -12,5 +12,6 @@ namespace FoodZone.Web.ViewModels
         public int Capacity { get; set; }
 
         public int Count { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
-using FoodZone.Web.Helpers;
 using FoodZone.Web.ViewModels;
+using FoodZone.Web.Helpers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -19,18 +19,24 @@ namespace FoodZone.Web.Controllers
         private readonly ICheckoutServices _checkoutServices;
         private readonly IMenuServices _menuServices;
         private readonly ITableServices _tableServices;
+        private readonly IUserVoucherServices _userVoucherServices;
+        private readonly IVoucherServices _voucherServices;
 
-        public ReservationController(IReservationServices reservationServices, 
+        public ReservationController(IReservationServices reservationServices,
             IReservationDetailsServices reservationDetailsServices,
             ICheckoutServices checkoutServices,
             IMenuServices menuServices,
-            ITableServices tableServices)
+            ITableServices tableServices,
+            IUserVoucherServices userVoucherServices,
+            IVoucherServices voucherServices)
         {
             _reservationServices = reservationServices;
             _reservationDetailsServices = reservationDetailsServices;
             _checkoutServices = checkoutServices;
             _menuServices = menuServices;
             _tableServices = tableServices;
+            _userVoucherServices = userVoucherServices;
+            _voucherServices = voucherServices;
         }
 
         private UserManager _userManager;
@@ -54,7 +60,7 @@ namespace FoodZone.Web.Controllers
                 ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
                 return View(reservationViewModel);
             }
-            ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x=>x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
+            ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
             return View();
         }
 
@@ -63,15 +69,26 @@ namespace FoodZone.Web.Controllers
         {
             var menu = _menuServices.GetById(reservationViewModel.MenuId);
             decimal menuPrice = menu.Price;
+
             string str = reservationViewModel.TableFloorCapacity;
             string[] floorCapacity = str.Split('-');
             decimal tableCapacity = Convert.ToDecimal(floorCapacity[0]);
             int floor = Convert.ToInt32(floorCapacity[1]);
-            decimal tableNeed = Math.Ceiling((reservationViewModel.Capacity)/tableCapacity);
-            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Capacity == tableCapacity && x.Status == 0).Take((int)tableNeed).ToList();
-            
+            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Capacity == tableCapacity && x.Status == 0).ToList();
+
+            if (!IsEnoughTable(tables, reservationViewModel.Capacity))
+            {
+                ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
+                return View(reservationViewModel);
+            }
+            else
+            {
+                tables = tables.Take(reservationViewModel.Capacity).ToList();
+            }
+
             if (ModelState.IsValid)
             {
+                ApplyVoucher(reservationViewModel.Code, tables.Count);
                 var reservationDetails = new List<ReservationDetail>();
                 foreach (var item in tables)
                 {
@@ -83,7 +100,6 @@ namespace FoodZone.Web.Controllers
                     };
                     reservationDetails.Add(reservationDetail);
                     UpdateTableStatus(item.Id, 1);
-                    TableHub.BroadcastData();
                 }
 
                 var reservation = new Reservation
@@ -110,8 +126,17 @@ namespace FoodZone.Web.Controllers
         {
             var userId = User.Identity.GetUserId();
             var user = UserManager.FindById(userId);
-            ViewBag.ReservationSuccess = "Cảm ơn "+ user.FullName + " đã đặt bàn, mong bạn sẽ đến đúng giờ nhé!";
+            ViewBag.ReservationSuccess = "Cảm ơn " + user.FullName + " đã đặt bàn, mong bạn sẽ đến đúng giờ nhé!";
             return View();
+        }
+
+        private bool IsEnoughTable(List<Table> tables, int tableNeed)
+        {
+            if (tableNeed <= 0 || (tables.Count <= tableNeed) && tableNeed > 0)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void UpdateTableStatus(int tableId, int status)
@@ -119,7 +144,35 @@ namespace FoodZone.Web.Controllers
             var table = _tableServices.GetById(tableId);
             table.Status = status;
             _tableServices.Update(table);
+            TableHub.BroadcastData();
         }
 
+        private void ApplyVoucher(string code, int point)
+        {
+            if (!string.IsNullOrEmpty(code))
+            {
+                var voucher = _voucherServices.GetByCode(code);
+                var user = UserManager.FindById(User.Identity.GetUserId());
+
+                var userApply = _userVoucherServices.GetAll().Where(x => x.VoucherId == voucher.Id && x.UserId == user.Id).FirstOrDefault();
+
+                if(userApply != null && voucher.Status == 1)
+                {
+                    if (user.Level >= voucher.Level)
+                    {
+                        var userVoucher = new UserVoucher
+                        {
+                            UserId = User.Identity.GetUserId(),
+                            VoucherId = voucher.Id
+                        };
+
+                        _userVoucherServices.Add(userVoucher);
+                        
+                    }
+                }
+                user.Level += point;
+                UserManager.Update(user);
+            }
+        }
     }
 }

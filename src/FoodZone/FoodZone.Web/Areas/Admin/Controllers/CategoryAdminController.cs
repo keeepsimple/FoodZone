@@ -4,6 +4,7 @@ using FoodZone.Web.Areas.Admin.ViewModels;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -64,13 +65,24 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
         [ValidateAntiForgeryToken]
 
-        public async Task<ActionResult> Create(CategoryViewModel model)
+        public async Task<ActionResult> Create(CategoryViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (uploadImage != null)
+                {
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
+                }
+
+                model.Image = fileName;
+
                 var category = new Category
                 {
-                    Name = model.Name
+                    Name = model.Name,
+                    Image = model.Image
                 };
 
                 var result = await _categoryServices.AddAsync(category);
@@ -140,6 +152,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             var categoryViewModel = new CategoryViewModel
             {
                 Name = category.Name,
+                Image = category.Image,
                 SelectedFoodIds = _categoryServices.GetFoodIdByCategory(category.Id)
             };
 
@@ -153,10 +166,23 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
         [ValidateAntiForgeryToken]
 
-        public async Task<ActionResult> Edit(CategoryViewModel model)
+        public async Task<ActionResult> Edit(CategoryViewModel model, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid)
             {
+                string fileName = "";
+                if (uploadImage != null && uploadImage.ContentLength > 0)
+                {
+                    fileName = Path.GetFileName(uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    uploadImage.SaveAs(folderPath);
+                }
+
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    model.Image = fileName;
+                }
+
                 var category = await _categoryServices.GetByIdAsync(model.Id);
 
                 if (category == null)
@@ -165,6 +191,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 }
 
                 category.Name = model.Name;
+                category.Image = model.Image;
 
                 var result = await _categoryServices.UpdateAsync(category);
 

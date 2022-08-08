@@ -18,7 +18,9 @@
                             <div class="section-content section-title">
                                 <h2 class="section-title-2 mb-3">@Model.Title</h2>
                                 <div class="blog-post-info">
-                                    <span>Ngày tạo: @Model.InsertedAt.ToString("dd/MM/yyyy")</span>
+                                    <span>Ngày tạo: @Model.InsertedAt.ToString("dd/MM/yyyy")</span><br />
+                                    Ngày hết hạn ưu đãi: <span style="font-weight:bold">@Model.ExpiredDate.ToString("dd/MM/yyyy")</span><br />
+                                    <p style="font-size:18px">Mã ưu đãi: <span style="font-weight:bold">@Model.Code</span></p>
                                 </div>
                                 <p class="mb-5">
                                     @Html.Raw(Model.Content)

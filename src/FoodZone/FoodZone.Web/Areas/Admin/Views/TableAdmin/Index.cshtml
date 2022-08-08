@@ -59,3 +59,31 @@ else
         }
     </table>
 }
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+            var hubNotify = $.connection.tableHub;
+            hubNotify.client.refreshAllTable = function () {
+                refreshTable();
+            };
+            $.connection.hub.start().done(function () {
+                refreshTable();
+            });
+
+        });
+        function refreshTable() {
+            $.ajax({
+                url: '/Table/GetAll',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    console.log('11111111111111111111111111111111111111111111111')
+                    document.getElementById("col-signal").append(result);
+                }
+            });
+        }
+    </script>
+}

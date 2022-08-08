@@ -25,7 +25,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         public ActionResult Index()
-{
+        {
             var table = _tableServices.GetAll();
             return View(table);
         }
@@ -51,20 +51,22 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     NumberTable = model.NumberTable,
                     Status = 0
                 };
-                
+
                 var result = await _tableServices.AddAsync(table);
+               
                 if (result > 0)
                 {
                     TempData["Message"] = "Tạo thành công.";
-                    TableHub.BroadcastData();
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["Message"] = "Tạo thất bại. Thử lại sau nhé!";
                 }
+                TableHub.BroadcastData();
                 return RedirectToAction("Index");
             }
+           
             return View(model);
         }
 

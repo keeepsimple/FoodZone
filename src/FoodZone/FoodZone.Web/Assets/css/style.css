@@ -73,7 +73,9 @@ body {
     scroll-behavior: smooth;
     font-size: 14px;
 }
-
+.disable{
+    background:red;
+}
 h1,
 h2,
 h3,
@@ -2747,6 +2749,8 @@ mark {
 
 /*    05 - Layout - Footer
 /*----------------------------------------*/
+
+
 
 .footer-area .footer-widget-area {
     padding: 100px 0;
@@ -7969,7 +7973,13 @@ mark {
     border: 1px solid black;
 }
 
-
+input#count {
+    border: none;
+    text-align: center;
+    width: 100%;
+    background: #808080;
+    color:white;
+}
 
 
 /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */

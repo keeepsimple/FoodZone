@@ -21,47 +21,60 @@
                             <div class="comment-box">
                                 <h5 class="text-uppercase">Đặt bàn</h5>
                                 @Html.ValidationSummary("", new { @class = "text-danger" })
-                                <div class="col mt-3">
-                                    <div class="col-md-12 col-custom">
-                                        <div class="input-item mb-4">
-                                            <div class="title-booking">Tên khách hàng</div>
-                                            @Html.TextBoxFor(m => m.CusName, new { @class = "form-control", @placeholder = "Tên" })
-                                        </div>
+                            <div class="col mt-3">
+                                <div class="col-md-12 col-custom">
+                                    <div class="input-item mb-4">
+                                        <div class="title-booking">Tên khách hàng</div>
+                                        @Html.TextBoxFor(m => m.CusName, new { @class = "form-control", @placeholder = "Tên" })
                                     </div>
-                                    <div class="col-md-12 col-custom">
-                                        <div class="input-item mb-4">
-                                            <div class="title-booking">Số điện thoại</div>
-                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Số điện thoại" })
-                                        </div>
+                                </div>
+                                <div class="col-md-12 col-custom">
+                                    <div class="input-item mb-4">
+                                        <div class="title-booking">Số điện thoại</div>
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Số điện thoại" })
                                     </div>
-                                    <div class="col-12 col-custom">
-                                        <div class="input-item mb-4">
-                                            <div class="title-booking">Chọn Combo</div>
-                                            @Html.DropDownList("MenuId", null, htmlAttributes: new { @class = "form-select" })
-                                            @Html.ValidationMessageFor(model => model.MenuId, "", new { @class = "text-danger" })
-                                        </div>
+                                </div>
+                                <div class="col-12 col-custom">
+                                    <div class="input-item mb-4">
+                                        <div class="title-booking">Chọn Combo</div>
+                                        @Html.DropDownList("MenuId", null, htmlAttributes: new { @class = "form-select" })
+                                        @Html.ValidationMessageFor(model => model.MenuId, "", new { @class = "text-danger" })
                                     </div>
-                                    <div class="col-md-12 col-custom">
-                                        <div class="input-item mb-4">
-                                            <div class="title-booking">Chọn ngày</div>
-                                            @Html.EditorFor(m => m.ReservationDate, new { htmlAttributes = new { @type = "date", @class = "border-0 rounded-0 w-100 input-area email gray-bg", @placeholder = "dd-mm-yyyy" } })
-                                        </div>
+                                </div>
+                                <div class="col-md-12 col-custom">
+                                    <div class="input-item mb-4">
+                                        <div class="title-booking">Chọn ngày</div>
+                                        @Html.EditorFor(m => m.ReservationDate, new { htmlAttributes = new { @class = "border-0 rounded-0 w-100 input-area email gray-bg", @disabled = "disabled" } })
                                     </div>
-                                    <div class="col-12 col-custom">
-                                        <div class="input-item mb-4 display-flex-col">
+                                </div>
+                                <div class="col-12 col-custom">
+                                    <div class="input-item mb-4 display-flex-col">
 
-                                            <div class="title-booking">Chọn thời gian đến</div>
-                                            <div class="display-flex-row">
-                                                <div class="title-time">Giờ</div>
-                                                <select class="form-select select-time" aria-label="Default select example" name="Hours" aria-placeholder="Chọn giờ">
-                                                    @if (now.Hour <= 14)
+                                        <div class="title-booking">Chọn thời gian đến</div>
+                                        <div class="display-flex-row">
+                                            <div class="title-time">Giờ</div>
+                                            <select class="form-select select-time" aria-label="Default select example" name="Hours" aria-placeholder="Chọn giờ">
+                                                @if (now.Hour <= 14)
+                                                {
+                                                    if (now.Hour < 11)
                                                     {
                                                         for (int i = 11; i <= 14; i++)
                                                         {
                                                             <option value="@i">@i h</option>
                                                         }
                                                     }
-                                                    else if (now.Hour > 14)
+                                                    else
+                                                    {
+                                                        for (int i = now.Hour; i <= 14; i++)
+                                                        {
+                                                            <option value="@i">@i h</option>
+                                                        }
+                                                    }
+
+                                                }
+                                                else if (now.Hour > 14)
+                                                {
+                                                    if (now.Hour < 18)
                                                     {
                                                         for (int i = 18; i <= 21; i++)
                                                         {
@@ -71,40 +84,49 @@
                                                             }
                                                         }
                                                     }
-                                                </select>
-                                                <div class="title-time">Phút</div>
-                                                <select class="form-select select-time" aria-label="Default select example" name="Minute" aria-placeholder="Chọn giờ">
-                                                    <option value="00">00</option>
-                                                    <option value="15">15</option>
-                                                    <option value="30">30</option>
-                                                    <option value="45">45</option>
-                                                </select>
-                                            </div>
+                                                    else
+                                                    {
+                                                        for (int i = now.Hour; i <= 21; i++)
+                                                        {
+                                                            if (now.Hour <= i)
+                                                            {
+                                                                <option value="@i">@i</option>
+                                                            }
+                                                        }
+                                                    }
 
+                                                }
+                                            </select>
+                                            <div class="title-time">Phút</div>
+                                            <select class="form-select select-time" aria-label="Default select example" name="Minute" aria-placeholder="Chọn giờ">
+                                                <option value="00">00</option>
+                                                <option value="15">15</option>
+                                                <option value="30">30</option>
+                                                <option value="45">45</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-custom">
-                                        <div class="input-item mb-4 display-flex-col">
-                                            <div class="display-flex-row">
-                                                <div class="title-quantity">Số lượng người</div>
-                                                @Html.TextBoxFor(m => m.Capacity, new { @class = "border-0 rounded-0 input-area number gray-bg input-quantity", @placeholder = "Số lượng" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-custom">
-                                        <div class="input-item mb-4">
-                                            <div class="title-booking">Ghi chú thêm cho nhà hàng: </div>
-                                            @Html.TextAreaFor(m => m.Note, new { @class = "border-0 rounded-0 w-100 input-area name gray-bg" })
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-custom mt-40">
-                                        <button type="submit" id="submit" name="submit" class="btn flosun-button secondary-btn theme-color rounded-0">
-                                            Đặt
-                                            bàn
-                                        </button>
 
                                     </div>
                                 </div>
+                                <div class="col-md-12 col-custom">
+                                    <div class="input-item mb-4">
+                                        <div class="title-booking">Mã ưu đãi</div>
+                                        @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @placeholder = "Mã ưu đãi" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-custom">
+                                    <div class="input-item mb-4">
+                                        <div class="title-booking">Ghi chú thêm cho nhà hàng: </div>
+                                        @Html.TextAreaFor(m => m.Note, new { @class = "border-0 rounded-0 w-100 input-area name gray-bg" })
+                                    </div>
+                                </div>
+                                <div class="col-12 col-custom mt-40">
+                                    <button type="submit" id="submit" name="submit" class="btn flosun-button secondary-btn theme-color rounded-0">
+                                        Đặt
+                                        bàn
+                                    </button>
+                                </div>
+                            </div>
                             </div>
 
                         </div>
@@ -131,4 +153,49 @@
     <script src="~/Assets/js/customize.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script >
+        const capa = document.getElementById("capa");
+        /*const count = document.querySelectorAll("#count");*/
+        /*Array.from(count);*/
+        const arr = [...document.querySelectorAll(".object #count")]
+        console.log(capa)
+        function handleChange() {
+            const check = capa.value;
+            console.log(typeof(check))
+            for (var i = 0; i < arr.length; i++) {
+                if (parseInt(check) > arr[i].value) {
+                    arr[i].parentElement.style.background = "red";
+                    console.log(arr[i].value)
+                }
+            }
+        }
+        $(function () {
+            var hubNotify = $.connection.tableHub;
+
+            $.connection.hub.start().done(function () {
+                refreshTable();
+            });
+
+            hubNotify.client.refreshAllTable = function () {
+                console.log('vaoooooooooooooooooo 2222222222222222222222')
+                $('#submit').click(function () {
+                    refreshTable();
+                });
+            };
+            
+        });
+        function refreshTable() {
+            $.ajax({
+                url: '/Table/GetAll',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    $('#col-signal').replaceWith(result);
+                }
+            });
+        }
+    </script>
 }
