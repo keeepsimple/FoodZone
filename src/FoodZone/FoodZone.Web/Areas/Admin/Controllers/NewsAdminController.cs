@@ -173,6 +173,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
 
