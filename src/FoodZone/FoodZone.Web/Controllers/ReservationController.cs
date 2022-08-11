@@ -58,9 +58,9 @@ namespace FoodZone.Web.Controllers
                     PhoneNumber = user.PhoneNumber
                 };
                 ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
+                ViewBag.CodeId = new SelectList(GetAllAvailableVoucherForUser(), "Id", "Code");
                 return View(reservationViewModel);
             }
-            ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
             return View();
         }
 
@@ -68,57 +68,64 @@ namespace FoodZone.Web.Controllers
         public ActionResult Index(ReservationViewModel reservationViewModel)
         {
             var menu = _menuServices.GetById(reservationViewModel.MenuId);
+            var voucher = _voucherServices.GetById(reservationViewModel.CodeId);
             decimal menuPrice = menu.Price;
-
-            string str = reservationViewModel.TableFloorCapacity;
-            string[] floorCapacity = str.Split('-');
-            decimal tableCapacity = Convert.ToDecimal(floorCapacity[0]);
-            int floor = Convert.ToInt32(floorCapacity[1]);
-            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Capacity == tableCapacity && x.Status == 0).ToList();
-
-            if (!IsEnoughTable(tables, reservationViewModel.Capacity))
+            string str = "";
+            if (!string.IsNullOrEmpty(reservationViewModel.TableFloorCapacity))
             {
-                ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
-                return View(reservationViewModel);
-            }
-            else
-            {
-                tables = tables.Take(reservationViewModel.Capacity).ToList();
-            }
+                str = reservationViewModel.TableFloorCapacity;
+                string[] floorCapacity = str.Split('-');
+                decimal tableCapacity = Convert.ToDecimal(floorCapacity[0]);
+                int floor = Convert.ToInt32(floorCapacity[1]);
+                var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Capacity == tableCapacity && x.Status == 0).ToList();
 
-            if (ModelState.IsValid)
-            {
-                ApplyVoucher(reservationViewModel.Code, tables.Count);
-                var reservationDetails = new List<ReservationDetail>();
-                foreach (var item in tables)
+                if (!IsEnoughTable(tables, reservationViewModel.Capacity))
                 {
-                    var reservationDetail = new ReservationDetail
-                    {
-                        TableId = item.Id,
-                        MenuId = menu.Id,
-                        MenuPrice = menu.Price
-                    };
-                    reservationDetails.Add(reservationDetail);
-                    UpdateTableStatus(item.Id, 1);
+                    ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
+                    return View(reservationViewModel);
+                }
+                else
+                {
+                    tables = tables.Take(reservationViewModel.Capacity).ToList();
                 }
 
-                var reservation = new Reservation
+                if (ModelState.IsValid)
                 {
-                    Capacity = reservationViewModel.Capacity,
-                    Name = reservationViewModel.CusName,
-                    PhoneNumber = reservationViewModel.PhoneNumber,
-                    ReservationDate = DateTime.Parse(reservationViewModel.ReservationDate)
-                                              .AddHours(reservationViewModel.Hours)
-                                              .AddMinutes(reservationViewModel.Minute),
-                    Note = reservationViewModel.Note,
-                    Status = 0,
-                    UserId = User.Identity.GetUserId()
-                };
+                    ApplyVoucher(voucher.Code);
+                    var reservationDetails = new List<ReservationDetail>();
+                    foreach (var item in tables)
+                    {
+                        var reservationDetail = new ReservationDetail
+                        {
+                            TableId = item.Id,
+                            MenuId = menu.Id,
+                            MenuPrice = menu.Price
+                        };
+                        reservationDetails.Add(reservationDetail);
+                        UpdateTableStatus(item.Id, 1);
+                    }
 
-                _checkoutServices.Checkout(reservation, reservationDetails);
-                return RedirectToAction("ReservationSuccess", "Reservation");
+                    var reservation = new Reservation
+                    {
+                        Capacity = reservationViewModel.Capacity,
+                        Name = reservationViewModel.CusName,
+                        PhoneNumber = reservationViewModel.PhoneNumber,
+                        ReservationDate = DateTime.Parse(reservationViewModel.ReservationDate)
+                                                  .AddHours(reservationViewModel.Hours)
+                                                  .AddMinutes(reservationViewModel.Minute),
+                        Note = reservationViewModel.Note,
+                        Code = voucher.Code,
+                        Status = 0,
+                        UserId = User.Identity.GetUserId()
+                    };
+                    TableHub.BroadcastData();
+                    _checkoutServices.Checkout(reservation, reservationDetails);
+                    return RedirectToAction("ReservationSuccess", "Reservation");
+                }
+
             }
             ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
+            ViewBag.CodeId = new SelectList(GetAllAvailableVoucherForUser(), "Id", "Code");
             return View(reservationViewModel);
         }
 
@@ -130,9 +137,15 @@ namespace FoodZone.Web.Controllers
             return View();
         }
 
+        public ActionResult History()
+        {
+            var reservations = _reservationServices.GetAll().Where(x => x.UserId == User.Identity.GetUserId()).ToList();
+            return PartialView("_Reservations", reservations);
+        }
+
         private bool IsEnoughTable(List<Table> tables, int tableNeed)
         {
-            if (tableNeed <= 0 || (tables.Count <= tableNeed) && tableNeed > 0)
+            if (tableNeed <= 0 || tables.Count < tableNeed)
             {
                 return false;
             }
@@ -147,7 +160,7 @@ namespace FoodZone.Web.Controllers
             TableHub.BroadcastData();
         }
 
-        private void ApplyVoucher(string code, int point)
+        private void ApplyVoucher(string code)
         {
             if (!string.IsNullOrEmpty(code))
             {
@@ -156,7 +169,7 @@ namespace FoodZone.Web.Controllers
 
                 var userApply = _userVoucherServices.GetAll().Where(x => x.VoucherId == voucher.Id && x.UserId == user.Id).FirstOrDefault();
 
-                if(userApply != null && voucher.Status == 1)
+                if (userApply == null && voucher.Status == 1)
                 {
                     if (user.Level >= voucher.Level)
                     {
@@ -167,12 +180,25 @@ namespace FoodZone.Web.Controllers
                         };
 
                         _userVoucherServices.Add(userVoucher);
-                        
                     }
                 }
-                user.Level += point;
-                UserManager.Update(user);
             }
+        }
+
+        public IEnumerable<Voucher> GetAllAvailableVoucherForUser()
+        {
+            var vouchers = _voucherServices.GetAll().Where(x => x.Status == 1);
+            var availableVouchers = new List<Voucher>();
+            var userVouchers = _userVoucherServices.GetAll();
+
+            foreach (var item in vouchers)
+            {
+                if (userVouchers.Where(x => x.VoucherId == item.Id && x.UserId == User.Identity.GetUserId()).FirstOrDefault() == null)
+                {
+                    availableVouchers.Add(item);
+                }
+            }
+            return availableVouchers.ToList();
         }
     }
 }

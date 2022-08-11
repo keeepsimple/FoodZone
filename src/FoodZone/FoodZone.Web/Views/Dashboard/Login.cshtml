@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LoginViewModel
+@{
     Layout = null;
 }
 
@@ -8,32 +9,33 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Đăng Nhập</title>
-    <link rel="stylesheet" href="~/Assets/css/login-admin.css" runat="server"/>
+    <link rel="stylesheet" href="~/Assets/css/login-admin.css" runat="server" />
 </head>
 <body>
     <div class="wrapper">
         <div class="container">
             <h1>Đăng nhập</h1>
-
-            <form class="form">
-                <input type="text" placeholder="Tên đăng nhập">
-                <input type="password" placeholder="Mật khẩu">
-                <button type="submit" id="login-button">Chiến nàooo</button>
-            </form>
+            @using (Html.BeginForm("Login", "Dashboard", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @placeholder = "Tên đăng nhập" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
+                <input type="submit" value="Log in" id="login-button" class="btn btn-info" />
+            }
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
         </div>
-
-        <ul class="bg-bubbles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
     </div>
 </body>
 </html>

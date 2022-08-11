@@ -1,17 +1,50 @@
-﻿@if (Request.IsAuthenticated)
+﻿@*@if (Request.IsAuthenticated)
+    {
+        <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
+            @Html.AntiForgeryToken()
+            <li>
+                <a class="menu-text" href="@Url.Action("Index", "Manage", new { area = "" })">Chào @User.Identity.GetUserName()!</a>
+            </li>
+            <li>
+                <a class="menu-text" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+            </li>
+        </form>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+    }*@
+@if (Request.IsAuthenticated)
 {
-    <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
-        @Html.AntiForgeryToken()
-        <li>
-            <a class="menu-text" href="@Url.Action("Index", "Manage", new { area = "" })">Chào @User.Identity.GetUserName()!</a>
-        </li>
-        <li>
-            <a class="menu-text" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-        </li>
-    </form>
+    <div class="col-lg-4 d-none d-lg-flex justify-content-center col-xl-3 col-md-6 col-6 col-custom center-margin">
+        <nav class="main-nav d-none d-lg-flex">
+            <ul class="display-flex-row">
+                <li>
+                    <a href="@Url.Action("Index", "Manage", new { area = "" })">
+                        <span class="menu-text">Chào @User.Identity.GetUserName()</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 }
 else
 {
-    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
+    <div class="col-lg-4 d-none d-lg-flex justify-content-center col-xl-3 col-md-6 col-6 col-custom center-margin">
+        <nav class="main-nav d-none d-lg-flex">
+            <ul class="display-flex-row">
+                <li>
+                    <a href="@Url.Action("Login", "Account", new { area = "" })">
+                        <span class="menu-text">Đăng nhập</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Register", "Account", new { area = "" })">
+                        <span class="menu-text">Đăng kí</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 }

@@ -34,5 +34,8 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
         [StringLength(500, ErrorMessage = "{0} không lớn hơn 500 ký tự")]
         [Display(Name = "Lí do huỷ")]
         public string CancelReason { get; set; }
+
+        [Display(Name = "Mã khuyến mãi")]
+        public string Code { get; set; }
     }
 }

@@ -28,10 +28,11 @@ namespace FoodZone.Web.ViewModels
         [Display(Name = "Số lượng bàn")]
         public int Capacity { get; set; }
 
-        public string Code { get; set; }
+        public int CodeId { get; set; }
 
         public string Note { get; set; }
 
+        [Required(ErrorMessage = "Chưa chọn bàn")]
         public string TableFloorCapacity { get; set; }
 
         public int MenuId { get; set; }

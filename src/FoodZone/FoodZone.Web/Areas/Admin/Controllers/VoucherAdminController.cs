@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 using System.IO;
+using FoodZone.Services.Services;
 
 namespace FoodZone.Web.Areas.Admin.Controllers
 {
@@ -37,16 +38,15 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var vouchers = await _voucherServices.GetAllAsync();
-
+            var news = await _voucherServices.GetAllAsync();
             if (!string.IsNullOrEmpty(searchString))
             {
-                vouchers = vouchers.Where(s => s.Title.Contains(searchString)).ToList();
+                news = news.Where(s => s.Title.Contains(searchString)).ToList();
             }
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(vouchers.ToPagedList(pageNumber, pageSize));
+            return View(news.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Create()

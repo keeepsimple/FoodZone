@@ -1,6 +1,8 @@
 ﻿using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
+using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Admin.ViewModels;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +27,29 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             _categoryServices = categoryServices;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
-            var menu = _menuServices.GetAll();
-            return View(menu);
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var news = await _menuServices.GetAllAsync();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                news = news.Where(s => s.Name.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(news.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Create()

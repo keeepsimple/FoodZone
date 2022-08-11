@@ -46,36 +46,37 @@ else
             </tr>
         }
     </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            @{
-                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                ViewBag.PageRange = 3;
-            }
-            <li class="page-item">
-                <a href="@Url.Action("Index", "NewsAdmin", new { pageIndex = 1, currentFilter = ViewData["CurrentFilter"] })"
-                   class="btn page-link @prevDisabled"><<</a>
-            <li class="page-item">
-                <a href="@Url.Action("Index", "NewsAdmin", new { pageIndex = (Model.PageNumber - 1 <= 0 ? 1 : Model.PageNumber - 1), currentFilter = ViewData["CurrentFilter"] })"
-                   class="btn page-link @prevDisabled"><</a>
-            </li>
-            @for (int i = 1; i <= Model.PageCount; i++)
-            {
-                if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
-                {
-                    <li class="page-item">
-                        <a class="@(i == Model.PageNumber ? "Current" : "") page-link"
-                           href="@Url.Action("Index", "NewsAdmin", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
-                    </li>
-                }
-            }
-            <li class="page-item">
-                <a href="@Url.Action("Index", "NewsAdmin", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
-                   class="btn page-link @nextDisabled">></a>
-            <li class="page-item">
-                <a href="@Url.Action("Index", "NewsAdmin", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
-                   class="btn page-link @nextDisabled">>></a>
-        </ul>
-    </nav>
+    <div class="row">
+        <div class="col-sm-12 col-custom">
+            <div class="toolbar-bottom">
+                <div class="pagination">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disable" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disable" : "";
+                        ViewBag.PageRange = 3;
+                    }
+                    <ul>
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
+                            {
+                                <li>
+                                    <a class="@(i == Model.PageNumber ? "current" : "")"
+                                       href="@Url.Action("Index", "NewsAdmin", new { page = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                                </li>
+                            }
+                        }
+                        <li class="page-item">
+                            <a href="@Url.Action("Index", "NewsAdmin", new { page = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                               class="@nextDisabled">&gt;</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "NewsAdmin", new { page = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                               class="@nextDisabled">&gt;&gt;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 }

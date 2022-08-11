@@ -1,77 +1,85 @@
-﻿@model IndexViewModel
+﻿@model AccountDetailViewModel
 @{
-    ViewBag.Title = "Manage your account";
+    ViewBag.Title = "Trang cá nhân";
 }
 
-<h2>@ViewBag.Title.</h2>
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <div class="col-md-8">
-        <p>
-            @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") 
-                : Html.ActionLink("Pick a password", "SetPassword"))
-        </p>
-        <p>
-            Phone Number: @(Model.PhoneNumber ?? "None") [
-            @if (Model.PhoneNumber != null)
-            {
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remove", "RemovePhoneNumber")
-            }
-            else
-            {
-                @Html.ActionLink("Add", "AddPhoneNumber")
-            }
-            ]
-        </p>
-        <p>
-            External Logins: @Model.Logins.Count
-            @Html.ActionLink("[Manage]", "ManageLogins")
-        </p>
-        @if (Model.TwoFactor)
-        {
-            using (Html.BeginForm("DisableTFA", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                 @Html.AntiForgeryToken()
-                 <p>
-                     Two factor is currently enabled:
-                     <input type="submit" value="Disable" class="btn btn-secondary"/>
-                 </p>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("EnableTFA", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                @Html.AntiForgeryToken()
-                <p>
-                    Two factor is currently disabled:
-                    <input type="submit" value="Enable" class="btn btn-success"/>
-                </p>
-            }
-        }
-        @if (Model.BrowserRemembered)
-        {
-            using (Html.BeginForm("ForgetBrowser", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                @Html.AntiForgeryToken()
-                <p>
-                    Browser is curently remembered for two factor:
-                    <input type="submit" value="Forget Browser" class="btn btn-secondary" />
-                </p>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("RememberBrowser", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                @Html.AntiForgeryToken()
-                <p>
-                    Browser is curently not remembered for two factor:
-                    <input type="submit" value="Remember Browser" class="btn btn-info"/>
-                </p>
-            }
-        }
+<div class="my-account-wrapper mt-5">
+    <div class="container container-default-2 custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <!-- My Account Page Start -->
+                <div class="myaccount-page-wrapper">
+                    <!-- My Account Tab Menu Start -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-custom">
+                            <div class="myaccount-tab-menu nav" role="tablist">
+                                <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
+                                <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- My Account Tab Menu End -->
+                        <!-- My Account Tab Content Start -->
+                        <div class="col-lg-9 col-md-8 col-custom">
+                            <div class="tab-content" id="myaccountContent">
+                                <!-- Single Tab Content Start -->
+                                @Html.Action("History", "Reservation")
+                                <!-- Single Tab Content End -->
+                                <div class="tab-pane fade" id="account-info" role="tabpanel">
+                                    <div class="myaccount-content">
+                                        <h3>Thông tin tài khoản</h3>
+                                        <div class="account-details-form">
+                                            <form action="@Url.Action("Index", "Manage", new {area=""})" method="post">
+                                                <div class="row">
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.HiddenFor(m => m.UserId)
+                                                    <div class="col-lg-6 col-custom">
+                                                        <div class="single-input-item mb-3">
+                                                            <label for="full-name" class="required mb-1">Tên đầy đủ</label>
+                                                            <input type="text" name="Fullname" id="full-name" placeholder="Tên đầy đủ" value="@Model.FullName" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-custom">
+                                                        <div class="single-input-item mb-3">
+                                                            <label for="Username" class="required mb-1">Tên đăng nhập</label>
+                                                            <input type="text" id="Username" name="Username" disabled value="@Model.Username" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="single-input-item mb-3">
+                                                    <label for="PhoneNumber" class="required mb-1">Số điện thoại</label>
+                                                    <input type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Số điện thoại" value="@Model.PhoneNumber" />
+                                                </div>
+                                                <div class="single-input-item mb-3">
+                                                    <label for="email" class="required mb-1">Email</label>
+                                                    <input type="email" id="email" name="Email" placeholder="Email" value="@Model.Email" />
+                                                </div>
+                                                <div class="single-input-item mb-3">
+                                                    <label for="email" class="required mb-1">Level: @(Model.Level == 0 ? Html.Raw("<img src=\"/assets/images/Level/0.png\" ></img>")
+                                                                                                     : Model.Level >= 1 ? Html.Raw("<img src=\"/assets/images/Level/1.png\" ></img>")
+                                                                                                     : Model.Level >= 15 ? Html.Raw("<img src=\"/assets/images/Level/2.png\" ></img>")
+                                                                                                     : Model.Level >= 30 ? Html.Raw("<img src=\"/assets/images/Level/3.png\" ></img>")
+                                                                                                     : Model.Level >= 50 ? Html.Raw("<img src=\"/assets/images/Level/4.png\" ></img>")
+                                                                                                     : Html.Raw("<img src=\"~/assets/images/Level/5.png\"></img>")) </label>
+                                                </div>
+                                                <div class="single-input-item single-item-button">
+                                                    <button class="btn flosun-button secondary-btn theme-color  rounded-0">Thay đổi</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Tab Content End -->
+                            </div>
+                        </div>
+                        <!-- My Account Tab Content End -->
+                    </div>
+                </div>
+                <!-- My Account Page End -->
+            </div>
+        </div>
     </div>
 </div>

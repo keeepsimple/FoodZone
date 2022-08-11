@@ -1,9 +1,13 @@
 ﻿using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
+using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Admin.ViewModels;
 using FoodZone.Web.Helpers;
 using Microsoft.AspNet.Identity.Owin;
+using PagedList;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,10 +42,30 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             _foodServices = foodServices;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
-            var reservations = _reservationServices.GetAll();
-            return View(reservations);
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var news = await _reservationServices.GetAllAsync();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                news = news.Where(s => s.PhoneNumber.Contains(searchString) 
+                                            || s.Name.Contains(searchString)).ToList();
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(news.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Edit(int? id)
@@ -68,7 +92,8 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 ReservationDate = reservation.ReservationDate,
                 Status = reservation.Status,
                 UserId = reservation.UserId,
-                CancelReason = reservation.CancelReason
+                CancelReason = reservation.CancelReason,
+                Code = reservation.Code
             };
 
             return View(model);
@@ -76,7 +101,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ReservationViewModel model)
+        public async Task<ActionResult> Edit(ReservationViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -105,11 +130,18 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     reservation.Status = 4;
                 }
 
+                if(reservation.Status == 3)
+                {
+                    var user = await UserManager.FindByIdAsync(reservation.UserId);
+                    user.Level += reservation.Capacity;
+                    await UserManager.UpdateAsync(user);
+                }
+
                 ChangeTableStatus(reservation);
                 TableHub.BroadcastData();
                 reservation.CancelReason = model.CancelReason;
 
-                var result = _reservationServices.Update(reservation);
+                var result = await _reservationServices.UpdateAsync(reservation);
                 if (result)
                 {
                     TempData["Message"] = "Cập nhật thành công.";

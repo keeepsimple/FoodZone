@@ -53,7 +53,6 @@ namespace FoodZone.Web
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
-
             // TODO: Register your type's mappings here.
             container.RegisterSingleton<FoodZoneContext, FoodZoneContext>();
             container.RegisterType<IUnitOfWork, UnitOfWork>();
@@ -74,6 +73,7 @@ namespace FoodZone.Web
             container.RegisterType<IVoucherServices, VoucherServices>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<ManageController>(new InjectionConstructor());
+            container.RegisterType<DashboardController>(new InjectionConstructor());
             container.RegisterType<RolesAdminController>(new InjectionConstructor());
             container.RegisterType<UsersAdminController>(new InjectionConstructor());
             container.RegisterType<JobStorage>(new InjectionFactory(c => JobStorage.Current));

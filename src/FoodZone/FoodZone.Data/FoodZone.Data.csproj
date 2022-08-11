@@ -115,6 +115,10 @@
     <Compile Include="Migrations\202208051023505_ModifyReservationModel.designer.cs">
       <DependentUpon>202208051023505_ModifyReservationModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208100700480_UpdateCodeForReservationModel.cs" />
+    <Compile Include="Migrations\202208100700480_UpdateCodeForReservationModel.designer.cs">
+      <DependentUpon>202208100700480_UpdateCodeForReservationModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -168,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208051023505_ModifyReservationModel.resx">
       <DependentUpon>202208051023505_ModifyReservationModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208100700480_UpdateCodeForReservationModel.resx">
+      <DependentUpon>202208100700480_UpdateCodeForReservationModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

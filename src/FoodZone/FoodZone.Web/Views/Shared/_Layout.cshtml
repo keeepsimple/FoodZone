@@ -56,8 +56,8 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-8 d-none d-lg-flex justify-content-center col-custom">
-                        <nav class="main-nav d-none d-lg-flex">
+                    <div class="col-lg-6 d-none d-lg-flex col-custom ">
+                        <nav class="main-nav d-none d-lg-flex header-menu-custom-style">
                             <ul class="nav">
                                 <li>
                                     <a href="@Url.Action("Index", "Home", new { area = "" })">
@@ -93,27 +93,10 @@
                                         <span class="menu-text">Đặt bàn</span>
                                     </a>
                                 </li>
-                                @if (Request.IsAuthenticated && User.IsInRole("Manager"))
-                                {
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Quản lý Nhà Hàng
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="@Url.Action("Index", "UsersAdmin", new { area = "Identity" })">Users Admin</a>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "RolesAdmin", new { area = "Identity" })">Roles Admin</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="@Url.Action("Index", "MenuAdmin", new {area="admin"})">Manager</a>
-                                        </div>
-                                    </li>
-                                }
-
-
-                                @Html.Partial("_LoginPartial")
                             </ul>
                         </nav>
                     </div>
-                    <div class="col-lg-2 col-md-6 col-6 col-custom">
+                    <div class="col-lg-1 col-md-6 col-6 col-custom">
                         <div class="header-right-area main-nav">
                             <ul class="nav">
                                 <li class="mobile-menu-btn d-lg-none">
@@ -124,6 +107,7 @@
                             </ul>
                         </div>
                     </div>
+                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </div>
@@ -192,10 +176,7 @@
         </aside>
     </header>
 
-    <main>
-
     @RenderBody()
-    </main>
 
     <a class="scroll-to-top" href="#">
         <i class="lnr lnr-arrow-up"></i>

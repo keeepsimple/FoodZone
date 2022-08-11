@@ -56,16 +56,16 @@
                                         {
                                             <li>
                                                 <a class="@(i == Model.PageNumber ? "current" : "")"
-                                                   href="@Url.Action("Index", "News", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                                                   href="@Url.Action("Index", "News", new { page = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
                                             </li>
                                         }
                                     }
                                     <li class="page-item">
-                                        <a href="@Url.Action("Index", "News", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                                        <a href="@Url.Action("Index", "News", new { page = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
                                            class="@nextDisabled">&gt;</a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Index", "News", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                                        <a href="@Url.Action("Index", "News", new { page = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
                                            class="@nextDisabled">&gt;&gt;</a>
                                     </li>
                                 </ul>

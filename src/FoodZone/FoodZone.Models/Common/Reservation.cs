@@ -42,6 +42,8 @@ namespace FoodZone.Models.Common
         [Display(Name = "Lí do huỷ")]
         public string CancelReason { get; set; }
 
+        public string Code { get; set; }
+
         public virtual ICollection<ReservationDetail> ReservationDetails { get; set; }
     }
 }

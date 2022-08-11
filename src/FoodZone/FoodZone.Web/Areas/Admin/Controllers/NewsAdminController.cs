@@ -39,7 +39,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var news = await _newsServices.GetAllAsync();
-
             if (!string.IsNullOrEmpty(searchString))
             {
                 news = news.Where(s => s.Title.Contains(searchString)).ToList();
@@ -47,7 +46,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-
             return View(news.ToPagedList(pageNumber, pageSize));
         }
 

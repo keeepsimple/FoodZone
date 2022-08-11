@@ -3,6 +3,7 @@ using FoodZone.Services.IServices;
 using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Admin.ViewModels;
 using FoodZone.Web.Helpers;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,25 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             _tableServices = tableServices;
         }
 
-        public ActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
-            var table = _tableServices.GetAll();
-            return View(table);
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var news = await _tableServices.GetAllAsync();
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(news.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Create()

@@ -71,15 +71,15 @@ else
                 {
                     <li class="page-item">
                         <a class="@(i == Model.PageNumber ? "Current" : "") page-link"
-                           href="@Url.Action("Index", "UsersAdmin", new { pageIndex = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                           href="@Url.Action("Index", "UsersAdmin", new { page = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
                     </li>
                 }
             }
             <li class="page-item">
-                <a href="@Url.Action("Index", "UsersAdmin", new { pageIndex = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                <a href="@Url.Action("Index", "UsersAdmin", new { page = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
                    class="btn page-link @nextDisabled">></a>
             <li class="page-item">
-                <a href="@Url.Action("Index", "UsersAdmin", new { pageIndex = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                <a href="@Url.Action("Index", "UsersAdmin", new { page = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
                    class="btn page-link @nextDisabled">>></a>
         </ul>
     </nav>

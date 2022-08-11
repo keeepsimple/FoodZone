@@ -28,17 +28,16 @@
                 <div class="input-item mb-4 display-flex-col">
                     <div class="display-flex-row">
                         <div class="title-quantity">Số lượng bàn</div>
-                        <input id="capa" name="Capacity" type="text" onkeyup="handleChange()" 
+                        <input id="capa" name="Capacity" type="number" onkeyup="handleChangeCount()" 
                                class="border-0 rounded-0 input-area number gray-bg input-quantity" 
-                               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" placeholder="Số lượng bàn" />
+                               placeholder="Số lượng bàn" />
                         
-                        <p style="danger">@ViewBag.TableNeed</p>
-                        <div style="width: 50px; height: 50px; border: 1px solid black; text-align: center ;font-size:20px ;margin-right: 10px; display:flex">
+                        @*<div style="width: 50px; height: 50px; border: 1px solid black; text-align: center ;font-size:20px ;margin-right: 10px; display:flex">
                             +
                         </div>
                         <div style="width: 50px; height: 50px; border: 1px solid black; text-align: center; font-size: 20px ">
                             -
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>

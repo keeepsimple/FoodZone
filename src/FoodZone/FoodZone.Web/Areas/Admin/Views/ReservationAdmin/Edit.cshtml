@@ -10,63 +10,68 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Id)
     @Html.HiddenFor(x=>x.UserId)
-    <div class="form-horizontal row">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group col-md-6">
-            Ten khach hang
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
-        </div>
-
-        <div class="form-group col-md-6">
-            So dien thoai
-            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
-        </div>
-
-        <div class="form-group col-md-6">
-            Ngay dat
-            @Html.EditorFor(model => model.ReservationDate, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
-        </div>
-
-        <div class="form-group col-md-6">
-            So nguoi
-            @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
-        </div>
-
-        <div class="form-group col-md-12">
-            Ghi chu
-            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
-        </div>
-
-        <div class="form-group col-md-12">
-            @Html.Action("GetReservationDetails", "ReservationAdmin", new { reservationId = Model.Id })
-        </div>
-
-        <div class="form-group col-md-6">
-            Li do huy
-            @Html.TextAreaFor(model => model.CancelReason, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.CancelReason, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group col-md-6">
-            Trạng Thái: @(Model.Status == 0 ? "Mới" : Model.Status == 1 ? "Xác nhận" : Model.Status == 2 ? "Khách đã đến" : Model.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )
-        </div>
-
-        <div class="form-group form-button mt-4 col-md-12">
-            @if (Model.Status == 0)
-            {
-                <input type="submit" name="signup" id="signup" class="btn btn-success" value="Xác nhận" />
-            }
-            else if (Model.Status == 1)
-            {
-                <input type="submit" name="signup" id="signup" class="btn btn-success" value="Khách đã đến" />
-            }
-            else if (Model.Status == 2)
-            {
-                <input type="submit" name="signup" id="signup" class="btn btn-success" value="Hoàn thành" />
-            }
-
-            @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
-        </div>
+<div class="form-horizontal row">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group col-md-6">
+        Ten khach hang
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
     </div>
+
+    <div class="form-group col-md-6">
+        So dien thoai
+        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
+    </div>
+
+    <div class="form-group col-md-6">
+        Ngay dat
+        @Html.EditorFor(model => model.ReservationDate, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
+    </div>
+
+    <div class="form-group col-md-6">
+        So luong ban
+        @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
+    </div>
+
+    <div class="form-group col-md-6">
+        Ma khuyen mai
+        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
+    </div>
+
+    <div class="form-group col-md-12">
+        Ghi chu
+        @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control", @disabled = "disable" } })
+    </div>
+
+    <div class="form-group col-md-12">
+        @Html.Action("GetReservationDetails", "ReservationAdmin", new { reservationId = Model.Id })
+    </div>
+
+    <div class="form-group col-md-6">
+        Li do huy
+        @Html.TextAreaFor(model => model.CancelReason, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.CancelReason, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group col-md-6">
+        Trạng Thái: @(Model.Status == 0 ? "Mới" : Model.Status == 1 ? "Xác nhận" : Model.Status == 2 ? "Khách đã đến" : Model.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )
+    </div>
+
+    <div class="form-group form-button mt-4 col-md-12">
+        @if (Model.Status == 0)
+        {
+            <input type="submit" name="signup" id="signup" class="btn btn-success" value="Xác nhận" />
+        }
+        else if (Model.Status == 1)
+        {
+            <input type="submit" name="signup" id="signup" class="btn btn-success" value="Khách đã đến" />
+        }
+        else if (Model.Status == 2)
+        {
+            <input type="submit" name="signup" id="signup" class="btn btn-success" value="Hoàn thành" />
+        }
+
+        @Html.ActionLink("Trở Về", "Index", null, new { @class = "btn btn-light ml-2" })
+    </div>
+</div>
 }

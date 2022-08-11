@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Table>
+﻿@model PagedList.PagedList<Table>
 @{
     ViewBag.Title = "Quản lý Bàn";
 }
@@ -58,6 +58,39 @@ else
             </tr>
         }
     </table>
+    <div class="row">
+        <div class="col-sm-12 col-custom">
+            <div class="toolbar-bottom">
+                <div class="pagination">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disable" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disable" : "";
+                        ViewBag.PageRange = 3;
+                    }
+                    <ul>
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
+                            {
+                                <li>
+                                    <a class="@(i == Model.PageNumber ? "current" : "")"
+                                       href="@Url.Action("Index", "TableAdmin", new { page = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
+                                </li>
+                            }
+                        }
+                        <li class="page-item">
+                            <a href="@Url.Action("Index", "TableAdmin", new { page = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
+                               class="@nextDisabled">&gt;</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "TableAdmin", new { page = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
+                               class="@nextDisabled">&gt;&gt;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 @section scripts{
     <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>

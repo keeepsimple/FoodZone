@@ -31,7 +31,7 @@ namespace FoodZone.Web.Helpers
         {
             using (var ctx = new FoodZoneContext())
             {
-                var ids = ctx.Database.SqlQuery<int>("Select t.Id from Tables as t Right Join ReservationDetails as rd on t.Id = rd.TableId right join Reservations as r on rd.ReservationId = r.Id Where DATEADD(minute, 15, r.ReservationDate) <= GETDATE() and r.Status = 1 and t.Status = 1").ToList();
+                var ids = ctx.Database.SqlQuery<int>("Select t.Id from Tables as t Right Join ReservationDetails as rd on t.Id = rd.TableId right join Reservations as r on rd.ReservationId = r.Id Where DATEADD(minute, 15, r.ReservationDate) <= GETDATE() and t.Status = 1 and r.Status = 1 or r.Status = 0").ToList();
                 if (ids.Count() > 0)
                 {
                     foreach (var item in ids)

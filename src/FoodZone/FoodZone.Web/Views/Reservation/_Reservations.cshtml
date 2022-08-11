@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Reservation>
+@{
+    int i = 1;
+}
+
+<div class="tab-pane fade show active" id="orders" role="tabpanel">
+    <div class="myaccount-content">
+        <h3>Đơn đặt bàn</h3>
+        <div class="myaccount-table table-responsive text-center">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>STT</th>
+                        <th>Ngày</th>
+                        <th>Trạng thái</th>
+                        <th>Số lượng bàn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.ReservationDate.ToString("dd/MM/yyyy")</td>
+                            <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Xác nhận" : item.Status == 2 ? "Khách đã đến" : item.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
+                            <td>@item.Capacity</td>
+                            <td><a href="history.html" class="btn flosun-button secondary-btn theme-color  rounded-0">View</a></td>
+                        </tr>
+                        <p style="display: none">@(i++)</p>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
