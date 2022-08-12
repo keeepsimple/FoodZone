@@ -1,17 +1,63 @@
-﻿@{
-    Layout = null;
+﻿@model ReservationDetailViewModel
+@{
+    ViewBag.Title = ViewBag.Detail;
 }
+<div class="contact-us-area d-flex">
+    <div class="container custom-area col mt-auto mb-auto h-75">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <!-- Cart Table Area -->
+                <div class="cart-table table-responsive">
+                    <br />
+                    <br />
+                    <br />
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="pro-thumbnail">Tên khách hàng</th>
+                                <th class="pro-thumbnail">Số điện thoại</th>
+                                <th class="pro-thumbnail">Thời gian dùng bữa</th>
+                                <th class="pro-thumbnail">Mã ưu đãi</th>
+                                <th class="pro-thumbnail">Ghi chú</th>
+                                <th class="pro-thumbnail">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="pro-thumbnail">@Model.CusName</td>
+                                <td class="pro-thumbnail">@Model.PhoneNumber</td>
+                                <td class="pro-thumbnail">@Model.ReservationDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                <td class="pro-thumbnail">@Model.Code</td>
+                                <td class="pro-thumbnail">@Model.Note</td>
+                                <td class="pro-thumbnail">@(Model.Status == 0 ? "Mới" : Model.Status == 1 ? "Xác nhận" : Model.Status == 2 ? "Khách đã đến" : Model.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn")</td>
+                            </tr>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+                        </tbody>
+                    </table>
+                    @Html.Action("GetReservationDetails", "Reservation", new { @reservationId = Model.Id})
+                </div>
+                <!-- Cart Update Option -->
+                <div class="cart-update-option d-block d-md-flex justify-content-between">
+                    <div class="apply-coupon-wrapper">
+                        @if (Model.Status == 4)
+                        {
+                            <form action="#" method="post" class=" d-block d-md-flex">
+                                <input type="text" placeholder="Lý do huỷ" disabled value="@Model.CancelReason" />
+                            </form>
+                        }
+                        else if(Model.Status < 2)
+                        {
+                            <form action="@Url.Action("Details", "Reservation", new {area=""})" method="post" class=" d-block d-md-flex">
+                                <input type="text" name="CancelReason" placeholder="Lý do huỷ" value="@Model.CancelReason" />
+                                <button class="btn flosun-button primary-btn rounded-0 black-btn">Huỷ đặt bàn</button>
+                            </form>
+                        }
+                    </div>
+                    <div class="cart-update mt-sm-16">
+                        <a href="@Url.Action("Index","Manage", new {area=""})" class="btn flosun-button primary-btn rounded-0 black-btn">Quay lại</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>

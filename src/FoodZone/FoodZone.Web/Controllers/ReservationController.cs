@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using FoodZone.Services.Services;
 
 namespace FoodZone.Web.Controllers
 {
@@ -146,13 +147,85 @@ namespace FoodZone.Web.Controllers
             return View();
         }
 
-        //public ActionResult Details(int id)
-        //{
-        //    var reservation = _reservationServices.GetById(id);
-        //    var user = UserManager.FindById(reservation.UserId);
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var reservation = _reservationServices.GetById(id);
+            var detail = new ReservationDetailViewModel()
+            {
+                Id = id,
+                CancelReason = reservation.CancelReason,
+                Code = reservation.Code,
+                CusName = reservation.Name,
+                Note = reservation.Note,
+                PhoneNumber = reservation.PhoneNumber ,
+                ReservationDate = reservation.ReservationDate,
+                Status = reservation.Status 
+            };
+            ViewBag.Detail = reservation.ReservationDate.ToShortDateString();
+            return View(detail);
+        }
 
-        //    View();
-        //}
+        public ActionResult GetReservationDetails(int reservationId)
+        {
+            var list = _reservationDetailsServices.GetReservationDetailsByReservation(reservationId);
+            return PartialView("_GetReservationDetails", list);
+        }
+
+        public int GetTableNumber(int tableId)
+        {
+            var table = _tableServices.GetById(tableId);
+            return table.NumberTable;
+        }
+
+        public string GetMenuName(int menuId)
+        {
+            var menu = _menuServices.GetById(menuId);
+            return menu.Name;
+        }
+
+        private void ChangeTableStatus(Reservation reservation)
+        {
+            var details = _reservationDetailsServices.GetReservationDetailsByReservation(reservation.Id);
+
+            foreach (var item in details)
+            {
+                var table = _tableServices.GetById(item.TableId);
+                if (reservation.Status == 2)
+                {
+                    table.Status = 2;
+                }
+                else if (reservation.Status == 3 || reservation.Status == 4)
+                {
+                    table.Status = 0;
+                }
+                _tableServices.Update(table);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Details(ReservationDetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var reservation = _reservationServices.GetById(model.Id);
+
+                reservation.Status = 4;
+                reservation.CancelReason = model.CancelReason;
+                ChangeTableStatus(reservation);
+                var result = _reservationServices.Update(reservation);
+                if (result)
+                {
+                    TempData["Message"] = "Hủy đặt bàn thành công!";
+                }
+                else
+                {
+                    TempData["Message"] = "Hủy đặt bàn thất bại!";
+                }
+                return RedirectToAction("Index", "Manage");
+            }
+            return View(model);
+        }
 
         public ActionResult History()
         {
@@ -192,7 +265,7 @@ namespace FoodZone.Web.Controllers
                     {
                         var userVoucher = new UserVoucher
                         {
-                            UserId = User.Identity.GetUserId(),
+                            UserId = user.Id,
                             VoucherId = voucher.Id
                         };
 

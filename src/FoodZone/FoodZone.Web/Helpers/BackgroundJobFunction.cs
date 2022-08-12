@@ -22,7 +22,7 @@ namespace FoodZone.Web.Helpers
         {
             using (var ctx = new FoodZoneContext())
             {
-                var command = "Update Reservations Set Status =4, CancelReason = N'Khách không đến',UpdatedAt = GETDATE() WHERE DATEADD(minute, 15, ReservationDate) <= GETDATE()";
+                var command = "Update Reservations Set Status =4, CancelReason = N'Khách không đến',UpdatedAt = GETDATE() WHERE DATEADD(minute, 15, ReservationDate) <= GETDATE() and Status = 1";
                 ctx.Database.ExecuteSqlCommand(command);
             }
         }

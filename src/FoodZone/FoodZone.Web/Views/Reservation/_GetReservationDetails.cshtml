@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ReservationDetail>
+<br />
+<br />
+<br />
+<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="pro-thumbnail">Bàn</th>
+            <th class="pro-thumbnail">Combo</th>
+            <th class="pro-thumbnail">Giá</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="pro-thumbnail">@Html.Action("GetTableNumber", "Reservation", new { tableId = item.TableId })</td>
+                <td class="pro-thumbnail">@Html.Action("GetMenuName", "Reservation", new { menuId = item.MenuId })</td>
+                <td class="pro-thumbnail">@item.MenuPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -249,6 +249,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\HangfireAuthFilter.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\ReservationDetailViewModel.cs" />
     <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
   </ItemGroup>
@@ -439,6 +440,7 @@
     <Content Include="Views\Shared\_TableArea.cshtml" />
     <Content Include="Views\Reservation\_Reservations.cshtml" />
     <Content Include="Views\Reservation\Details.cshtml" />
+    <Content Include="Views\Reservation\_GetReservationDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

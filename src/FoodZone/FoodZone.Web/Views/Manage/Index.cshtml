@@ -59,17 +59,8 @@
                                                     <input type="email" id="email" name="Email" placeholder="Email" value="@Model.Email" />
                                                 </div>
                                                 <div class="single-input-item mb-3" style="width: fit-content">
-                                                    <label id="modalBtn" class="required mb-1" data-bs-toggle="tooltip" data-bs-placement="right"
-                                                           title="@(Model.Level == 0 ? "Bạn là người dùng mới" :
-                                                                    Model.Level >= 1 ? "Bạn đang ở Level 1" :
-                                                                    Model.Level >= 15 ? "Bạn đang ở Level 2" :
-                                                                    Model.Level >= 30 ? "Bạn đang ở Level 3" :
-                                                                    Model.Level >= 50 ? "Bạn đang ở Level 4" :
-                                                                    Model.Level >= 80 ? "Bạn đang ở Level 5" : "Bạn đang ở Level 5")
-                                                                    Đặt 15 bàn bạn sẽ lên level 2,
-                                                                            30 bàn bạn sẽ lên level 3,
-                                                                            50 bàn sẽ lên level 4,
-                                                                            80 bàn sẽ lên level 5">
+                                                    <label id="modalBtn" class="required mb-1">
+
                                                         Level: @(Model.Level == 0 ? Html.Raw("<img src=\"/assets/images/Level/0.png\" ></img>")
                                                                : Model.Level >= 1 ? Html.Raw("<img src=\"/assets/images/Level/1.png\" ></img>")
                                                                : Model.Level >= 15 ? Html.Raw("<img src=\"/assets/images/Level/2.png\" ></img>")
@@ -86,7 +77,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button >Test</button>
                                 <!-- Single Tab Content End -->
                             </div>
                         </div>
@@ -104,12 +94,29 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2>Hướng dẫn chuyển khoản tới SpaceSpeakers</h2>
+                            <h2>Hệ thống Level</h2>
                         </div>
 
                         <div class="col-12">
-                            <h6>* Trong đó, Mã hàng hóa được quy định ở mục Mô tả sản phẩm</h6>
-                            <h6>** Khi nhận được chuyển khoản, chúng tôi sẽ gọi cho bạn theo số điện thoại trên để xác nhận và gửi hàng. Nếu cần hỗ trợ, bạn vui lòng liên hệ với VinID qua hotline 1900 6959</h6>
+                            <p style="font-weight: bold">
+                                @(Model.Level == 0 ? "Bạn là người dùng mới" :
+                                                                    Model.Level >= 1 ? "Bạn đang ở Level 1" :
+                                                                    Model.Level >= 15 ? "Bạn đang ở Level 2" :
+                                                                    Model.Level >= 30 ? "Bạn đang ở Level 3" :
+                                                                    Model.Level >= 50 ? "Bạn đang ở Level 4" :
+                                                                    Model.Level >= 80 ? "Bạn đang ở Level 5" : "Bạn đang ở Level 5")
+                            </p>
+                            <p>Khi đặt và đến ăn: </p>
+                            <p>
+                                15 bàn bạn sẽ lên level 2
+                            </p>
+                            <p>
+                                30 bàn bạn sẽ lên level 3
+                            </p>
+                            <p> 50 bàn bạn sẽ lên level 4</p>
+                            <p>
+                                80 bàn bạn sẽ lên level 5
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -120,27 +127,27 @@
     </div>
 </div>
 @section scripts{
-   <script>
-       const $ = document.querySelector.bind(document);
-       const $$ = document.querySelectorAll.bind(document);
-       const app = {
-           modalF: () => {
-               var modal = $("#modal");
-               var btn = $("#modalBtn");
-               var close = $(".close");
-               btn.onclick = () => {
-                   modal.style.display="block"
-               }
-               close.onclick = () => {
-                   modal.style.display="none"
-               }
-               window.onclick = e => {
-                   if (e.target == modal) {
-                       modal.style.display="none"
-                   }
-               }
-           }
-       }
-       app.modalF();
+    <script>
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+        const app = {
+            modalF: () => {
+                var modal = $("#modal");
+                var btn = $("#modalBtn");
+                var close = $(".close");
+                btn.onclick = () => {
+                    modal.style.display = "block"
+                }
+                close.onclick = () => {
+                    modal.style.display = "none"
+                }
+                window.onclick = e => {
+                    if (e.target == modal) {
+                        modal.style.display = "none"
+                    }
+                }
+            }
+        }
+        app.modalF();
     </script>
-    }
+}
