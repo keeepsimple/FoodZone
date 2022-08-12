@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace FoodZone.Web.Controllers
 {
@@ -69,6 +70,11 @@ namespace FoodZone.Web.Controllers
         {
             var menu = _menuServices.GetById(reservationViewModel.MenuId);
             var voucher = _voucherServices.GetById(reservationViewModel.CodeId);
+            string code = "";
+            if(voucher != null)
+            {
+                code = voucher.Code;
+            }
             decimal menuPrice = menu.Price;
             string str = "";
             if (!string.IsNullOrEmpty(reservationViewModel.TableFloorCapacity))
@@ -91,7 +97,10 @@ namespace FoodZone.Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    ApplyVoucher(voucher.Code);
+                    if (reservationViewModel.CodeId > 0)
+                    {
+                        ApplyVoucher(voucher.Code);
+                    }
                     var reservationDetails = new List<ReservationDetail>();
                     foreach (var item in tables)
                     {
@@ -114,7 +123,7 @@ namespace FoodZone.Web.Controllers
                                                   .AddHours(reservationViewModel.Hours)
                                                   .AddMinutes(reservationViewModel.Minute),
                         Note = reservationViewModel.Note,
-                        Code = voucher.Code,
+                        Code = code,
                         Status = 0,
                         UserId = User.Identity.GetUserId()
                     };
@@ -136,6 +145,14 @@ namespace FoodZone.Web.Controllers
             ViewBag.ReservationSuccess = "Cảm ơn " + user.FullName + " đã đặt bàn, mong bạn sẽ đến đúng giờ nhé!";
             return View();
         }
+
+        //public ActionResult Details(int id)
+        //{
+        //    var reservation = _reservationServices.GetById(id);
+        //    var user = UserManager.FindById(reservation.UserId);
+
+        //    View();
+        //}
 
         public ActionResult History()
         {

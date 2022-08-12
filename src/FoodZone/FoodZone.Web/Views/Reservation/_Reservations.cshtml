@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Reservation>
 @{
-    int i = 1;
+    int j = 1;
 }
 
 <div class="tab-pane fade show active" id="orders" role="tabpanel">
@@ -22,13 +22,13 @@
                     {
 
                         <tr>
-                            <td>@i</td>
+                            <td>@j</td>
                             <td>@item.ReservationDate.ToString("dd/MM/yyyy")</td>
                             <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Xác nhận" : item.Status == 2 ? "Khách đã đến" : item.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
                             <td>@item.Capacity</td>
                             <td><a href="history.html" class="btn flosun-button secondary-btn theme-color  rounded-0">View</a></td>
                         </tr>
-                        <p style="display: none">@(i++)</p>
+                        <p style="display: none">@(j++)</p>
                     }
                 </tbody>
             </table>
