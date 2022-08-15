@@ -46,12 +46,14 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+
             return View(news.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Create()
         {
             var voucherViewModel = new VoucherViewModel();
+
             return View(voucherViewModel);
         }
 
@@ -68,6 +70,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string fileName = "";
+
                 if (uploadImage != null)
                 {
                     fileName = Path.GetFileName(uploadImage.FileName);
@@ -90,6 +93,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 };
 
                 var result = await _voucherServices.AddAsync(voucher);
+
                 if (result > 0)
                 {
                     TempData["Message"] = "Tạo thành công.";
@@ -142,6 +146,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string fileName = "";
+
                 if (uploadImage != null && uploadImage.ContentLength > 0)
                 {
                     fileName = Path.GetFileName(uploadImage.FileName);
@@ -155,12 +160,14 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 }
 
                 var voucher = _voucherServices.GetById(model.Id);
+
                 if (voucher == null)
                 {
                     return HttpNotFound();
                 }
 
                 var checkExpired = CompareDate(DateTime.Now, model.ExpiredDate);
+
                 if (checkExpired <= 0)
                 {
                     voucher.Status = 1;
@@ -188,8 +195,10 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 {
                     TempData["Message"] = "Cập nhật thất bại.";
                 }
+
                 return RedirectToAction("Index");
             }
+
             return View(model);
         }
 
@@ -197,6 +206,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var result = _voucherServices.Delete(id);
+
             if (result)
             {
                 TempData["Message"] = "Xóa thành công.";
@@ -205,6 +215,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             {
                 TempData["Message"] = "Xóa thất bại.";
             }
+
             return RedirectToAction("Index");
         }
     }
