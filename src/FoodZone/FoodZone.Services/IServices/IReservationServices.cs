@@ -7,5 +7,9 @@ namespace FoodZone.Services.IServices
     public interface IReservationServices : IBaseServices<Reservation>
     {
         IEnumerable<Reservation> GetAllReservationToday();
+
+        IEnumerable<Reservation> GetAllReservationMonthly();
+
+
     }
 }

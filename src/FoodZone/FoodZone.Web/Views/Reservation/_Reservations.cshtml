@@ -7,8 +7,8 @@
     <div class="myaccount-content">
         <h3>Đơn đặt bàn</h3>
         <div class="myaccount-table table-responsive text-center">
-            <table class="table table-bordered">
-                <thead class="thead-light">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
                     <tr>
                         <th>STT</th>
                         <th>Ngày</th>
@@ -20,15 +20,14 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-
                         <tr>
                             <td>@j</td>
                             <td>@item.ReservationDate.ToString("dd/MM/yyyy")</td>
                             <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Xác nhận" : item.Status == 2 ? "Khách đã đến" : item.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
                             <td>@item.Capacity</td>
                             <td><a href="@Url.Action("Details", "Reservation", new {id = item.Id})" class="btn flosun-button secondary-btn theme-color  rounded-0">View</a></td>
+                            <td style="display: none">@(j++)</td>
                         </tr>
-                        <p style="display: none">@(j++)</p>
                     }
                 </tbody>
             </table>

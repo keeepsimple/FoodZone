@@ -1,13 +1,17 @@
-﻿using FoodZone.Web.ViewModels;
+﻿using FoodZone.Services.IServices;
+using FoodZone.Web.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace FoodZone.Web.Controllers
 {
+    
     public class DashboardController : Controller
     {
+
         public DashboardController()
         {
 
@@ -34,10 +38,6 @@ namespace FoodZone.Web.Controllers
             private set => _signInManager = value;
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult Login()
         {
@@ -59,7 +59,7 @@ namespace FoodZone.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "Dashboard");
+                    return RedirectToAction("Index", "DashboardAdmin", new {area="admin"});
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

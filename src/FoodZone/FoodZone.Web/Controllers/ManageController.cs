@@ -1,4 +1,4 @@
-using FoodZone.Models.Security;
+﻿using FoodZone.Models.Security;
 using FoodZone.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -60,12 +60,12 @@ namespace FoodZone.Web.Controllers
                 var result = UserManager.Update(user);
                 if (result.Succeeded)
                 {
-                    TempData["Message"] = "C?p nh?t th�nh c�ng.";
+                    TempData["Message"] = "Cập nhật thành công.";
                     return RedirectToAction("Index", "Manage");
                 }
                 else
                 {
-                    TempData["Message"] = "C?p nh?t th?t b?i";
+                    TempData["Message"] = "Cập nhật thất bại";
                 }
             }
             return View(model);

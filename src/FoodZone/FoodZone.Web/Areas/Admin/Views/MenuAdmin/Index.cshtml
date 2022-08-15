@@ -1,88 +1,42 @@
-﻿@model PagedList.PagedList<Menu>
+﻿@model IEnumerable<Menu>
 @{
-    ViewBag.Title = "Quản lý Thực Đơn";
+    ViewBag.Title = "Quản lý Menu";
 }
-
-<div class="row">
-    <div class="col-md-6">
-        <a href="@Url.Action("Create", "MenuAdmin")" class="btn btn-primary float-left"><span class="fas fa-plus-square"></span></a>
-    </div>
+<div class="d-flex flex-row">
+    <h1 class="h3 mb-2 text-gray-800">Danh sách menu</h1>
+    <a class="btn btn-primary btn-icon-split btn-sm ml-auto h-100  btn-success" href="@Url.Action("Create", "MenuAdmin")">
+        <span class="text">Tạo mới</span>
+    </a>
 </div>
-
-@if (!Model.Any())
-{
-    <h3 class="text-center">Không tìm thấy Thực Đơn nào.</h3>
-}
-else
-{
-    <table class="table table-condensed table-bordered">
-        <tr class="d-flex center-title">
-            <th class="col-md-4">
-                Tên
-            </th>
-            <th class="col-md-4">
-                Mô Tả
-            </th>
-            <th class="col-md-4">
-                Giá
-            </th>
-            <th class="col-md-4">Quản Lý</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr class="d-flex center-title">
-                <td class="col-md-4">
-                    <a href="@Url.Action("Edit", new { id = item.Id })">
-                        @item.Name
-                    </a>
-                </td>
-                <td class="col-md-4">
-                    @item.Description
-                </td>
-                <td class="col-md-4">
-                    @item.Price.ToString("N0")
-                </td>
-                <td class="col-md-4">
-                    <form action="@Url.Action("Delete", "MenuAdmin", new { id = item.Id })" method="post">
-                        <a href="@Url.Action("Edit", "MenuAdmin", new { id = item.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                        <button type="submit" onclick="return confirm('Bạn có muốn xóa Thực Đơn @item.Name này?');" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </table>
-    <div class="row">
-        <div class="col-sm-12 col-custom">
-            <div class="toolbar-bottom">
-                <div class="pagination">
-                    @{
-                        var prevDisabled = !Model.HasPreviousPage ? "disable" : "";
-                        var nextDisabled = !Model.HasNextPage ? "disable" : "";
-                        ViewBag.PageRange = 3;
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Giá</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Price.ToString("N0")</td>
+                            <td>
+                                <form action="@Url.Action("Delete", "MenuAdmin", new { id = item.Id })" method="post">
+                                    <a class="btn btn-primary btn-icon-split btn-sm" href="@Url.Action("Edit", "MenuAdmin", new { id = item.Id })">
+                                        <span class="text">Sửa</span>
+                                    </a>
+                                    <button type="submit" onclick="return confirm('Bạn có muốn xóa @item.Name này?')" class="btn btn-primary btn-icon-split btn-sm"><span class="text">Xoá</span></button>
+                                </form>
+                            </td>
+                        </tr>
                     }
-                    <ul>
-                        @for (int i = 1; i <= Model.PageCount; i++)
-                        {
-                            if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
-                            {
-                                <li>
-                                    <a class="@(i == Model.PageNumber ? "current" : "")"
-                                       href="@Url.Action("Index", "MenuAdmin", new { page = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
-                                </li>
-                            }
-                        }
-                        <li class="page-item">
-                            <a href="@Url.Action("Index", "MenuAdmin", new { page = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
-                               class="@nextDisabled">&gt;</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "MenuAdmin", new { page = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
-                               class="@nextDisabled">&gt;&gt;</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
-}
+</div>

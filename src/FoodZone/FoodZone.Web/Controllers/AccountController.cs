@@ -1,4 +1,4 @@
-using FoodZone.Models.Security;
+﻿using FoodZone.Models.Security;
 using FoodZone.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -67,13 +67,9 @@ namespace FoodZone.Web.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Đăng nhập thất bại");
                     return View(model);
             }
         }
@@ -139,8 +135,8 @@ namespace FoodZone.Web.Controllers
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", 
                     new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", 
-                    "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+                await UserManager.SendEmailAsync(user.Id, "Cài lại mật khẩu", 
+                    "Làm ơn cài lại mật khẩu tại link này: <a href=\"" + callbackUrl + "\">Cài lại mật khẩu</a>");
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }

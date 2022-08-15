@@ -45,8 +45,8 @@
                         <div class="toolbar-bottom">
                             <div class="pagination">
                                 @{
-                                    var prevDisabled = !Model.HasPreviousPage ? "disable" : "";
-                                    var nextDisabled = !Model.HasNextPage ? "disable" : "";
+                                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
                                     ViewBag.PageRange = 3;
                                 }
                                 <ul>

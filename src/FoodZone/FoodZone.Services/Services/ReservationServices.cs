@@ -14,11 +14,16 @@ namespace FoodZone.Services.Services
         {
         }
 
+        public IEnumerable<Reservation> GetAllReservationMonthly()
+        {
+            return _unitOfWork.ReservationRepository.GetQuery(x => x.ReservationDate.Month == DateTime.Now.Month).ToList();
+        }
+
         public IEnumerable<Reservation> GetAllReservationToday()
         {
             var today = DateTime.Now.ToShortDateString();
-            var getDate = DateTime.Parse(today);
-            return _unitOfWork.ReservationRepository.GetQuery(x => x.ReservationDate == getDate).OrderByDescending(x=>x.ReservationDate).ToList();
+            var all = _unitOfWork.ReservationRepository.GetQuery().ToList();
+            return all.Where(x => x.ReservationDate.ToShortDateString() == today);
         }
     }
 }

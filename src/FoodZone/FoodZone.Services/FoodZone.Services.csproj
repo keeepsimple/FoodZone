@@ -62,7 +62,6 @@
     <Compile Include="IServices\IMenuServices.cs" />
     <Compile Include="IServices\IReservationServices.cs" />
     <Compile Include="IServices\ITableServices.cs" />
-    <Compile Include="IServices\IUserMenuServices.cs" />
     <Compile Include="IServices\IUserVoucherServices.cs" />
     <Compile Include="IServices\IVoucherServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,7 +74,6 @@
     <Compile Include="Services\ReservationDetailServices.cs" />
     <Compile Include="Services\ReservationServices.cs" />
     <Compile Include="Services\TableServices.cs" />
-    <Compile Include="Services\UserMenuServices.cs" />
     <Compile Include="Services\UserVoucherServices.cs" />
     <Compile Include="Services\VoucherServices.cs" />
   </ItemGroup>

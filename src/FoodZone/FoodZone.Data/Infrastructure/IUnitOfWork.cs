@@ -37,8 +37,6 @@ namespace FoodZone.Data.Infrastructure
 
         ICoreRepository<Table> TableRepository { get; }
 
-        ICoreRepository<UserMenu> UserMenuRepository { get; }
-
         ICoreRepository<UserVoucher> UserVoucherRepository { get; }
 
         ICoreRepository<Voucher> VoucherRepository { get; }

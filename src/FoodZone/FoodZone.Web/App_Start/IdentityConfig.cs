@@ -100,8 +100,8 @@ namespace FoodZone.Web
         void sendMail(IdentityMessage message)
         {
             #region formatter
-            string text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
-            string html = "Please confirm your account by clicking this link: " + message.Body + "<br/>";
+            string text = string.Format("{1}", message.Subject, message.Body);
+            string html = "" + message.Body + "<br/>";
             #endregion
 
             MailMessage msg = new MailMessage();

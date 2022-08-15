@@ -39,9 +39,6 @@ namespace FoodZone.Data.Infrastructure
         private ICoreRepository<Table> _tableRepository;
         public ICoreRepository<Table> TableRepository => _tableRepository ?? new CoreRepository<Table>(_dbContext);
 
-        private ICoreRepository<UserMenu> _userMenuRepository;
-        public ICoreRepository<UserMenu> UserMenuRepository => _userMenuRepository ?? new CoreRepository<UserMenu>(_dbContext);
-
         private ICoreRepository<UserVoucher> _userVoucherRepository;
         public ICoreRepository<UserVoucher> UserVoucherRepository => _userVoucherRepository ?? new CoreRepository<UserVoucher>(_dbContext);
 

@@ -67,7 +67,6 @@
     <Compile Include="Common\Reservation.cs" />
     <Compile Include="Common\ReservationDetail.cs" />
     <Compile Include="Common\Table.cs" />
-    <Compile Include="Common\UserMenu.cs" />
     <Compile Include="Common\UserVoucher.cs" />
     <Compile Include="Common\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

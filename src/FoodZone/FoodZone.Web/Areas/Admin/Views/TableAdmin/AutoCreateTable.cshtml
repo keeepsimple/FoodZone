@@ -1,0 +1,22 @@
+﻿@model AutoCreateTableModel
+@{
+    ViewBag.Title = "Tạo bàn tự động";
+}
+
+<h5 class="modal-title">Tạo bàn tự động</h5>
+@using (Html.BeginForm("AutoCreateTable", "TableAdmin", FormMethod.Post, new { @class = "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="input-group">
+        <div class="modal-body w-100 d-flex">Số lượng bàn: <input type="number" name="NumberOfTable" class="form-control bg-light border-0 small ml-md-3" aria-describedby="basic-addon2"></div>
+        <div class="modal-body w-100 d-flex">Tầng: <input type="number" name="Floor" class="form-control bg-light border-0 small ml-md-3" aria-describedby="basic-addon2"></div>
+        <div class="modal-body w-100 d-flex">Số lượng người : <input type="text" name="Capacities" class="form-control bg-light border-0 small ml-md-3" aria-describedby="basic-addon2"></div>
+    </div>
+
+
+    <div class="modal-footer">
+        <a href="@Url.Action("Index", "TableAdmin")" class="btn btn-secondary">Hủy</a>
+        <input type="submit" class="btn btn-primary" value="Tạo" />
+    </div>
+}

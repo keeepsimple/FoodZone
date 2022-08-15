@@ -22,28 +22,10 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
+        public async Task<ActionResult> Index()
         {
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
             var foods = await _foodServices.GetAllAsync();
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                foods = foods.Where(s => s.Name.Contains(searchString)).ToList();
-            }
-
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(foods.ToPagedList(pageNumber, pageSize));
+            return View(foods);
         }
 
         public ActionResult Create()

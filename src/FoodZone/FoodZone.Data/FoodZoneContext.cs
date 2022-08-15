@@ -37,7 +37,6 @@ namespace FoodZone.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ReservationDetail> ReservationDetails { get; set; }
         public DbSet<Table> Tables { get; set; }
-        public DbSet<UserMenu> UserMenus { get; set; }
         public DbSet<UserVoucher> UserVouchers { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
 

@@ -15,6 +15,7 @@ namespace FoodZone.Web.Areas.Admin.ViewModels
 
         [Required(ErrorMessage = "{0} không được bỏ trống")]
         [StringLength(500, ErrorMessage = "Mô tả không lớn hơn 500 ký tự")]
+        [Display(Name = "Mô tả ngắn")]
         public string ShortDescription { get; set; }
 
         [Required(ErrorMessage = "{0} không được bỏ trống")]

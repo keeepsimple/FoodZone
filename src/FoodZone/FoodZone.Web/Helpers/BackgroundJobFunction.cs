@@ -24,6 +24,7 @@ namespace FoodZone.Web.Helpers
             {
                 var command = "Update Reservations Set Status =4, CancelReason = N'Khách không đến',UpdatedAt = GETDATE() WHERE DATEADD(minute, 15, ReservationDate) <= GETDATE() and Status = 1";
                 ctx.Database.ExecuteSqlCommand(command);
+                ctx.SaveChanges();
             }
         }
 
@@ -39,6 +40,7 @@ namespace FoodZone.Web.Helpers
                         var command = "Update [Tables] Set Status = 0, UpdatedAt = GETDATE() Where Id = @id";
                         var id = new SqlParameter("@id", item);
                         ctx.Database.ExecuteSqlCommand(command, id);
+                        ctx.SaveChanges();
                         TableHub.BroadcastData();
                     }
                 }
@@ -62,6 +64,7 @@ namespace FoodZone.Web.Helpers
                 var command = "Update Tables Set Status = 0, UpdatedAt = GETDATE() WHERE GETDATE() >= @resetTime";
                 var reset = new SqlParameter("@resetTime", resetTime);
                 ctx.Database.ExecuteSqlCommand(command, reset);
+                ctx.SaveChanges();
                 TableHub.BroadcastData();
             }
         }
@@ -70,8 +73,9 @@ namespace FoodZone.Web.Helpers
         {
             using (var ctx = new FoodZoneContext())
             {
-                var command = "Update Vouchers Set Status = 0, UpdatedAt = GETDATE() Where ExpiredDate >= GETDATE()";
+                var command = "Update Vouchers Set Status = 0, UpdatedAt = GETDATE() Where ExpiredDate <= GETDATE()";
                 ctx.Database.ExecuteSqlCommand(command);
+                ctx.SaveChanges();
             }
         }
     }

@@ -21,7 +21,5 @@ namespace FoodZone.Models.Common
         public decimal Price { get; set; }
 
         public virtual ICollection<MenuCategory> MenuCategories { get; set; }
-
-        public virtual ICollection<UserMenu> UserMenus { get; set; }
     }
 }

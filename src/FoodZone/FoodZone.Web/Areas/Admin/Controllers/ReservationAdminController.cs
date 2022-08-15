@@ -43,29 +43,10 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
+        public async Task<ActionResult> Index()
         {
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var news = await _reservationServices.GetAllAsync();
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                news = news.Where(s => s.PhoneNumber.Contains(searchString) 
-                                            || s.Name.Contains(searchString)).ToList();
-            }
-
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(news.ToPagedList(pageNumber, pageSize));
+            var reservation = await _reservationServices.GetAllAsync();
+            return View(reservation);
         }
 
         public ActionResult Edit(int? id)

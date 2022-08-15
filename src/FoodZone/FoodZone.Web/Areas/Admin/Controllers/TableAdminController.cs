@@ -26,24 +26,51 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
+        public async Task<ActionResult> Index()
         {
-            if (searchString != null)
+            var tables = await _tableServices.GetAllAsync();
+            return View(tables);
+        }
+
+        public ActionResult AutoCreateTable()
+        {
+            var model = new AutoCreateTableModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AutoCreateTable(AutoCreateTableModel model)
+        {
+            int numberTable = 1;
+            if (ModelState.IsValid)
             {
-                page = 1;
+                var tables = await _tableServices.GetAllAsync();
+                if (tables.Count() > 0)
+                {
+                    numberTable = tables.OrderByDescending(x => x.NumberTable).FirstOrDefault().NumberTable;
+                }
+
+                var capacities = model.Capacities.Split(',');
+
+                for (int i = 0; i < model.NumberOfTable; i++)
+                {
+                    foreach (var item in capacities)
+                    {
+                        var table = new Table
+                        {
+                            Capacity = Convert.ToInt32(item),
+                            Floor = model.Floor,
+                            NumberTable = numberTable++,
+                            Status = 0
+                        };
+                        await _tableServices.AddAsync(table);
+                    }
+                    TableHub.BroadcastData();
+                }
+
+                return RedirectToAction("Index");
             }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var news = await _tableServices.GetAllAsync();
-
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(news.ToPagedList(pageNumber, pageSize));
+            return View(model);
         }
 
         public ActionResult Create()
@@ -69,7 +96,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 };
 
                 var result = await _tableServices.AddAsync(table);
-               
+
                 if (result > 0)
                 {
                     TempData["Message"] = "Tạo thành công.";
@@ -82,7 +109,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 TableHub.BroadcastData();
                 return RedirectToAction("Index");
             }
-           
+
             return View(model);
         }
 

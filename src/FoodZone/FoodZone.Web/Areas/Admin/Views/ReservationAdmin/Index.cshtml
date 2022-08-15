@@ -1,73 +1,46 @@
-﻿@model PagedList.PagedList<Reservation>
+﻿@model IEnumerable<Reservation>
 @{
     ViewBag.Title = "Quản lý Đặt Bàn";
 }
 
-@if (!Model.Any())
-{
-    <h3 class="text-center">Không tìm thấy đơn đặt bàn nào.</h3>
-}
-else
-{
-    <table class="table table-condensed table-bordered">
-        <tr class="d-flex center-title">
-            <th class="col-md-4">
-                Tên khách hàng
-            </th>
-            <th class="col-md-4">
-                Số điện thoại
-            </th>
-            <th class="col-md-4">Quản Lý</th>
-        </tr>
+<div class="d-flex flex-row">
+    <h1 class="h3 mb-2 text-gray-800">Danh sách đặt bàn</h1>
+</div>
 
-        @foreach (var item in Model)
-        {
-            <tr class="d-flex center-title">
-                <td class="col-md-4">
-                    <a href="@Url.Action("Edit", new { id = item.Id })">
-                        @item.Name
-                    </a>
-                </td>
-                <td class="col-md-4">
-                    @item.PhoneNumber
-                </td>
-                <td class="col-md-4">
-                    <a href="@Url.Action("Edit", "ReservationAdmin", new { id = item.Id })" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                </td>
-            </tr>
-        }
-    </table>
-    <div class="row">
-        <div class="col-sm-12 col-custom">
-            <div class="toolbar-bottom">
-                <div class="pagination">
-                    @{
-                        var prevDisabled = !Model.HasPreviousPage ? "disable" : "";
-                        var nextDisabled = !Model.HasNextPage ? "disable" : "";
-                        ViewBag.PageRange = 3;
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Tên khách hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Thời gian dùng bữa</th>
+                        <th>Số lượng bàn</th>
+                        <th>Trạng thái</th>
+                        <th>Thời gian tạo đơn</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.ReservationDate.ToString("dd-MM-yyyy HH:mm:ss")</td>
+                            <td>@item.Capacity</td>
+                            <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Xác nhận" : item.Status == 2 ? "Khách đã đến" : item.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
+                            <td>@item.InsertedAt.ToString("dd-MM-yyyy HH:mm:ss")</td>
+                            <td>
+                                <a class="btn btn-primary btn-icon-split btn-sm" href="@Url.Action("Edit", "ReservationAdmin", new { id = item.Id })">
+                                    <span class="text">Sửa</span>
+                                </a>
+                            </td>
+                        </tr>
                     }
-                    <ul>
-                        @for (int i = 1; i <= Model.PageCount; i++)
-                        {
-                            if (i >= Model.PageNumber - ViewBag.PageRange && i <= Model.PageNumber + ViewBag.PageRange)
-                            {
-                                <li>
-                                    <a class="@(i == Model.PageNumber ? "current" : "")"
-                                       href="@Url.Action("Index", "ReservationAdmin", new { page = i, currentFilter = ViewData["CurrentFilter"] })">@i</a>
-                                </li>
-                            }
-                        }
-                        <li class="page-item">
-                            <a href="@Url.Action("Index", "ReservationAdmin", new { page = (Model.PageNumber + 1 > Model.PageCount ? Model.PageCount : Model.PageNumber + 1), currentFilter = ViewData["CurrentFilter"] })"
-                               class="@nextDisabled">&gt;</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "ReservationAdmin", new { page = (Model.PageCount), currentFilter = ViewData["CurrentFilter"] })"
-                               class="@nextDisabled">&gt;&gt;</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
-}
+</div>

@@ -18,8 +18,6 @@ namespace FoodZone.Models.Security
 
         public virtual ICollection<News> News { get; set; }
 
-        public virtual ICollection<UserMenu> UserMenus { get; set; }
-
         public virtual ICollection<UserVoucher> UserVouchers { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
