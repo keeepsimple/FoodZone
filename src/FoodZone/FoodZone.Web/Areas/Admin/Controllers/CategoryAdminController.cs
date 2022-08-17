@@ -30,6 +30,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Index()
         {
             var categories = await _categoryServices.GetAllAsync();
+
             return View(categories);
         }
 
@@ -50,6 +51,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string fileName = "";
+
                 if (uploadImage != null)
                 {
                     fileName = Path.GetFileName(uploadImage.FileName);
