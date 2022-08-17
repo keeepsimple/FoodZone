@@ -122,10 +122,13 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-custom mt-40">
-                                    <button type="submit" id="submit" name="submit" class="btn flosun-button secondary-btn theme-color rounded-0">
-                                        Đặt
-                                        bàn
-                                    </button>
+                                    @if (DateTime.Now.Hour <= 22)
+                                    {
+                                        <button type="submit" id="submit" name="submit" class="btn flosun-button secondary-btn theme-color rounded-0">
+                                            Đặt
+                                            bàn
+                                        </button>
+                                    }
                                 </div>
                             </div>
                             </div>

@@ -11,6 +11,8 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using FoodZone.Services.Services;
+using FoodZone.Models.Security;
+using System.Threading.Tasks;
 
 namespace FoodZone.Web.Controllers
 {
@@ -67,7 +69,7 @@ namespace FoodZone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(ReservationViewModel reservationViewModel)
+        public async Task<ActionResult> Index(ReservationViewModel reservationViewModel)
         {
             var menu = _menuServices.GetById(reservationViewModel.MenuId);
             var voucher = _voucherServices.GetById(reservationViewModel.CodeId);
@@ -129,7 +131,7 @@ namespace FoodZone.Web.Controllers
                         UserId = User.Identity.GetUserId()
                     };
                     TableHub.BroadcastData();
-                    _checkoutServices.Checkout(reservation, reservationDetails);
+                    await _checkoutServices.CheckoutAsync(reservation, reservationDetails);
                     return RedirectToAction("ReservationSuccess", "Reservation");
                 }
 
@@ -191,11 +193,11 @@ namespace FoodZone.Web.Controllers
             foreach (var item in details)
             {
                 var table = _tableServices.GetById(item.TableId);
-                if (reservation.Status == 2)
+                if (reservation.Status == 0)
                 {
-                    table.Status = 2;
+                    table.Status = 1;
                 }
-                else if (reservation.Status == 3 || reservation.Status == 4)
+                else if (reservation.Status == 2 || reservation.Status == -1)
                 {
                     table.Status = 0;
                 }
@@ -210,8 +212,18 @@ namespace FoodZone.Web.Controllers
             {
                 var reservation = _reservationServices.GetById(model.Id);
 
-                reservation.Status = 4;
+                reservation.Status = -1;
                 reservation.CancelReason = model.CancelReason;
+                if (!string.IsNullOrEmpty(reservation.Code))
+                {
+                    var voucher = _voucherServices.GetByCode(reservation.Code);
+                    var userVoucher = _userVoucherServices.GetAll().Where(x => x.VoucherId == voucher.Id && x.UserId == User.Identity.GetUserId()).FirstOrDefault();
+                    if(userVoucher != null)
+                    {
+                        _userVoucherServices.Delete(userVoucher);
+                    }
+                }
+
                 ChangeTableStatus(reservation);
                 var result = _reservationServices.Update(reservation);
                 if (result)

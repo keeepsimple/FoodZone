@@ -1,4 +1,5 @@
-﻿using FoodZone.Models.Common;
+﻿using FoodZone.Data;
+using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
 using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Admin.ViewModels;
@@ -26,10 +27,15 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var tables = await _tableServices.GetAllAsync();
-            return View(tables);
+            var tables = new List<Table>();
+            using (var ctx = new FoodZoneContext())
+            {
+                var command = ctx.Tables.SqlQuery("Select * from Tables Where IsDeleted = 0");
+                tables = command.ToList();
+            }
+            return View(tables.OrderByDescending(x => x.InsertedAt));
         }
 
         public ActionResult AutoCreateTable()

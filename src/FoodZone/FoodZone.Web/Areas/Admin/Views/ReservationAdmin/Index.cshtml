@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<Reservation>
 @{
     ViewBag.Title = "Quản lý Đặt Bàn";
+    int j = 1;
 }
 
 <div class="d-flex flex-row">
     <h1 class="h3 mb-2 text-gray-800">Danh sách đặt bàn</h1>
 </div>
-
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>STT</th>
                         <th>Tên khách hàng</th>
                         <th>Số điện thoại</th>
                         <th>Thời gian dùng bữa</th>
@@ -26,16 +27,18 @@
                     @foreach (var item in Model)
                     {
                         <tr>
+                            <td>@j</td>
                             <td>@item.Name</td>
                             <td>@item.PhoneNumber</td>
                             <td>@item.ReservationDate.ToString("dd-MM-yyyy HH:mm:ss")</td>
                             <td>@item.Capacity</td>
-                            <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Xác nhận" : item.Status == 2 ? "Khách đã đến" : item.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
+                            <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Khách đã đến" : item.Status == 2 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
                             <td>@item.InsertedAt.ToString("dd-MM-yyyy HH:mm:ss")</td>
                             <td>
                                 <a class="btn btn-primary btn-icon-split btn-sm" href="@Url.Action("Edit", "ReservationAdmin", new { id = item.Id })">
                                     <span class="text">Sửa</span>
                                 </a>
+                            <p style="display:none">@(j++)</p>
                             </td>
                         </tr>
                     }

@@ -14,7 +14,7 @@
                         <th>Ngày</th>
                         <th>Trạng thái</th>
                         <th>Số lượng bàn</th>
-                        <th></th>
+                        <th> Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,10 +23,10 @@
                         <tr>
                             <td>@j</td>
                             <td>@item.ReservationDate.ToString("dd/MM/yyyy")</td>
-                            <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Xác nhận" : item.Status == 2 ? "Khách đã đến" : item.Status == 3 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
+                            <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Khách đã đến" : item.Status == 2 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
                             <td>@item.Capacity</td>
-                            <td><a href="@Url.Action("Details", "Reservation", new {id = item.Id})" class="btn flosun-button secondary-btn theme-color  rounded-0">View</a></td>
-                            <td style="display: none">@(j++)</td>
+                            <td><a href="@Url.Action("Details", "Reservation", new {id = item.Id})" class="btn flosun-button secondary-btn theme-color  rounded-0">Xem</a></td>
+                            <p style="display: none">@(j++)</p>
                         </tr>
                     }
                 </tbody>

@@ -29,7 +29,9 @@
                                     <a class="btn btn-primary btn-icon-split btn-sm" href="@Url.Action("Edit", "RolesAdmin", new { id = item.Id })">
                                         <span class="text">Sửa</span>
                                     </a>
-                                    <button type="submit" onclick="return confirm('Bạn có muốn xóa @item.Name này?')" class="btn btn-primary btn-icon-split btn-sm"><span class="text">Xoá</span></button>
+                                    <button type="submit"  data-toggle="modal" data-target="#deleteTable" onclick="deleteRole(@item.Id)"
+                                            @*onclick="return confirm('Bạn có muốn xóa @item.Name này?')"*@
+                                            class="btn btn-primary btn-icon-split btn-sm"><span class="text">Xoá</span></button>
                                 </form>
                             </td>
                         </tr>
@@ -39,3 +41,6 @@
         </div>
     </div>
 </div>
+
+
+

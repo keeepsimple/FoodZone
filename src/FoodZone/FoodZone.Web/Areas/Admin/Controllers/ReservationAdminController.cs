@@ -1,10 +1,12 @@
-﻿using FoodZone.Models.Common;
+﻿using FoodZone.Data;
+using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
 using FoodZone.Services.Services;
 using FoodZone.Web.Areas.Admin.ViewModels;
 using FoodZone.Web.Helpers;
 using Microsoft.AspNet.Identity.Owin;
 using PagedList;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -43,10 +45,16 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var reservation = await _reservationServices.GetAllAsync();
-            return View(reservation);
+            //var reservation = _reservationServices.GetAll();
+            var reservations = new List<Reservation>();
+            using(var ctx = new FoodZoneContext())
+            {
+                var command = ctx.Reservations.SqlQuery("Select * from Reservations");
+                reservations = command.ToList();
+            }
+            return View(reservations.OrderByDescending(x=>x.InsertedAt));
         }
 
         public ActionResult Edit(int? id)
@@ -101,17 +109,13 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     reservation.Status = 2;
 
                 }
-                else if (reservation.Status == 2)
-                {
-                    reservation.Status = 3;
-                }
 
                 if (!string.IsNullOrEmpty(model.CancelReason))
                 {
-                    reservation.Status = 4;
+                    reservation.Status = -1;
                 }
 
-                if(reservation.Status == 3)
+                if(reservation.Status == 2)
                 {
                     var user = await UserManager.FindByIdAsync(reservation.UserId);
                     user.Level += reservation.Capacity;
@@ -144,11 +148,11 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             foreach (var item in details)
             {
                 var table = _tableServices.GetById(item.TableId);
-                if (reservation.Status == 2)
+                if (reservation.Status == 0)
                 {
-                    table.Status = 2;
+                    table.Status = 1;
                 }
-                else if (reservation.Status == 3 || reservation.Status == 4)
+                else if (reservation.Status == 2 || reservation.Status == -1)
                 {
                     table.Status = 0;
                 }

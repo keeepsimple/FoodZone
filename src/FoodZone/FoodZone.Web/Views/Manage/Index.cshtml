@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-custom">
                             <div class="myaccount-tab-menu nav" role="tablist">
-                                <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
+                                <a href="#orders" data-toggle="tab" class="active"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
                                 <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Thông tin tài khoản</a>
                                 <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
                                     @Html.AntiForgeryToken()

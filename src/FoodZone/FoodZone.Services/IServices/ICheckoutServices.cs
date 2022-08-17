@@ -9,6 +9,6 @@ namespace FoodZone.Services.IServices
 {
     public interface ICheckoutServices
     {
-        void Checkout(Reservation reservation, List<ReservationDetail> reservationDetails);
+        Task CheckoutAsync(Reservation reservation, List<ReservationDetail> reservationDetails);
     }
 }

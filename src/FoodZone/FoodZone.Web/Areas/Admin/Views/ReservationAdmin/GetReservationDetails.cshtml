@@ -1,21 +1,18 @@
 ﻿@model IEnumerable<ReservationDetail>
 <br />
 <br />
-<center>
-    <table class="table table-condensed">
+<table class="table table-condensed" style="text-align:center">
+    <tr class="d-flex center-title">
+        <th class="col-md-2">Bàn</th>
+        <th class="col-md-2">Combo</th>
+        <th class="col-md-2">Giá</th>
+    </tr>
+    @foreach (var item in Model)
+    {
         <tr class="d-flex center-title">
-            <th class="col-md-2">Bàn</th>
-            <th class="col-md-2">Combo</th>
-            <th class="col-md-2">Đồ Ăn</th>
-            <th class="col-md-2">Giá</th>
+            <td class="col-md-2">@Html.Action("GetTableNumber", "ReservationAdmin", new { tableId = item.TableId })</td>
+            <td class="col-md-2">@Html.Action("GetMenuName", "ReservationAdmin", new { menuId = item.MenuId })</td>
+            <td class="col-md-2">@(item.MenuPrice.ToString("N0"))</td>
         </tr>
-        @foreach (var item in Model)
-        {
-            <tr class="d-flex center-title">
-                <td class="col-md-2">@Html.Action("GetTableNumber", "ReservationAdmin", new { tableId = item.TableId })</td>
-                <td class="col-md-2">@Html.Action("GetMenuName", "ReservationAdmin", new { menuId = item.MenuId })</td>
-                <td class="col-md-2">@(item.MenuPrice.ToString("N0"))</td>
-            </tr>
-        }
-    </table>
-</center>
+    }
+</table>

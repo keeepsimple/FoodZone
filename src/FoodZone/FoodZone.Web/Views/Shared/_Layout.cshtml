@@ -8,6 +8,7 @@
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Custom styles for this page -->
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="~/Assets/images/favicon.ico">
 
@@ -31,6 +32,8 @@
     <link rel="stylesheet" href="~/Assets/css/plugins/magnific-popup.css">
 
     <link href="~/AdminAssets/css/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="~/Assets/css/style.css" runat="server">
@@ -186,6 +189,13 @@
 
     @Html.Partial("_Footer")
 
+    <!-- Page level plugins -->
+    <script src="~/AdminAssets/css/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/AdminAssets/css/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/AdminAssets/js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
     <!-- Modernizer JS -->
     <script src="~/Assets/js/vendor/modernizr-3.7.1.min.js"></script>
     <!-- jQuery J~/A -->
@@ -207,12 +217,7 @@
 
     <script src="~/Assets/js/main.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="~/AdminAssets/css/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/AdminAssets/css/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="~/AdminAssets/js/demo/datatables-demo.js"></script>
 
     @RenderSection("scripts", required: false)
 

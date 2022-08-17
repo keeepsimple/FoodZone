@@ -4,10 +4,10 @@
 }
 <div class="d-flex flex-row">
     <h1 class="h3 mb-2 text-gray-800">Danh sách bàn</h1>
-    <a class="btn btn-primary btn-icon-split btn-sm ml-auto h-100  btn-success" href="@Url.Action("Create", "TableAdmin")">
+    <a class="btn btn-primary btn-icon-split btn-sm ml-auto h-100 btn-success" href="@Url.Action("Create", "TableAdmin")">
         <span class="text">Tạo mới</span>
     </a>
-    <a class="btn btn-primary btn-icon-split btn-sm ml-auto h-100  btn-success" href="@Url.Action("AutoCreateTable", "TableAdmin")">
+    <a class="btn btn-primary btn-icon-split btn-sm ml-2 h-100 btn-success" href="@Url.Action("AutoCreateTable", "TableAdmin")">
         <span class="text">Tạo bàn tự động</span>
     </a>
 </div>
@@ -37,7 +37,9 @@
                                     <a class="btn btn-primary btn-icon-split btn-sm" href="@Url.Action("Edit", "TableAdmin", new { id = item.Id })">
                                         <span class="text">Sửa</span>
                                     </a>
-                                    <button type="submit" onclick="return confirm('Bạn có muốn xóa @item.NumberTable này?')" class="btn btn-primary btn-icon-split btn-sm"><span class="text">Xoá</span></button>
+                                    <button type="submit"
+                                            onclick="return confirm('Bạn có muốn xóa @item.NumberTable này?')" 
+                                            class="btn btn-primary btn-icon-split btn-sm"><span class="text">Xoá</span></button>
                                 </form>
                             </td>
                         </tr>

@@ -23,7 +23,7 @@ namespace FoodZone.Services.Services
             _reservationDetailsRepository = reservationDetailsRepository;
         }
 
-        public void Checkout(Reservation reservation, List<ReservationDetail> reservationDetails)
+        public async Task CheckoutAsync(Reservation reservation, List<ReservationDetail> reservationDetails)
         {
             _reservationRepository.Add(reservation);
 
@@ -33,7 +33,7 @@ namespace FoodZone.Services.Services
                 _reservationDetailsRepository.Add(item);
             }
 
-            _unitOfWork.SaveChanges();
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

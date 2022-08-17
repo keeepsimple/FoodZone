@@ -4,37 +4,39 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create.</h2>
+<h2>Tạo mới chức vụ</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Role.</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
+    @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
-            </div>
+    <div class="form-group mb-3">
+        <label class="control-label col-md-2">Tên chức vụ</label>
+        <div class="col-md-5">
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
     </div>
+    <div class="w-100 d-flex flex-row mt-3">
+
+        <div class="w-auto mr-1">
+
+            <input type="submit" value="Tạo" class="btn btn-success" />
+        </div>
+        <div class=" float-right w-auto btn btn btn-light ml-2">
+            <a style="text-decoration: none; color: black" href="@Url.Action("Index", "RolesAdmin")">Trở về</a>
+        </div>
+    </div>
+
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,8 +1,6 @@
 ﻿@model MenuViewModel
 @{
     ViewBag.Title = "Tạo Thực Đơn";
-
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 }
 
 <h2>Tạo Thực Đơn</h2>
@@ -11,22 +9,28 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal row">
-        <h4>Thực Đơn</h4>
-        <hr />
+    <div class="form-horizontal d-flex flex-column">
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên Menu" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            Tên menu
+            <div>
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên Menu" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
         </div>
 
         <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gia" } })
-            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            Giá
+            <div>
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gia" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+            
         </div>
 
         <div class="form-group col-md-6">
-            <label class="control-label" for="Menu">Categories</label>
+            <label class="control-label" for="Menu">Danh mục</label>
             <div class="">
                 @Html.ListBoxFor(model => model.SelectedCategoryIds, Model.Categories, new { @class = "select-multiple", style = "width:100%" })
             </div>

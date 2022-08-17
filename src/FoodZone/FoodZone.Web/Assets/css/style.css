@@ -6090,7 +6090,7 @@ mark {
 }
 
 .slide-bg-1 {
-    min-height: 890px;
+    min-height: 700px;
 }
 
 @media (max-width: 1800px) {
@@ -6176,12 +6176,12 @@ mark {
 }
 
 .slide-5 {
-    background-image: url("../images/slider/background.jpg");
+    background-image: url("../images/slider/bg-1.jpg");
     background-color: rgba(54, 36, 42, 0.9);
 }
 
-.slide-6 {
-    background-image: url("../images/slider/background.jpg");
+.slide-9 {
+    background-image: url("../images/slider/bg-5.jpg");
     background-color: rgba(54, 36, 42, 0.9);
 }
 
