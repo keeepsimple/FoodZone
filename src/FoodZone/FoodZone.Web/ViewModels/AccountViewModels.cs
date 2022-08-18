@@ -54,7 +54,7 @@ namespace FoodZone.Web.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
@@ -63,29 +63,33 @@ namespace FoodZone.Web.ViewModels
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [StringLength(255, ErrorMessage = "Tên phải từ {2} đến {1} ký tự", MinimumLength = 3)]
+        [Display(Name = "Username")]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [StringLength(255, ErrorMessage = "Tên phải từ {2} đến {1} ký tự", MinimumLength = 3)]
+        [Display(Name = "Tên đầy đủ")]
         public string Fullname { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [RegularExpression("^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$", ErrorMessage = "Email không hợp lệ")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [RegularExpression("^((\\+84|84|0)?((3[2-9]|5[25689]|7[0|6-9]|8[0-9]|9[0-4|6-9]|2[0-9])|(12[0-9]|16[2-9]|18[68]|199)))([0-9]{7})$", ErrorMessage = "Số điện thoại không hợp lệ")]
+        [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [StringLength(100, ErrorMessage = "Tên phải từ {2} đến {1} ký tự", MinimumLength = 6)]
+        [DataType(DataType.Password, ErrorMessage ="Mật khẩu không hợp lệ")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Password not match")]
+        [Compare("Password", ErrorMessage = "Mật khẩu và xác nhận mật khẩu không giống nhau.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -112,8 +116,8 @@ namespace FoodZone.Web.ViewModels
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [RegularExpression("^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$", ErrorMessage = "Email không hợp lệ")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

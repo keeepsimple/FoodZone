@@ -53,7 +53,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 var tables = await _tableServices.GetAllAsync();
                 if (tables.Count() > 0)
                 {
-                    numberTable = tables.OrderByDescending(x => x.NumberTable).FirstOrDefault().NumberTable;
+                    numberTable = tables.OrderByDescending(x => x.NumberTable).FirstOrDefault().NumberTable + 1;
                 }
 
                 var capacities = model.Capacities.Split(',');

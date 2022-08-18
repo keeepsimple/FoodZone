@@ -25,13 +25,13 @@
                                 <div class="col-md-12 col-custom">
                                     <div class="input-item mb-4">
                                         <div class="title-booking">Tên khách hàng</div>
-                                        @Html.TextBoxFor(m => m.CusName, new { @class = "form-control", @placeholder = "Tên" })
+                                        @Html.TextBoxFor(m => m.CusName, new { @class = "form-control", @readonly = "readonly", @placeholder = "Tên" })
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-custom">
                                     <div class="input-item mb-4">
                                         <div class="title-booking">Số điện thoại</div>
-                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Số điện thoại" })
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control",@readonly = "readonly", @placeholder = "Số điện thoại" })
                                     </div>
                                 </div>
                                 <div class="col-12 col-custom">
@@ -51,6 +51,7 @@
                                     <div class="input-item mb-4 display-flex-col">
 
                                         <div class="title-booking">Chọn thời gian đến</div>
+                                        @*@if(now.Hour >)*@
                                         <div class="display-flex-row">
                                             <div class="title-time">Giờ</div>
                                             <select class="form-select select-time" aria-label="Default select example" name="Hours" aria-placeholder="Chọn giờ">
