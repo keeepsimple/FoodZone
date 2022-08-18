@@ -14,48 +14,6 @@ namespace FoodZone.Web.Controllers
 {
     public class TableController : Controller
     {
-        private readonly ITableServices _tableServices;
-
-        public TableController(ITableServices tableServices)
-        {
-            _tableServices = tableServices;
-        }
-
-        public ActionResult GetAll()
-        {
-            var tables = _tableServices.GetAll();
-            //TableHub.BroadcastData();
-            return PartialView("_ListTable", tables);
-        }
-
-        public ActionResult GetTablesByCapacity(int floor)
-        {
-            var listTable = new List<TableViewModel>();
-            var capacities = GetCapacity(floor);
-            var tables = _tableServices.GetAll().Where(x => x.Floor == floor && x.Status == 0).ToList();
-            foreach (var item in capacities)
-            {
-                var model = new TableViewModel
-                {
-                    Floor = floor,
-                    Capacity = item,
-                    Count = CountTableByCapacity(tables, floor, item),
-                    Quantity = 0,
-                };
-                listTable.Add(model);
-            }
-            return PartialView("_TableArea", listTable);
-        }
-
-        public List<int> GetCapacity(int floor)
-        {
-            var tables = _tableServices.GetAll().Where(x => x.Floor == floor);
-            return tables.Select(x => x.Capacity).Distinct().ToList();
-        }
-
-        public int CountTableByCapacity(IEnumerable<Table> tables, int floor, int capacity)
-        {
-            return tables.Where(x => x.Floor == floor && x.Capacity == capacity && x.Status == 0).Count();
-        }
+        
     }
 }
