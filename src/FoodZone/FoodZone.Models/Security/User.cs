@@ -12,8 +12,6 @@ namespace FoodZone.Models.Security
     {
         public string FullName { get; set; }
 
-        public string Token { get; set; }
-
         public int Level { get; set; }
 
         public virtual ICollection<News> News { get; set; }

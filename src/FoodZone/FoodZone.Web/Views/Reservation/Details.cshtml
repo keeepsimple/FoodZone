@@ -39,16 +39,16 @@
                 <!-- Cart Update Option -->
                 <div class="cart-update-option d-block d-md-flex justify-content-between">
                     <div class="apply-coupon-wrapper">
-                        @if (Model.Status == 4)
+                        @if (Model.Status == -1)
                         {
                             <form action="#" method="post" class=" d-block d-md-flex">
-                                <input type="text" placeholder="Lý do huỷ" disabled value="@Model.CancelReason" />
+                                <input type="text" placeholder="Lý do huỷ" readonly value="@Model.CancelReason" />
                             </form>
                         }
                         else if(Model.Status < 2)
                         {
                             <form action="@Url.Action("Details", "Reservation", new {area=""})" method="post" class=" d-block d-md-flex">
-                                <input type="text" name="CancelReason" placeholder="Lý do huỷ" value="@Model.CancelReason" />
+                                <input type="text" name="CancelReason" placeholder="Lý do huỷ" required value="@Model.CancelReason" />
                                 <button class="btn flosun-button primary-btn rounded-0 black-btn">Huỷ đặt bàn</button>
                             </form>
                         }
