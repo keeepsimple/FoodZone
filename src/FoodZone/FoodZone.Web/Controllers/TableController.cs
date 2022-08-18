@@ -14,6 +14,6 @@ namespace FoodZone.Web.Controllers
 {
     public class TableController : Controller
     {
-      
+       
     }
 }
