@@ -74,6 +74,7 @@ namespace FoodZone.Web.Controllers
             var menu = _menuServices.GetById(reservationViewModel.MenuId);
             var voucher = _voucherServices.GetById(reservationViewModel.CodeId);
             string code = "";
+
             if(voucher != null)
             {
                 code = voucher.Code;
@@ -134,7 +135,7 @@ namespace FoodZone.Web.Controllers
                     await _checkoutServices.CheckoutAsync(reservation, reservationDetails);
                     return RedirectToAction("ReservationSuccess", "Reservation");
                 }
-
+                ViewBag.CodeId = new SelectList(GetAllAvailableVoucherForUser(), "Id", "Code");
             }
             ViewBag.MenuId = new SelectList(_menuServices.GetAll().Where(x => x.Name != "Thực Đơn Đặc Biệt"), "Id", "Name");
             ViewBag.CodeId = new SelectList(GetAllAvailableVoucherForUser(), "Id", "Code");

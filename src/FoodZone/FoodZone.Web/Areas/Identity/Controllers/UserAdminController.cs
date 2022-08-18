@@ -42,29 +42,10 @@ namespace FoodZone.Web.Areas.Identity.Controllers
         //
         // GET: /Users/
         [HttpGet]
-        public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
+        public async Task<ActionResult> Index()
         {
-            if(searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
             var users = await UserManager.Users.ToListAsync();
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                users = users.Where(s => s.UserName.Contains(searchString) 
-                                              || s.Email.Contains(searchString)).ToList();
-            }
-
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(users.ToPagedList(pageNumber, pageSize));
+            return View(users);
         }
 
         //

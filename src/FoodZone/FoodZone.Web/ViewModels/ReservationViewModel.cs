@@ -25,6 +25,7 @@ namespace FoodZone.Web.ViewModels
         public int Minute { get; set; }
 
         [Required(ErrorMessage = "{0} không được bỏ trống")]
+        [Range(1, int.MaxValue, ErrorMessage = "Vui lòng nhập giá trị lớn hơn {1}")]
         [Display(Name = "Số lượng bàn")]
         public int Capacity { get; set; }
 

@@ -20,7 +20,7 @@
         <div class="form-group col-md-6">
             <label class="control-label" for="Menu">Đồ Ăn</label>
             <div class="">
-                @Html.ListBoxFor(model => model.SelectedFoodIds, Model.Foods, new { @class = "select-multiple", style = "width:100%" })
+                @Html.ListBoxFor(model => model.SelectedFoodIds, Model.Foods, new { @class = "select-multiple",@required= "required", style = "width:100%" })
             </div>
         </div>
 

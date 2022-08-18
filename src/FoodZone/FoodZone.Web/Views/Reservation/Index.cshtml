@@ -123,8 +123,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-custom mt-40">
-                                    @if (DateTime.Now.Hour <= 22)
-                                    {
+                                    @*@if (DateTime.Now.Hour <= 22)
+                                    {*@
                                         <button type="submit" id="submit" name="submit" class="btn flosun-button secondary-btn theme-color rounded-0">
                                             Đặt
                                             bàn
@@ -168,17 +168,19 @@
         console.log(capa)
         function handleChangeCount() {
             const check = capa.value;
-            if (check != "" ) {
+            if (check != "") {
                 for (var i = 0; i < arr.length; i++) {
-                    if (parseInt(check) > parseInt(arr[i].textContent)) {
-                        console.log(arr[i].offsetParent.childNodes)
+                    
+                    if (parseInt(check) < 1) {
+                        arr[i].offsetParent.childNodes[1].setAttribute('disabled', '');
+                    } else if (parseInt(check) > parseInt(arr[i].textContent)) {
                         arr[i].offsetParent.childNodes[1].setAttribute('disabled', '');
                     }
                 }
             }
             else {
                 for (var i = 0; i < arr.length; i++) {
-                    if  (parseInt(arr[i].textContent)> 0) {
+                    if (parseInt(arr[i].textContent) > 0) {
                         arr[i].offsetParent.childNodes[1].removeAttribute('disabled', '');
                     }
                 }

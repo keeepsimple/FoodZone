@@ -58,9 +58,17 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
                     uploadImage.SaveAs(folderPath);
                 }
-
+                var status = 0;
                 model.Image = fileName;
-
+                var checkExpired = CompareDate(DateTime.Now, model.ExpiredDate);
+                if (checkExpired <= 0)
+                {
+                    status = 1;
+                }
+                else
+                {
+                    status = 0;
+                }
                 var voucher = new Voucher
                 {
                     Title = model.Title,
@@ -70,7 +78,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     ShortDescription = model.ShortDescription,
                     ExpiredDate = model.ExpiredDate,
                     Level = model.Level,
-                    Status = 1
+                    Status = status
                 };
 
                 var result = await _voucherServices.AddAsync(voucher);

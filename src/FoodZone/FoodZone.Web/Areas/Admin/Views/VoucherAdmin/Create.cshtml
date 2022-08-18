@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "Tạo Ưu Đãi";
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 }
 
 <h2>Tạo Ưu Đãi</h2>
-<h4>@TempData["Message"]</h4>
 
 @using (Html.BeginForm("Create", "VoucherAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
