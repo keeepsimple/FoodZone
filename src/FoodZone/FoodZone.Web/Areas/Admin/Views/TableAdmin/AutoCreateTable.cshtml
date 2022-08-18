@@ -11,7 +11,7 @@
     <div class="input-group">
         <div class="modal-body w-100 d-flex flex-column">Số lượng bàn: <input type="number" name="NumberOfTable" class="form-control bg-light border-0 small mt-1" aria-describedby="basic-addon2" placeholder="Số lượng bàn"></div>
         <div class="modal-body w-100 d-flex  flex-column">Tầng: <input type="number" name="Floor" class="form-control bg-light border-0 small  mt-1" aria-describedby="basic-addon2" placeholder="Tầng"></div>
-        <div class="modal-body w-100 d-flex  flex-column">Số lượng người : <input type="text" name="Capacities" class="form-control bg-light border-0 small  mt-1" aria-describedby="basic-addon2" placeholder="Số lượng người"></div>
+        <div class="modal-body w-100 d-flex  flex-column">Số lượng người : <input type="text" id="inputNumber" onkeypress="onChangeNumber(event)" name="Capacities" class="form-control bg-light border-0 small  mt-1" aria-describedby="basic-addon2" placeholder="Số lượng người"></div>
     </div>
 
 
@@ -21,3 +21,17 @@
         <a href="@Url.Action("Index", "TableAdmin")" class="btn btn-close-white">Hủy</a>
     </div>
 }
+
+@section scripts{
+    
+    <script>
+        function onChangeNumber(event) {
+            let result = event.target.value.replace(/[^0-9,]/g, "");
+            document.getElementById("inputNumber").value = result
+        }
+
+
+
+    </script>
+    
+    }

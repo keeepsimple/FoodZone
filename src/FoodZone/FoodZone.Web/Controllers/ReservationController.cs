@@ -117,15 +117,17 @@ namespace FoodZone.Web.Controllers
                         reservationDetails.Add(reservationDetail);
                         UpdateTableStatus(item.Id, 1);
                     }
-
+                    string[] time = reservationViewModel.Time.Split(':');
+                    var hour = int.Parse(time[0]);
+                    var min = int.Parse(time[1]);
                     var reservation = new Reservation
                     {
                         Capacity = reservationViewModel.Capacity,
                         Name = reservationViewModel.CusName,
                         PhoneNumber = reservationViewModel.PhoneNumber,
                         ReservationDate = DateTime.Parse(reservationViewModel.ReservationDate)
-                                                  .AddHours(reservationViewModel.Hours)
-                                                  .AddMinutes(reservationViewModel.Minute),
+                                                  .AddHours(hour)
+                                                  .AddMinutes(min),
                         Note = reservationViewModel.Note,
                         Code = code,
                         Status = 0,

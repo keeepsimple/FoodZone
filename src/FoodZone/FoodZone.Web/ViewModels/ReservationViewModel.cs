@@ -19,10 +19,7 @@ namespace FoodZone.Web.ViewModels
         public string ReservationDate { get; set; } = DateTime.Now.ToShortDateString();
 
         [Required(ErrorMessage = "Giờ đặt hàng không được bỏ trống")]
-        public int Hours { get; set; }
-
-        [Required(ErrorMessage = "Giờ đặt hàng không được bỏ trống")]
-        public int Minute { get; set; }
+        public string Time { get; set; }
 
         [Required(ErrorMessage = "{0} không được bỏ trống")]
         [Range(1, int.MaxValue, ErrorMessage = "Vui lòng nhập giá trị lớn hơn {1}")]

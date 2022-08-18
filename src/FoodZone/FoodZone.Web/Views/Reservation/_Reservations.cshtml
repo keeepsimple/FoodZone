@@ -7,30 +7,36 @@
     <div class="myaccount-content">
         <h3>Đơn đặt bàn</h3>
         <div class="myaccount-table table-responsive text-center">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Ngày</th>
-                        <th>Trạng thái</th>
-                        <th>Số lượng bàn</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <div class="display-flex-col" width="100%" cellspacing="0">
+                <div>
+                    <div class="row mb-3 w-100">
+                        <div class="col">STT</div>
+                        <div class="col">Ngày</div>
+                        <div class="col">Trạng thái</div>
+                        <div class="col">Số lượng bàn</div>
+                        <div class="col">Thao tác</div>
+                    </div>
+                </div>
+                <div class=" overflow-auto" style="max-height:400px ">
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@j</td>
-                            <td>@item.ReservationDate.ToString("dd/MM/yyyy")</td>
-                            <td>@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Khách đã đến" : item.Status == 2 ? "Hoàn thành" : "Huỷ đặt bàn" )</td>
-                            <td>@item.Capacity</td>
-                            <td><a href="@Url.Action("Details", "Reservation", new {id = item.Id})" class="btn flosun-button secondary-btn theme-color  rounded-0">Xem</a></td>
-                            <p style="display: none">@(j++)</p>
-                        </tr>
+                        <div class="row mb-3 w-100">
+                            <div class="col">@j</div>
+                            <div class="col">@item.ReservationDate.ToString("dd/MM/yyyy")</div>
+                            <div class="col">@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Khách đã đến" : item.Status == 2 ? "Hoàn thành" : "Huỷ đặt bàn" )</div>
+                            <div class="col ">@item.Capacity</div>
+                            <div class="col "><a href="@Url.Action("Details", "Reservation", new {id = item.Id})" class="btn flosun-button secondary-btn theme-color  rounded-0">Xem</a></div>
+
+
+                        </div>
+                        <p style="display: none">@(j++)</p>
                     }
-                </tbody>
-            </table>
+
+                </div>
+
+
+
+            </div>
         </div>
     </div>
 </div>

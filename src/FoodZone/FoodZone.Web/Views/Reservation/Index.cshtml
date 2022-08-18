@@ -2,7 +2,8 @@
 @{
     ViewBag.Title = "Đặt Bàn";
     var now = DateTime.Now;
-    int nextHour = now.Hour + 1;
+    var nextDate = DateTime.Now.AddDays(1);
+
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 }
@@ -14,124 +15,155 @@
             {
                 using (Html.BeginForm("Index", "Reservation", FormMethod.Post, new { @class = "row", role = "form" }))
                 {
-                    <div class="col">
+                    <div class="col w-50">
                         <div class="booking-box">
 
                             @Html.AntiForgeryToken()
                             <div class="comment-box">
                                 <h5 class="text-uppercase">Đặt bàn</h5>
                                 @Html.ValidationSummary("", new { @class = "text-danger" })
-                            <div class="col mt-3">
-                                <div class="col-md-12 col-custom">
-                                    <div class="input-item mb-4">
-                                        <div class="title-booking">Tên khách hàng</div>
-                                        @Html.TextBoxFor(m => m.CusName, new { @class = "form-control", @readonly = "readonly", @placeholder = "Tên" })
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-custom">
-                                    <div class="input-item mb-4">
-                                        <div class="title-booking">Số điện thoại</div>
-                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control",@readonly = "readonly", @placeholder = "Số điện thoại" })
-                                    </div>
-                                </div>
-                                <div class="col-12 col-custom">
-                                    <div class="input-item mb-4">
-                                        <div class="title-booking">Chọn Combo</div>
-                                        @Html.DropDownList("MenuId", null, htmlAttributes: new { @class = "form-select select-single" })
-                                        @Html.ValidationMessageFor(model => model.MenuId, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-custom">
-                                    <div class="input-item mb-4">
-                                        <div class="title-booking">Thời gian dùng bữa</div>
-                                        @Html.EditorFor(m => m.ReservationDate, new { htmlAttributes = new { @class = "border-0 rounded-0 w-100 input-area email gray-bg", @disabled = "disabled" } })
-                                    </div>
-                                </div>
-                                <div class="col-12 col-custom">
-                                    <div class="input-item mb-4 display-flex-col">
-
-                                        <div class="title-booking">Chọn thời gian đến</div>
-                                        @*@if(now.Hour >)*@
-                                        <div class="display-flex-row">
-                                            <div class="title-time">Giờ</div>
-                                            <select class="form-select select-time" aria-label="Default select example" name="Hours" aria-placeholder="Chọn giờ">
-                                                @if (now.Hour <= 14)
-                                                {
-                                                    if (now.Hour < 11)
-                                                    {
-                                                        for (int i = 11; i <= 14; i++)
-                                                        {
-                                                            <option value="@i">@i h</option>
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        for (int i = now.Hour; i <= 14; i++)
-                                                        {
-                                                            <option value="@i">@i h</option>
-                                                        }
-                                                    }
-
-                                                }
-                                                else if (now.Hour > 14)
-                                                {
-                                                    if (now.Hour < 18)
-                                                    {
-                                                        for (int i = 18; i <= 21; i++)
-                                                        {
-                                                            if (now.Hour <= i)
-                                                            {
-                                                                <option value="@i">@i</option>
-                                                            }
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        for (int i = now.Hour; i <= 21; i++)
-                                                        {
-                                                            if (now.Hour <= i)
-                                                            {
-                                                                <option value="@i">@i</option>
-                                                            }
-                                                        }
-                                                    }
-
-                                                }
-                                            </select>
-                                            <div class="title-time">Phút</div>
-                                            <select class="form-select select-time" aria-label="Default select example" name="Minute" aria-placeholder="Chọn giờ">
-                                                <option value="00">00</option>
-                                                <option value="15">15</option>
-                                                <option value="30">30</option>
-                                                <option value="45">45</option>
-                                            </select>
+                                <div class="col mt-3">
+                                    <div class="col-md-12 col-custom">
+                                        <div class="input-item mb-4">
+                                            <div class="title-booking">Tên khách hàng</div>
+                                            @Html.TextBoxFor(m => m.CusName, new { @class = "form-control", @readonly = "readonly", @placeholder = "Tên" })
                                         </div>
+                                    </div>
+                                    <div class="col-md-12 col-custom">
+                                        <div class="input-item mb-4">
+                                            <div class="title-booking">Số điện thoại</div>
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @readonly = "readonly", @placeholder = "Số điện thoại" })
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-custom">
+                                        <div class="input-item mb-4">
+                                            <div class="title-booking">Chọn Combo</div>
+                                            @Html.DropDownList("MenuId", null, htmlAttributes: new { @class = "form-select select-single w-50" })
+                                            @Html.ValidationMessageFor(model => model.MenuId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-custom">
+                                        <div class="input-item mb-4">
+                                            <div class="title-booking">Thời gian dùng bữa</div>
+                                            @if (now.Hour > 21)
+                                            {
+                                                <input class="border-0 rounded-0 w-100 input-area email gray-bg text-box single-line" data-val="true" data-val-required="Ngày đặt bàn không được bỏ trống" disabled="disabled" id="ReservationDate" name="ReservationDate" type="text" value="@nextDate.ToShortDateString()">
+                                            }
+                                            else
+                                            {
+                                                @Html.EditorFor(m => m.ReservationDate, new { htmlAttributes = new { @class = "border-0 rounded-0 w-100 input-area email gray-bg", @disabled = "disabled" } })
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-custom">
+                                        <div class="input-item mb-4 display-flex-col">
 
+                                            <div class="title-booking">Chọn thời gian đến</div>
+                                            <div id="menu" style="position: relative; width:100%">
+                                                <ul class="nav nav-tabs nav-menu-custom nav-tabs-floor-booking " style="margin-left:6% ; max-height: 60px; width: 88%; flex-wrap: unset ; overflow-x: hidden">
+
+                                                    @if (now.Hour <= 14)
+                                                    {
+                                                        for (int i = 11; i < 14; i++)
+                                                        {
+                                                            if (i >= now.Hour || now.Hour >=21)
+                                                            {
+                                                                if (i == now.Hour)
+                                                                {
+
+                                                                    for (int j = 0; j < 60; j += 15)
+                                                                    {
+                                                                        if (j > now.Minute)
+                                                                        {
+                                                                            <li class="nav-item mr-2 p-1">
+                                                                                <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
+                                                                                <label class="form-check-label label-time " for="@i@j">@i:@j </label>
+                                                                            </li>
+                                                                        }
+
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    for (int j = 0; j < 60; j += 15)
+                                                                    {
+                                                                        <li class="nav-item mr-2 p-1">
+                                                                            <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
+                                                                            <label class="form-check-label label-time" for="@i@j">@i:@j </label>
+                                                                        </li>
+                                                                    }
+                                                                }
+
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        for (int i = 18; i < 21; i++)
+                                                        {
+                                                            if (i >= now.Hour)
+                                                            {
+                                                                if (i == now.Hour)
+                                                                {
+
+                                                                    for (int j = 0; j < 60; j += 15)
+                                                                    {
+                                                                        if (j > now.Minute)
+                                                                        {
+                                                                            <li class="nav-item mr-2 p-1">
+                                                                                <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
+                                                                                <label class="form-check-label label-time" for="@i@j">@i:@j </label>
+                                                                            </li>
+                                                                        }
+
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    for (int j = 0; j < 60; j += 15)
+                                                                    {
+                                                                        <li class="nav-item mr-2 p-1">
+                                                                            <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
+                                                                            <label class="form-check-label label-time" for="@i@j">@i:@j </label>
+                                                                        </li>
+                                                                    }
+                                                                }
+
+                                                            }
+                                                        }
+                                                    }
+                                                </ul>
+                                                <div id="nav">
+                                                    <div id="prev"><</div>
+                                                    <div id="next">></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-custom">
-                                    <div class="input-item mb-4">
-                                        <div class="title-booking">Mã ưu đãi của bạn</div>
-                                        @Html.DropDownList("CodeId", null, htmlAttributes: new { @class = "form-select select-single" })
-                                        @Html.ValidationMessageFor(model => model.CodeId, "", new { @class = "text-danger" })
+                                    <div class="col-12 col-custom">
+                                        <div class="input-item mb-4">
+                                            <div class="title-booking">Mã ưu đãi của bạn</div>
+                                            @Html.DropDownList("CodeId", null, htmlAttributes: new { @class = "form-select select-single w-50" })
+                                            @Html.ValidationMessageFor(model => model.CodeId, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 col-custom">
-                                    <div class="input-item mb-4">
-                                        <div class="title-booking">Ghi chú thêm cho nhà hàng: </div>
-                                        @Html.TextAreaFor(m => m.Note, new { @class = "border-0 rounded-0 w-100 input-area name gray-bg" })
+                                    <div class="col-md-12 col-custom">
+                                        <div class="input-item mb-4">
+                                            <div class="title-booking">Ghi chú thêm cho nhà hàng: </div>
+                                            @Html.TextAreaFor(m => m.Note, new { @class = "border-0 rounded-0 w-100 input-area name gray-bg" })
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-custom mt-40">
-                                    @*@if (DateTime.Now.Hour <= 22)
-                                    {*@
+                                    <div class="col-12 col-custom mt-40">
+                                        @*@if (DateTime.Now.Hour <= 22)
+                                            {*@
                                         <button type="submit" id="submit" name="submit" class="btn flosun-button secondary-btn theme-color rounded-0">
                                             Đặt
                                             bàn
                                         </button>
-                                    }
+                                        }
+                                    </div>
                                 </div>
-                            </div>
                             </div>
 
                         </div>
@@ -154,7 +186,30 @@
     </div>
 </div>
 
+
+
 @section scripts{
+    <style>
+        #prev {
+            position: absolute;
+            left: 0;
+            background-color: #ceaaaa;
+            padding: 5px;
+            cursor: pointer;
+            top: 5px;
+            border-radius: 1rem;
+        }
+
+        #next {
+            position: absolute;
+            right: 0;
+            background-color: #ceaaaa;
+            padding: 5px;
+            cursor: pointer;
+            top: 5px;
+            border-radius: 1rem;
+        }
+    </style>
     <script src="~/Assets/js/customize.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -170,7 +225,7 @@
             const check = capa.value;
             if (check != "") {
                 for (var i = 0; i < arr.length; i++) {
-                    
+
                     if (parseInt(check) < 1) {
                         arr[i].offsetParent.childNodes[1].setAttribute('disabled', '');
                     } else if (parseInt(check) > parseInt(arr[i].textContent)) {
@@ -184,7 +239,7 @@
                         arr[i].offsetParent.childNodes[1].removeAttribute('disabled', '');
                     }
                 }
-                
+
             }
         }
         $(function () {
@@ -202,10 +257,22 @@
                 contentType: 'application/html ; charset:utf-8',
                 type: 'GET',
                 dataType: 'html',
-                success: function(result) {
+                success: function (result) {
                     document.getElementById("col-signal").innerHTML = result;
                 }
             })
         }
+
+        $('#prev').on('click', function () {
+            $('#menu ul').animate({
+                scrollLeft: '-=100'
+            }, 300, 'swing');
+        });
+
+        $('#next').on('click', function () {
+            $('#menu ul').animate({
+                scrollLeft: '+=100'
+            }, 300, 'swing');
+        });
     </script>
 }
