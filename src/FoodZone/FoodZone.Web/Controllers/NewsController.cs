@@ -41,6 +41,7 @@ namespace FoodZone.Web.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+
             return View(news.ToPagedList(pageNumber, pageSize));
         }
 
@@ -51,7 +52,9 @@ namespace FoodZone.Web.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.News = news.Title;
+
             return View(news);
         }
     }
