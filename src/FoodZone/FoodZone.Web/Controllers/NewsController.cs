@@ -34,6 +34,7 @@ namespace FoodZone.Web.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var news = await _newsServices.GetAllAsync();
+
             if (!string.IsNullOrEmpty(searchString))
             {
                 news = news.Where(s => s.Title.Contains(searchString)).ToList();
@@ -48,6 +49,7 @@ namespace FoodZone.Web.Controllers
         public ActionResult Details(int newsId)
         {
             var news = _newsServices.GetById(newsId);
+
             if (news == null)
             {
                 return HttpNotFound();
