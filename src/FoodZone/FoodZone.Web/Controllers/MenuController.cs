@@ -32,6 +32,8 @@ namespace FoodZone.Web.Controllers
         {
             var foods = _foodServices.GetFoodsByCategory(cateId);
             return PartialView("_FoodByCate", foods);
+
+
         }
     }
 }
