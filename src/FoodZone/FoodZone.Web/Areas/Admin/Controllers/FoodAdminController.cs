@@ -58,6 +58,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     TempData["Message"] = "Tạo thất bại. Thử lại sau nhé!";
                 }
             }
+
             return View(model);
         }
 
@@ -118,6 +119,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             {
                 TempData["Message"] = "Xóa thất bại!";
             }
+
             return RedirectToAction("Index");
         }
     }
