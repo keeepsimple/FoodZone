@@ -37,6 +37,7 @@ namespace FoodZone.Web.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+
             return View();
         }
 
@@ -63,6 +64,7 @@ namespace FoodZone.Web.Controllers
             // This doesn't count login failures towards lockout only two factor authentication
             // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
@@ -94,6 +96,7 @@ namespace FoodZone.Web.Controllers
             {
                 var user = new User { UserName = model.Username, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.Fullname };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "User");
@@ -126,6 +129,7 @@ namespace FoodZone.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByEmailAsync(model.Email);
+
                 if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -138,6 +142,7 @@ namespace FoodZone.Web.Controllers
                 await UserManager.SendEmailAsync(user.Id, "Cài lại mật khẩu", 
                     "Làm ơn cài lại mật khẩu tại link này: <a href=\"" + callbackUrl + "\">Cài lại mật khẩu</a>");
                 ViewBag.Link = callbackUrl;
+
                 return View("ForgotPasswordConfirmation");
             }
 
@@ -175,17 +180,21 @@ namespace FoodZone.Web.Controllers
                 return View(model);
             }
             var user = await UserManager.FindByEmailAsync(model.Email);
+
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+
             if (result.Succeeded)
             {
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
+
             AddErrors(result);
+
             return View();
         }
 
