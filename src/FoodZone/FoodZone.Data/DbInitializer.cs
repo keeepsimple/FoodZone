@@ -396,7 +396,7 @@ namespace FoodZone.Data
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
-            var food44 = new Food
+            var food50 = new Food
             {
                 Id = 50,
                 Name = "Khoai môn",
@@ -606,13 +606,6 @@ namespace FoodZone.Data
                 Price = 0,
                 InsertedAt = DateTime.Now
             };
-            var food79 = new Food
-            {
-                Id = 79,
-                Name = "Lẩu thái tứ xuyên",
-                Price = 0,
-                InsertedAt = DateTime.Now
-            };
             var food80 = new Food
             {
                 Id = 80,
@@ -690,7 +683,7 @@ namespace FoodZone.Data
                     Id = 1,
                     Name = "Thực đơn đặc biệt",
                     Image = "dac_biet.JPG",
-                    Foods = new List<Food>{food1, food2, food3, food4, food5,food61,food62,food63,food64,food65,food66,food67,food68,food69,food70},
+                    Foods = new List<Food>{food1, food2, food3, food4, food5,food61,food62,food63,food64,food65,food66,food67,food68,food69,food70,food18},
                     InsertedAt = DateTime.Now
                 },
                 new Category
@@ -734,8 +727,8 @@ namespace FoodZone.Data
                 ,new Category
                 {
                     Id=7,
-                    Name="vien.JPG",
-                    Image = "273806003_815314159870639_4286230620733864158_n.jpg",
+                    Name="Viên thả lẩu",
+                    Image = "vien.JPG",
                     Foods = new List<Food>{food17,food40,food41,food42,food43,food44,food45,food46,food47,food48,food49,food50,food51,food52,food53,food54,food55,food56,food57},
                     InsertedAt = DateTime.Now
                 },
@@ -746,7 +739,7 @@ namespace FoodZone.Data
                     Image = "do_uong.JPG",
                     Foods = new List<Food>{food6, food7, food8,food9,food86,food87,food88,food89},
                     InsertedAt = DateTime.Now
-                }
+                },
                 new Category
                 {
                     Id=9,
@@ -754,10 +747,10 @@ namespace FoodZone.Data
                     Image = "salad.jpg",
                     Foods = new List<Food>{food35,food36,food37,food38,food39,food58,food59,food60},
                     InsertedAt = DateTime.Now
-                }
+                },
                 new Category
                 {
-                    Id=8,
+                    Id=10,
                     Name="Đồ ăn kèm",
                     Image = "an_them.JPG",
                     Foods = new List<Food>{food71,food72,food73,food74,food75,food76},
@@ -854,7 +847,40 @@ namespace FoodZone.Data
                     CategoryId=8,
                     MenuId=4,
                     InsertedAt = DateTime.Now
+                },new MenuCategory
+                {
+                    CategoryId=9,
+                    MenuId= 1,
+                    InsertedAt = DateTime.Now
                 },
+                new MenuCategory
+                {
+                    CategoryId=10,
+                    MenuId= 1,
+                    InsertedAt = DateTime.Now
+                },new MenuCategory
+                {
+                    CategoryId=9,
+                    MenuId= 2,
+                    InsertedAt = DateTime.Now
+                },
+                new MenuCategory
+                {
+                    CategoryId=10,
+                    MenuId= 2,
+                    InsertedAt = DateTime.Now
+                },new MenuCategory
+                {
+                    CategoryId=9,
+                    MenuId= 3,
+                    InsertedAt = DateTime.Now
+                },
+                new MenuCategory
+                {
+                    CategoryId=10,
+                    MenuId= 3,
+                    InsertedAt = DateTime.Now
+                }
             };
 
             context.MenuCategories.AddRange(menuCategories);

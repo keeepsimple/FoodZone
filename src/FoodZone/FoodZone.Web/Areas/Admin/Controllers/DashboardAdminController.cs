@@ -1,6 +1,9 @@
-﻿using FoodZone.Services.IServices;
+﻿using FoodZone.Data;
+using FoodZone.Models.Common;
+using FoodZone.Services.IServices;
 using FoodZone.Web.Areas.Admin.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -18,9 +21,14 @@ namespace FoodZone.Web.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var annual = _reservationServices.GetAll();
+            var annual = new List<Reservation>();
+            using(var ctx = new FoodZoneContext())
+            {
+                var command = ctx.Reservations.SqlQuery("Select * from Reservations where IsDeleted = 0");
+                annual = command.ToList();
+            }
             var monthly = _reservationServices.GetAllReservationMonthly();
-            var newReservation = _reservationServices.GetAllReservationToday().Where(x => x.Status == 0);
+            var newReservation = annual.Where(x => x.ReservationDate.Date == DateTime.Now.Date && x.Status == 0);
             var cancelReservation = annual.Where(x => x.Status == -1);
             var successReservation = annual.Where(x => x.Status == 2);
 

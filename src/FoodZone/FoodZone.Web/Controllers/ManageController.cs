@@ -68,6 +68,7 @@ namespace FoodZone.Web.Controllers
                     TempData["Message"] = "Cập nhật thất bại";
                 }
             }
+            ViewBag.UpdateStatus = "Cập nhật thất bại";
             return View(model);
         }
 

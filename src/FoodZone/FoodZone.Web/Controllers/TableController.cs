@@ -23,8 +23,12 @@ namespace FoodZone.Web.Controllers
 
         public ActionResult GetAll()
         {
-            var tables = _tableServices.GetAll();
-            //TableHub.BroadcastData();
+            var tables = new List<Table>();
+            using (var ctx = new FoodZoneContext())
+            {
+                var command = ctx.Tables.SqlQuery("Select * from Tables Where IsDeleted = 0");
+                tables = command.ToList();
+            }
             return PartialView("_ListTable", tables);
         }
 

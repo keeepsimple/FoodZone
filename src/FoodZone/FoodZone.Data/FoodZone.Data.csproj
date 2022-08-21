@@ -131,6 +131,10 @@
     <Compile Include="Migrations\202208181451363_UpdateUserModel1.designer.cs">
       <DependentUpon>202208181451363_UpdateUserModel1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208210708491_UpdateData.cs" />
+    <Compile Include="Migrations\202208210708491_UpdateData.designer.cs">
+      <DependentUpon>202208210708491_UpdateData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -196,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208181451363_UpdateUserModel1.resx">
       <DependentUpon>202208181451363_UpdateUserModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208210708491_UpdateData.resx">
+      <DependentUpon>202208210708491_UpdateData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
