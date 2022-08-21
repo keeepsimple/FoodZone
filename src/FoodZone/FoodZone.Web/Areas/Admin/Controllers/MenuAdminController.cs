@@ -173,6 +173,8 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 TempData["Message"] = "Xóa thất bại!";
             }
             return RedirectToAction("Index");
+
+
         }
     }
 }
