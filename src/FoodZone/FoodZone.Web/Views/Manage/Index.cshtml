@@ -13,8 +13,8 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-custom">
                             <div class="myaccount-tab-menu nav" role="tablist">
-                                <a href="#orders" data-toggle="tab" class="active"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
-                                <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
+                                <a href="#account-info" data-toggle="tab" class="active"><i class="fa fa-user"></i> Thông tin tài khoản</a>
                                 <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
                                     @Html.AntiForgeryToken()
                                     <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
@@ -29,7 +29,7 @@
                                 <!-- Single Tab Content Start -->
                                 @Html.Action("History", "Reservation")
                                 <!-- Single Tab Content End -->
-                                <div class="tab-pane fade" id="account-info" role="tabpanel">
+                                <div class="tab-pane  fade show active " id="account-info" role="tabpanel">
                                     <div class="myaccount-content">
                                         <h3>Thông tin tài khoản</h3>
                                         <div class="account-details-form">
@@ -37,27 +37,32 @@
                                             <form action="@Url.Action("Index", "Manage", new {area=""})" method="post">
                                                 <div class="row">
                                                     @Html.AntiForgeryToken()
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                                     @Html.HiddenFor(m => m.UserId)
                                                     <div class="col-lg-6 col-custom">
                                                         <div class="single-input-item mb-3">
                                                             <label for="full-name" class="required mb-1">Tên đầy đủ</label>
                                                             <input type="text" name="Fullname" id="full-name" required placeholder="Tên đầy đủ" value="@Model.FullName" />
+                                                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-custom">
                                                         <div class="single-input-item mb-3">
                                                             <label for="Username" class="required mb-1">Tên đăng nhập</label>
                                                             <input type="text" id="Username" name="Username" disabled value="@Model.Username" />
+                                                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="single-input-item mb-3">
                                                     <label for="PhoneNumber" class="required mb-1">Số điện thoại</label>
                                                     <input type="number" id="PhoneNumber" name="PhoneNumber" required placeholder="Số điện thoại" value="@Model.PhoneNumber" />
+                                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="single-input-item mb-3">
                                                     <label for="email" class="required mb-1">Email</label>
                                                     <input type="email" id="email" name="Email" required placeholder="Email" value="@Model.Email" />
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="single-input-item mb-3" style="width: fit-content">
                                                     <label id="modalBtn" class="required mb-1">
@@ -73,7 +78,7 @@
                                                 </div>
                                                 <div class="single-input-item single-item-button">
                                                     <button class="btn flosun-button secondary-btn theme-color  rounded-0">Thay đổi</button>
-                                                    <a class="btn flosun-button secondary-btn theme-color  rounded-0 float-right" href="@Url.Action("ChangePassword", "Manage")">Thay đổi mật khẩu</a>
+                                                    <a class="rounded-0 float-right" href="@Url.Action("ChangePassword", "Manage")">Thay đổi mật khẩu</a>
                                                 </div>
                                             </form>
                                         </div>
