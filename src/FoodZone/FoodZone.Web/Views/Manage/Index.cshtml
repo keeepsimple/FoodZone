@@ -33,7 +33,7 @@
                                     <div class="myaccount-content">
                                         <h3>Thông tin tài khoản</h3>
                                         <div class="account-details-form">
-                                        <div class="flex-fill">@ViewBag.UpdateStatus</div> 
+                                            <div class="flex-fill">@ViewBag.UpdateStatus</div>
                                             <form action="@Url.Action("Index", "Manage", new {area=""})" method="post">
                                                 <div class="row">
                                                     @Html.AntiForgeryToken()
@@ -73,6 +73,7 @@
                                                 </div>
                                                 <div class="single-input-item single-item-button">
                                                     <button class="btn flosun-button secondary-btn theme-color  rounded-0">Thay đổi</button>
+                                                    <a class="btn flosun-button secondary-btn theme-color  rounded-0 float-right" href="@Url.Action("ChangePassword", "Manage")">Thay đổi mật khẩu</a>
                                                 </div>
                                             </form>
                                         </div>

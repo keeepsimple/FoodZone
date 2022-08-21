@@ -1,0 +1,35 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewBag.Title = "Danh sách nhân viên";
+}
+<div class="d-flex flex-row">
+    <h1 class="h3 mb-2 text-gray-800">Danh sách nhân viên</h1>
+</div>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Tên đăng nhập</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>
+                                <a class="btn btn-primary btn-icon-split btn-sm" href="@Url.Action("Edit", "UsersAdmin", new { id = item.Id })">
+                                    <span class="text">Sửa</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

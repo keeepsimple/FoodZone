@@ -110,7 +110,13 @@ namespace FoodZone.Web.Controllers
             return View(model);
         }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
 
 
         #region Helpers

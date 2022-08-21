@@ -48,6 +48,16 @@ namespace FoodZone.Web.Areas.Identity.Controllers
             return View(users);
         }
 
+        [HttpGet]
+        public ActionResult StaffList()
+        {
+            var staffRole = RoleManager.Roles.Where(x => x.Name == "Staff").FirstOrDefault();
+            var users = from user in UserManager.Users
+                        where user.Roles.Any(r => r.RoleId == staffRole.Id)
+                        select user;
+            return View(users);
+        }
+
         //
         // GET: /Users/Edit/1
         [HttpGet]
