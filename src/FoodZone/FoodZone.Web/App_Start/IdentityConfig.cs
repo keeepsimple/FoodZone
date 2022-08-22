@@ -9,6 +9,7 @@ using System;
 using System.Configuration;
 using System.Net;
 using System.Net.Configuration;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Security.Claims;
@@ -112,11 +113,19 @@ namespace FoodZone.Web
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
             msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html));
 
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
-            NetworkCredential credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailFrom"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
-            smtpClient.Credentials = credentials;
-            smtpClient.EnableSsl = true;
-            smtpClient.Send(msg);
+            //SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587));
+            //NetworkCredential credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailFrom"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
+            //smtpClient.Credentials = credentials;
+            //smtpClient.EnableSsl = true;
+            //smtpClient.Send(msg);
+            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+            {
+                NetworkCredential credentials = new NetworkCredential(ConfigurationManager.AppSettings["MailFrom"].ToString(), ConfigurationManager.AppSettings["Password"].ToString());
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = credentials;
+                smtp.Send(msg);
+            }
         }
     }
 
