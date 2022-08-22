@@ -20,6 +20,17 @@
                                 <div class="blog-post-info">
                                     <span>Ngày tạo: @Model.InsertedAt.ToString("dd/MM/yyyy")</span><br />
                                     Ngày hết hạn ưu đãi: <span style="font-weight:bold">@Model.ExpiredDate.ToString("dd/MM/yyyy")</span><br />
+                                    <p>
+                                        Mã ưu đãi cho: <span style="font-weight:bold">
+                                            @(Model.Level == 0 ? "Người dùng mới"
+                                                               : Model.Level >= 1 ? "Người dùng level 1"
+                                                               : Model.Level >= 15 ? "Người dùng level 2"
+                                                               : Model.Level >= 30 ? "Người dùng level 3"
+                                                               : Model.Level >= 50 ? "Người dùng level 4"
+                                                               : Model.Level >= 80 ? "Người dùng level 5"
+                                                               : "Người dùng level 5")
+                                        </span>
+                                    </p>
                                     <p style="font-size:18px">Mã ưu đãi: <span style="font-weight:bold">@Model.Code</span></p>
                                 </div>
                                 <p class="mb-5">

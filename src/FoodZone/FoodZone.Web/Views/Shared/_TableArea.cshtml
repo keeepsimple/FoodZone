@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<TableViewModel>
 
+
+
+
 @foreach (var item in Model)
 {
 
@@ -15,9 +18,12 @@
                 Khu vực bàn @item.Capacity người<br>
                 Ghi chú: @(item.Capacity <= 4 ? "có không gian riêng tư" : "thích hợp đi nhiều người")
                 <br>
+
                 Số lượng còn: <p id="count">@item.Count</p>
             </div>
         </label>
     </div>
 }
+
+
 

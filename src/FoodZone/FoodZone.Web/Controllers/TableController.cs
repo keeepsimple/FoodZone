@@ -32,6 +32,7 @@ namespace FoodZone.Web.Controllers
             return PartialView("_ListTable", tables);
         }
 
+        [HttpGet]
         public ActionResult GetTablesByCapacity(int floor)
         {
             var listTable = new List<TableViewModel>();
@@ -56,6 +57,7 @@ namespace FoodZone.Web.Controllers
             var tables = _tableServices.GetAll().Where(x => x.Floor == floor);
             return tables.Select(x => x.Capacity).Distinct().ToList();
         }
+
 
         public int CountTableByCapacity(IEnumerable<Table> tables, int floor, int capacity)
         {

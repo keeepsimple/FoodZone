@@ -25,7 +25,9 @@
     <div class="form-group col-md-6">
         Giá
         <div>
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gia" } })
+            <input class="form-control text-box single-line" data-val="true"
+                   data-val-range="Vui lòng nhập giá trị lớn hơn 1" data-val-range-max="1000000000000" data-val-range-min="1"
+                   data-val-required="Giá không được bỏ trống" id="Price" name="Price" placeholder="Giá" type="number" value="@Model.Price">
             @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
         </div>
 

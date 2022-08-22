@@ -219,7 +219,6 @@
         /*const count = document.querySelectorAll("#count");*/
         /*Array.from(count);*/
         const arr = [...document.querySelectorAll(".object #count")]
-        console.log(capa)
         function handleChangeCount() {
             const check = capa.value;
             if (check != "") {
@@ -250,6 +249,7 @@
                 refreshTable();
             };
         });
+ 
         function refreshTable() {
             $.ajax({
                 url: '/Table/GetAll',

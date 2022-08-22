@@ -292,13 +292,14 @@ namespace FoodZone.Web.Controllers
 
         public IEnumerable<Voucher> GetAllAvailableVoucherForUser()
         {
-            var vouchers = _voucherServices.GetAll().Where(x => x.Status == 1);
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var vouchers = _voucherServices.GetAll().Where(x => x.Status == 1 &&  user.Level >= x.Level);
             var availableVouchers = new List<Voucher>();
             var userVouchers = _userVoucherServices.GetAll();
 
             foreach (var item in vouchers)
             {
-                if (userVouchers.Where(x => x.VoucherId == item.Id && x.UserId == User.Identity.GetUserId()).FirstOrDefault() == null)
+                if (userVouchers.Where(x => x.VoucherId == item.Id && x.UserId == user.Id).FirstOrDefault() == null)
                 {
                     availableVouchers.Add(item);
                 }

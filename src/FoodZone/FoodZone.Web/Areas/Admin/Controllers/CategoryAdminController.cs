@@ -55,7 +55,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 if (uploadImage != null)
                 {
                     fileName = Path.GetFileName(uploadImage.FileName);
-                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images/category"), uploadImage.FileName);
                     uploadImage.SaveAs(folderPath);
                 }
 
@@ -156,7 +156,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 if (uploadImage != null && uploadImage.ContentLength > 0)
                 {
                     fileName = Path.GetFileName(uploadImage.FileName);
-                    string folderPath = Path.Combine(Server.MapPath("~/assets/images"), uploadImage.FileName);
+                    string folderPath = Path.Combine(Server.MapPath("~/assets/images/category"), uploadImage.FileName);
                     uploadImage.SaveAs(folderPath);
                 }
 

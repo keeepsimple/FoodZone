@@ -63,7 +63,7 @@
                 {
                     if (listFloorNoDup[i] == 1)
                     {
-                        <div class="tab-pane fade show active display-flex-col" id="@(floorId + listFloorNoDup[i])" role="tabpanel" aria-labelledby="@(floorTab + listFloorNoDup[i])">
+                        <div class="tab-pane fade active show display-flex-col" id="@(floorId + listFloorNoDup[i])" role="tabpanel" aria-labelledby="@(floorTab + listFloorNoDup[i])">
                             <div class="contructor-floor">
                                 <div class="object recepter-style">
                                     Cửa ra vào | Lễ tân | Thang máy | Cầu thang
@@ -84,8 +84,10 @@
                                 <div class="object window-style-left window-5">
                                     |
                                 </div>
-
-                                @Html.Action("GetTablesByCapacity", "Table", new { floor = listFloorNoDup[i] })
+                                <div id="floor-update-@listFloorNoDup[i]">
+                                    @Html.Action("GetTablesByCapacity", "Table", new { floor = listFloorNoDup[i] })
+                                </div>
+                              
                             </div>
                         </div>
                     }
@@ -111,7 +113,10 @@
                                 <div class="object window-style-left window-5">
                                     |
                                 </div>
+                                <div id="floor-update-@listFloorNoDup[i]">
+
                                 @Html.Action("GetTablesByCapacity", "Table", new { floor = listFloorNoDup[i] })
+                                </div>
                             </div>
                         </div>
                     }
