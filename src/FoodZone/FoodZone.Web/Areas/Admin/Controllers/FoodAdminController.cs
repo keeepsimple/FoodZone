@@ -111,6 +111,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var result = await _foodServices.DeleteAsync(id);
+
             if (result)
             {
                 TempData["Message"] = "Xóa thành công.";
