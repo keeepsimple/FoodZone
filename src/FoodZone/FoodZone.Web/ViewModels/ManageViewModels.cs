@@ -41,12 +41,12 @@ namespace FoodZone.Web.ViewModels
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu cũ")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "{0} không được bỏ trống")]
         [StringLength(100, ErrorMessage = "{0} phải có ít nhất {2} kí tự.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu mới")]
