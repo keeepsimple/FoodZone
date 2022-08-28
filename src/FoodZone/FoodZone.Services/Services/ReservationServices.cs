@@ -25,5 +25,10 @@ namespace FoodZone.Services.Services
             var all = _unitOfWork.ReservationRepository.GetQuery().ToList();
             return all.Where(x => x.ReservationDate.ToShortDateString() == today);
         }
+
+        public IEnumerable<Reservation> GetReservationByUser(string userId)
+        {
+            return _unitOfWork.ReservationRepository.GetQuery(x => x.UserId == userId &&  x.Status == 0).ToList();
+        }
     }
 }

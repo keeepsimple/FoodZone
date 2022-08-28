@@ -69,6 +69,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                             NumberTable = numberTable++,
                             Status = 0
                         };
+                        TableHub.BroadcastData();
                         await _tableServices.AddAsync(table);
                     }
                     TableHub.BroadcastData();
@@ -102,7 +103,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 };
 
                 var result = await _tableServices.AddAsync(table);
-
+                TableHub.BroadcastData();
                 if (result > 0)
                 {
                     TempData["Message"] = "Tạo thành công.";
@@ -112,7 +113,6 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 {
                     TempData["Message"] = "Tạo thất bại. Thử lại sau nhé!";
                 }
-                TableHub.BroadcastData();
                 return RedirectToAction("Index");
             }
 
@@ -161,9 +161,9 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 table.NumberTable = model.NumberTable;
 
                 var result = await _tableServices.UpdateAsync(table);
+                TableHub.BroadcastData();
                 if (result)
                 {
-                    TableHub.BroadcastData();
                     TempData["Message"] = "Cập nhật thành công.";
                 }
                 else
@@ -179,9 +179,9 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var result = await _tableServices.DeleteAsync(id);
+            TableHub.BroadcastData();
             if (result)
             {
-                TableHub.BroadcastData();
                 TempData["Message"] = "Xóa thành công.";
             }
             else

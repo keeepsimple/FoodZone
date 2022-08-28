@@ -13,8 +13,8 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-custom">
                             <div class="myaccount-tab-menu nav" role="tablist">
-                                <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
-                                <a href="#account-info" data-toggle="tab" class="active"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                <a href="@Url.Action("Index", "Manage", new {area=""})" class="active"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                <a href="@Url.Action("History","Reservation", new {area=""})"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
                                 <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
                                     @Html.AntiForgeryToken()
                                     <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
@@ -27,7 +27,6 @@
                         <div class="col-lg-9 col-md-8 col-custom">
                             <div class="tab-content" id="myaccountContent">
                                 <!-- Single Tab Content Start -->
-                                @Html.Action("History", "Reservation")
                                 <!-- Single Tab Content End -->
                                 <div class="tab-pane  fade show active " id="account-info" role="tabpanel">
                                     <div class="myaccount-content">
@@ -41,7 +40,7 @@
                                                     @Html.HiddenFor(m => m.UserId)
                                                     <div class="col-lg-6 col-custom">
                                                         <div class="single-input-item mb-3">
-                                                            <label for="full-name" class="required mb-1">Tên đầy đủ</label>
+                                                            <label for="full-name" class="required mb-1">Tên đầy đủ &nbsp; <p class="d-inline-block text-danger">*</p></label>
                                                             <input type="text" name="Fullname" id="full-name" required placeholder="Tên đầy đủ" value="@Model.FullName" />
                                                             @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                                                         </div>

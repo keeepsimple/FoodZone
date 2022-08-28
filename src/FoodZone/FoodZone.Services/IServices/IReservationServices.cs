@@ -10,6 +10,6 @@ namespace FoodZone.Services.IServices
 
         IEnumerable<Reservation> GetAllReservationMonthly();
 
-
+        IEnumerable<Reservation> GetReservationByUser(string userId);
     }
 }

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Reservation>
+@{
+    ViewBag.Title = "Lịch sử đặt bàn";
+    int j = 1;
+}
+<div class="my-account-wrapper mt-5">
+    <div class="container container-default-2 custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <!-- My Account Page Start -->
+                <div class="myaccount-page-wrapper">
+                    <!-- My Account Tab Menu Start -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-custom">
+                            <div class="myaccount-tab-menu nav" role="tablist">
+                                <a href="@Url.Action("Index", "Manage", new {area=""})"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                <a href="@Url.Action("History","Reservation", new {area=""})" class="active"><i class="fa fa-cart-arrow-down"></i> Lịch sử đặt bàn</a>
+                                <form id="logoutForm" action="@Url.Action("LogOff", "Account", new { area = "" })" , method="post">
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Đăng xuất</a>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- My Account Tab Menu End -->
+                        <!-- My Account Tab Content Start -->
+
+                        <div class="col-lg-9 col-md-8 col-custom">
+                            <div class="tab-content" id="myaccountContent">
+                                <!-- Single Tab Content Start -->
+                                <!-- Single Tab Content End -->
+                                <div class="tab-pane show active fade">
+                                    <div class="myaccount-content">
+                                        <h3>Đơn đặt bàn (Nếu bạn có đơn đặt bàn mới thì không thể đặt thêm bàn)</h3>
+                                        <div class="myaccount-table table-responsive text-center">
+                                            <div class="display-flex-col" width="100%" cellspacing="0">
+                                                <div>
+                                                    <div class="row mb-3 w-100">
+                                                        <div class="col">STT</div>
+                                                        <div class="col">Ngày</div>
+                                                        <div class="col">Trạng thái</div>
+                                                        <div class="col">Số lượng bàn</div>
+                                                        <div class="col">Thao tác</div>
+                                                    </div>
+                                                </div>
+                                                <div class=" overflow-auto" style="max-height:400px ">
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <div class="row mb-3 w-100">
+                                                            <div class="col">@j</div>
+                                                            <div class="col">@item.ReservationDate.ToString("dd/MM/yyyy")</div>
+                                                            <div class="col">@(item.Status == 0 ? "Mới" : item.Status == 1 ? "Khách đã đến" : item.Status == 2 ? "Hoàn thành" : "Huỷ đặt bàn" )</div>
+                                                            <div class="col ">@item.Capacity</div>
+                                                            <div class="col "><a href="@Url.Action("Details", "Reservation", new {id = item.Id})" class="btn flosun-button secondary-btn theme-color  rounded-0">Xem</a></div>
+
+
+                                                        </div>
+                                                        <p style="display: none">@(j++)</p>
+                                                    }
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Tab Content End -->
+                            </div>
+                        </div>
+                        <!-- My Account Tab Content End -->
+                    </div>
+                </div>
+                <!-- My Account Page End -->
+            </div>
+        </div>
+    </div>
+    
+</div>
+

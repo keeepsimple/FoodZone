@@ -2265,7 +2265,7 @@
     <Content Include="Views\Home\_CustomerFeedback.cshtml" />
     <Content Include="Views\Shared\_GetByFloor.cshtml" />
     <Content Include="Views\Shared\_TableArea.cshtml" />
-    <Content Include="Views\Reservation\_Reservations.cshtml" />
+    <Content Include="Views\Reservation\History.cshtml" />
     <Content Include="Views\Reservation\Details.cshtml" />
     <Content Include="Views\Reservation\_GetReservationDetails.cshtml" />
     <Content Include="Areas\Admin\Views\DashboardAdmin\Index.cshtml" />

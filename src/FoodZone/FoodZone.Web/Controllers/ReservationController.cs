@@ -52,6 +52,12 @@ namespace FoodZone.Web.Controllers
 
         public ActionResult Index()
         {
+
+            var listReservation = _reservationServices.GetReservationByUser(User.Identity.GetUserId());
+            if (listReservation.Count() > 0)
+            {
+                return RedirectToAction("History");
+            }
             if (Request.IsAuthenticated)
             {
                 var userId = User.Identity.GetUserId();
@@ -75,7 +81,7 @@ namespace FoodZone.Web.Controllers
             var voucher = _voucherServices.GetById(reservationViewModel.CodeId);
             string code = "";
 
-            if(voucher != null)
+            if (voucher != null)
             {
                 code = voucher.Code;
             }
@@ -135,7 +141,7 @@ namespace FoodZone.Web.Controllers
                     };
                     TableHub.BroadcastData();
                     await _checkoutServices.CheckoutAsync(reservation, reservationDetails);
-                    return RedirectToAction("ReservationSuccess", "Reservation");
+                    return RedirectToAction("History", "Reservation");
                 }
                 ViewBag.CodeId = new SelectList(GetAllAvailableVoucherForUser(), "Id", "Code");
             }
@@ -163,9 +169,9 @@ namespace FoodZone.Web.Controllers
                 Code = reservation.Code,
                 CusName = reservation.Name,
                 Note = reservation.Note,
-                PhoneNumber = reservation.PhoneNumber ,
+                PhoneNumber = reservation.PhoneNumber,
                 ReservationDate = reservation.ReservationDate,
-                Status = reservation.Status 
+                Status = reservation.Status
             };
             ViewBag.Detail = reservation.ReservationDate.ToShortDateString();
             return View(detail);
@@ -221,7 +227,7 @@ namespace FoodZone.Web.Controllers
                 {
                     var voucher = _voucherServices.GetByCode(reservation.Code);
                     var userVoucher = _userVoucherServices.GetAll().Where(x => x.VoucherId == voucher.Id && x.UserId == User.Identity.GetUserId()).FirstOrDefault();
-                    if(userVoucher != null)
+                    if (userVoucher != null)
                     {
                         _userVoucherServices.Delete(userVoucher);
                     }
@@ -237,7 +243,7 @@ namespace FoodZone.Web.Controllers
                 {
                     TempData["Message"] = "Hủy đặt bàn thất bại!";
                 }
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("History");
             }
             return View(model);
         }
@@ -245,7 +251,7 @@ namespace FoodZone.Web.Controllers
         public ActionResult History()
         {
             var reservations = _reservationServices.GetAll().Where(x => x.UserId == User.Identity.GetUserId()).ToList();
-            return PartialView("_Reservations", reservations);
+            return View(reservations);
         }
 
         private bool IsEnoughTable(List<Table> tables, int tableNeed)
@@ -293,7 +299,7 @@ namespace FoodZone.Web.Controllers
         public IEnumerable<Voucher> GetAllAvailableVoucherForUser()
         {
             var user = UserManager.FindById(User.Identity.GetUserId());
-            var vouchers = _voucherServices.GetAll().Where(x => x.Status == 1 &&  user.Level >= x.Level);
+            var vouchers = _voucherServices.GetAll().Where(x => x.Status == 1 && user.Level >= x.Level);
             var availableVouchers = new List<Voucher>();
             var userVouchers = _userVoucherServices.GetAll();
 

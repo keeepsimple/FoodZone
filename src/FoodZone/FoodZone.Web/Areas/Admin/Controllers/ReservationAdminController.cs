@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace FoodZone.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Manager,Staff")]
+    [Authorize(Roles = "Staff")]
     public class ReservationAdminController : Controller
     {
         private readonly IReservationServices _reservationServices;
@@ -156,6 +156,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 {
                     table.Status = 0;
                 }
+                TableHub.BroadcastData();
                 _tableServices.Update(table);
             }
         }

@@ -26,11 +26,13 @@ namespace FoodZone.Web.Controllers
             var tables = new List<Table>();
             using (var ctx = new FoodZoneContext())
             {
-                var command = ctx.Tables.SqlQuery("Select * from Tables Where IsDeleted = 0");
+                var command = ctx.Tables.SqlQuery("Select * from Tables Where IsDeleted = 0 and Status = 0");
                 tables = command.ToList();
             }
             return PartialView("_ListTable", tables);
         }
+    
+
 
         [HttpGet]
         public ActionResult GetTablesByCapacity(int floor)
