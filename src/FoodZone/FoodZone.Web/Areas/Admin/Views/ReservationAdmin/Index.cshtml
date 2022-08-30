@@ -7,7 +7,7 @@
 <div class="d-flex flex-row">
     <h1 class="h3 mb-2 text-gray-800">Danh sách đặt bàn</h1>
 </div>
-<div class="card shadow mb-4">
+<div class="card shadow mb-4" id="tables">
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -38,7 +38,7 @@
                                 <a class="btn btn-primary btn-icon-split btn-sm" href="@Url.Action("Edit", "ReservationAdmin", new { id = item.Id })">
                                     <span class="text">Sửa</span>
                                 </a>
-                            <p style="display:none">@(j++)</p>
+                                <p style="display:none">@(j++)</p>
                             </td>
                         </tr>
                     }

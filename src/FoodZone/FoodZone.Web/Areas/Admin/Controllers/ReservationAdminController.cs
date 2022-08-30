@@ -54,7 +54,17 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 var command = ctx.Reservations.SqlQuery("Select * from Reservations");
                 reservations = command.ToList();
             }
-            return View(reservations.OrderByDescending(x=>x.InsertedAt));
+            var list = reservations.OrderByDescending(x => x.InsertedAt);
+            return View(list);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveTableFromReservation(int tableId)
+        {
+            var table = _tableServices.GetById(tableId);
+            table.Status = 0;
+            _tableServices.Update(table);
+            return View();
         }
 
         public ActionResult Edit(int? id)

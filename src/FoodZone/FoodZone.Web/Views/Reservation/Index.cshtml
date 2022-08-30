@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Đặt Bàn";
     var now = DateTime.Now;
-    var nextDate = DateTime.Now.AddDays(1);
 
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -45,37 +44,31 @@
                                     <div class="col-md-12 col-custom">
                                         <div class="input-item mb-4">
                                             <div class="title-booking font-weight-bold">Thời gian dùng bữa</div>
-                                            @if (now.Hour >= 21)
-                                            {
-                                                <input class="border-0 rounded-0 w-100 input-area email gray-bg text-box single-line" disabled="disabled" id="ReservationDate" name="ReservationDate" type="text" value="@nextDate.ToShortDateString()">
-                                            }
-                                            else
-                                            {
                                                 <input class="border-0 rounded-0 w-100 input-area email gray-bg text-box single-line" disabled="disabled" id="ReservationDate" name="ReservationDate" type="text" value="@Model.ReservationDate">
-                                            }
+                                            
                                         </div>
                                     </div>
                                     <div class="col-12 col-custom">
                                         <div class="input-item mb-4 display-flex-col">
 
-                                            <div class="title-booking font-weight-bold">Chọn thời gian đến</div>
+                                            <div class="title-booking font-weight-bold">Chọn thời gian đến &nbsp; <p class="d-inline-block text-danger">*</p></div>
                                             <div id="menu" style="position: relative; width:100%">
                                                 <ul class="nav nav-tabs nav-menu-custom nav-tabs-floor-booking " style="margin-left:6% ; max-height: 60px; width: 88%; flex-wrap: unset ; overflow-x: hidden">
 
-                                                    @if (now.Hour <= 12 || now.Hour >= 21)
+                                                    @if (now.Hour <= 12)
                                                     {
                                                         for (int i = 11; i <= 12; i++)
                                                         {
-                                                            if (i >= now.Hour || now.Hour >= 21)
+                                                            if (i >= now.Hour)
                                                             {
                                                                 if (i == now.Hour)
                                                                 {
 
-                                                                    for (int j = 0; j < 60; j += 15)
+                                                                    for (int j = 0; j < 60; j += 10)
                                                                     {
 
 
-                                                                        if (j > now.Minute)
+                                                                        if (j > now.Minute && i < 12)
                                                                         {
                                                                             <li class="nav-item mr-2 p-1">
                                                                                 <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
@@ -85,22 +78,12 @@
 
                                                                     }
                                                                 }
-                                                                else if (i == 12)
+                                                                if (i == 12)
                                                                 {
                                                                     <li class="nav-item mr-2 p-1">
                                                                         <input class="form-check-input input-custom-table" name="Time" type="radio" id="@(i)00" value="@i:00">
                                                                         <label class="form-check-label label-time" for="@(i)00">@i:00 </label>
                                                                     </li>
-                                                                }
-                                                                else
-                                                                {
-                                                                    for (int j = 0; j < 60; j += 15)
-                                                                    {
-                                                                        <li class="nav-item mr-2 p-1">
-                                                                            <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
-                                                                            <label class="form-check-label label-time" for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
-                                                                        </li>
-                                                                    }
                                                                 }
 
                                                             }
@@ -108,41 +91,33 @@
                                                     }
                                                     else
                                                     {
-                                                        for (int i = 19; i <= 20; i++)
+                                                        for (int i = 19; i <= 23; i++)
                                                         {
-                                                            if (i >= now.Hour || now.Hour >= 14)
+                                                            if (i >= now.Hour)
                                                             {
                                                                 if (i == now.Hour)
                                                                 {
 
-                                                                    for (int j = 0; j < 60; j += 15)
+                                                                    for (int j = 0; j < 60; j += 10)
                                                                     {
-                                                                        if (j > now.Minute)
+
+
+                                                                        if (j > now.Minute && i < 20)
                                                                         {
                                                                             <li class="nav-item mr-2 p-1">
                                                                                 <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
-                                                                                <label class="form-check-label label-time" for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
+                                                                                <label class="form-check-label label-time " for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
                                                                             </li>
                                                                         }
 
                                                                     }
                                                                 }
-                                                                else if (i == 20)
+                                                                if (i == 23)
                                                                 {
                                                                     <li class="nav-item mr-2 p-1">
                                                                         <input class="form-check-input input-custom-table" name="Time" type="radio" id="@(i)00" value="@i:00">
                                                                         <label class="form-check-label label-time" for="@(i)00">@i:00 </label>
                                                                     </li>
-                                                                }
-                                                                else
-                                                                {
-                                                                    for (int j = 0; j < 60; j += 15)
-                                                                    {
-                                                                        <li class="nav-item mr-2 p-1">
-                                                                            <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
-                                                                            <label class="form-check-label label-time" for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
-                                                                        </li>
-                                                                    }
                                                                 }
 
                                                             }

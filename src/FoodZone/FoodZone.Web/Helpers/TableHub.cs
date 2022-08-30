@@ -11,5 +11,6 @@ namespace FoodZone.Web.Helpers
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<TableHub>();
             context.Clients.All.refreshAllTable();
         }
+
     }
 }

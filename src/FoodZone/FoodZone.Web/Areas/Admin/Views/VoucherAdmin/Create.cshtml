@@ -16,7 +16,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })&nbsp; <p class="d-inline-block text-danger">*</p>
             <div>
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
@@ -24,16 +24,16 @@
         </div>
 
         <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label" })
+            @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label" })&nbsp; <p class="d-inline-block text-danger">*</p>
             <div>
                 @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
             </div>
-            
+
         </div>
 
         <div class="form-group col-md-6 mt-3">
-            @Html.LabelFor(model => model.ExpiredDate, htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.LabelFor(model => model.ExpiredDate, htmlAttributes: new { @class = "control-label col-md-3" })&nbsp; <p class="d-inline-block text-danger">*</p>
             <div>
                 @Html.EditorFor(model => model.ExpiredDate, new { htmlAttributes = new { @class = "form-control" }, id = "ExpiredDate" })
                 @Html.ValidationMessageFor(model => model.ExpiredDate, "", new { @class = "text-danger" })
@@ -56,7 +56,7 @@
         </div>
 
         <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label" })
+            @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label" })&nbsp; <p class="d-inline-block text-danger">*</p>
             <div>
                 @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
@@ -64,7 +64,7 @@
         </div>
 
         <div class="form-group col-md-12">
-            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label" })
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label" })&nbsp; <p class="d-inline-block text-danger">*</p>
             <div>
                 <textarea class="form-control" name="Content" id="ckeditor">@Model.Content</textarea>
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
@@ -73,7 +73,7 @@
 
         <div class="form-group col-md-6 mt-3">
             <div> <img id="showImage" src="~/assets/images/@Model.Image" class="img-home form-control w-100 h-100 bg-light mr-2" alt=""></div>
-            <input type="file" class="form-control" id="avatar" name="uploadImage" />
+            <input type="file" class="form-control" id="avatar" name="uploadImage" accept="image/png, image/gif, image/jpeg"/>
         </div>
 
         <div class="form-group form-button mt-4 col-md-12">

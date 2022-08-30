@@ -23,8 +23,8 @@ namespace FoodZone.Web.Controllers
         private readonly ICheckoutServices _checkoutServices;
         private readonly IMenuServices _menuServices;
         private readonly ITableServices _tableServices;
-        private readonly IUserVoucherServices _userVoucherServices;
         private readonly IVoucherServices _voucherServices;
+        private readonly IUserVoucherServices _userVoucherServices;
 
         public ReservationController(IReservationServices reservationServices,
             IReservationDetailsServices reservationDetailsServices,
@@ -139,8 +139,8 @@ namespace FoodZone.Web.Controllers
                         Status = 0,
                         UserId = User.Identity.GetUserId()
                     };
-                    TableHub.BroadcastData();
                     await _checkoutServices.CheckoutAsync(reservation, reservationDetails);
+                    TableHub.BroadcastData();
                     return RedirectToAction("History", "Reservation");
                 }
                 ViewBag.CodeId = new SelectList(GetAllAvailableVoucherForUser(), "Id", "Code");

@@ -47,19 +47,19 @@
                                                     </div>
                                                     <div class="col-lg-6 col-custom">
                                                         <div class="single-input-item mb-3">
-                                                            <label for="Username" class="required mb-1">Tên đăng nhập</label>
+                                                            <label for="Username" class="required mb-1">Tên đăng nhập &nbsp; <p class="d-inline-block text-danger">*</p></label>
                                                             <input type="text" id="Username" name="Username" disabled value="@Model.Username" />
                                                             @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="single-input-item mb-3">
-                                                    <label for="PhoneNumber" class="required mb-1">Số điện thoại</label>
+                                                    <label for="PhoneNumber" class="required mb-1">Số điện thoại &nbsp; <p class="d-inline-block text-danger">*</p></label>
                                                     <input type="number" id="PhoneNumber" name="PhoneNumber" required placeholder="Số điện thoại" value="@Model.PhoneNumber" />
                                                     @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="single-input-item mb-3">
-                                                    <label for="email" class="required mb-1">Email</label>
+                                                    <label for="email" class="required mb-1">Email &nbsp; <p class="d-inline-block text-danger">*</p></label>
                                                     <input type="email" id="email" name="Email" required placeholder="Email" value="@Model.Email" />
                                                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                                 </div>

@@ -6,6 +6,7 @@
         <th class="col-md-2">Bàn</th>
         <th class="col-md-2">Combo</th>
         <th class="col-md-2">Giá</th>
+        <th class="col-md-2">Thao tác</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -13,6 +14,11 @@
             <td class="col-md-2">@Html.Action("GetTableNumber", "ReservationAdmin", new { tableId = item.TableId })</td>
             <td class="col-md-2">@Html.Action("GetMenuName", "ReservationAdmin", new { menuId = item.MenuId })</td>
             <td class="col-md-2">@(item.MenuPrice.ToString("N0"))</td>
+            <td class="col-md-2">
+                <form action="@Url.Action("RemoveTableFromReservation", "ReservationAdmin", new {tableId = item.TableId})" method="post">
+                    <button type="submit" onclick="return confirm('Bạn có muốn xóa @item.TableId này?')" class="btn btn-danger btn-icon-split btn-sm"><span class="text">Huỷ bàn</span></button>
+                </form>
+            </td>
         </tr>
     }
 </table>

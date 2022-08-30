@@ -17,21 +17,27 @@
                             <p>@Html.ValidationSummary("", new { @class = "text-danger" })</p>
                         </div>
                         <div class="single-input-item mb-3">
+                            Tên đầy đủ &nbsp; <p class="d-inline-block text-danger">*</p>
                             @Html.TextBoxFor(m => m.Fullname, new { @placeholder = "Tên đầy đủ" })
                         </div>
                         <div class="single-input-item mb-3">
+                            Tên đăng nhập &nbsp; <p class="d-inline-block text-danger">*</p>
                             @Html.TextBoxFor(m => m.Username, new { @placeholder = "Tên đăng nhập" })
                         </div>
                         <div class="single-input-item mb-3">
+                            Email &nbsp; <p class="d-inline-block text-danger">*</p>
                             @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email" })
                         </div>
                         <div class="single-input-item mb-3">
+                            Số điện thoại &nbsp; <p class="d-inline-block text-danger">*</p>
                             @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Số điện thoại" })
                         </div>
                         <div class="single-input-item mb-3">
+                            Mật khẩu &nbsp; <p class="d-inline-block text-danger">*</p>
                             @Html.PasswordFor(m => m.Password, new { @placeholder = "Mật khẩu" })
                         </div>
                         <div class="single-input-item mb-3">
+                            Xác nhận mật khẩu &nbsp; <p class="d-inline-block text-danger">*</p>
                             @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Xác nhận mật khẩu" })
                         </div>
                         <div class="single-input-item mb-3">
