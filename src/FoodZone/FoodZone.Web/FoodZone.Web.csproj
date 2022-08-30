@@ -2191,6 +2191,9 @@
     <Content Include="AdminAssets\css\jquery\jquery.slim.min.map" />
     <Content Include="Areas\Admin\Views\TableAdmin\AutoCreateTable.cshtml" />
     <Content Include="Areas\Identity\Views\UsersAdmin\StaffList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\ReservationAdmin\NewReservations.cshtml" />
+    <Content Include="Areas\Admin\Views\ReservationAdmin\_ListNewReservation.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

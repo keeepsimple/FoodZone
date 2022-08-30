@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Reservation>
+@{
+    ViewBag.Title = "Quản lý Đặt Bàn";
+    int j = 1;
+}
+
+<div class="d-flex flex-row" >
+    <h1 class="h3 mb-2 text-gray-800">Đơn đặt bàn mới</h1>
+</div>
+
+<div id="tables">
+    @Html.Action("ListNewReservation", "ReservationAdmin")
+
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            var hubNotify = $.connection.tableHub;
+            $.connection.hub.logging = true;
+
+            $.connection.hub.start();
+            hubNotify.client.refreshAllTable = function () {
+                refresh();
+            };
+        });
+
+        function refresh() {
+            $.ajax({
+                url: '/Admin/ReservationAdmin/ListNewReservation',
+                contentType: 'application/html ; charset:utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    console.log('111111111', result);
+                    document.getElementById("tables").innerHTML = result;
+                }
+            })
+        }
+    </script>
+}

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@ViewBag.Title - Quản lý</title>
+    <title>@ViewBag.Title - FoodZone</title>
 
     <!-- Custom fonts for this template -->
     <link href="~/AdminAssets/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -51,94 +51,105 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
-
+            @if (User.IsInRole("Staff"))
+            {
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Đặt bàn
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "ReservationAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý đặt bàn</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("NewReservations", "ReservationAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Đơn đặt bàn mới</span>
+                    </a>
+                </li>
+            }
             <!-- Heading -->
-            <div class="sidebar-heading">
-                Đặt bàn
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "ReservationAdmin", new {area="admin"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý đặt bàn</span>
-                </a>
-            </li>
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            @if (User.IsInRole("Manager"))
+            {
+                <hr class="sidebar-divider">
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Người Dùng
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "UsersAdmin", new {area="identity"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý người dùng</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("StaffList", "UsersAdmin", new {area="identity"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Danh sách nhân viên</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "RolesAdmin", new {area="identity"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý chức vụ</span>
+                    </a>
+                </li>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Người Dùng
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "UsersAdmin", new {area="identity"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý người dùng</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("StaffList", "UsersAdmin", new {area="identity"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Danh sách nhân viên</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "RolesAdmin", new {area="identity"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý chức vụ</span>
-                </a>
-            </li>
 
+                <hr class="sidebar-divider">
 
-            <hr class="sidebar-divider">
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Trang web
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "NewsAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý tin tức</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "VoucherAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý ưu đãi</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "TableAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý bàn</span>
+                    </a>
+                </li>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Trang web
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "NewsAdmin", new {area="admin"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý tin tức</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "VoucherAdmin", new {area="admin"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý ưu đãi</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "TableAdmin", new {area="admin"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý bàn</span>
-                </a>
-            </li>
+                <hr class="sidebar-divider">
 
-            <hr class="sidebar-divider">
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Menu và món ăn
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "MenuAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý menu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "CategoryAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý danh mục</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "FoodAdmin", new {area="admin"})">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Quản lý đồ ăn</span>
+                    </a>
+                </li>
+            }
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Menu và món ăn
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "MenuAdmin", new {area="admin"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý menu</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "CategoryAdmin", new {area="admin"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý danh mục</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "FoodAdmin", new {area="admin"})">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Quản lý đồ ăn</span>
-                </a>
-            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

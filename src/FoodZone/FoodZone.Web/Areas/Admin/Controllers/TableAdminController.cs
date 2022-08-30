@@ -47,37 +47,45 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<ActionResult> AutoCreateTable(AutoCreateTableModel model)
         {
-            int numberTable = 1;
-            if (ModelState.IsValid)
+            try
             {
-                var tables = await _tableServices.GetAllAsync();
-                if (tables.Count() > 0)
+                int numberTable = 1;
+                if (ModelState.IsValid)
                 {
-                    numberTable = tables.OrderByDescending(x => x.NumberTable).FirstOrDefault().NumberTable + 1;
-                }
-
-                var capacities = model.Capacities.Split(',');
-
-                for (int i = 0; i < model.NumberOfTable; i++)
-                {
-                    foreach (var item in capacities)
+                    var tables = await _tableServices.GetAllAsync();
+                    if (tables.Count() > 0)
                     {
-                        var table = new Table
-                        {
-                            Capacity = Convert.ToInt32(item),
-                            Floor = model.Floor,
-                            NumberTable = numberTable++,
-                            Status = 0
-                        };
-                        TableHub.BroadcastData();
-                        await _tableServices.AddAsync(table);
+                        numberTable = tables.OrderByDescending(x => x.NumberTable).FirstOrDefault().NumberTable + 1;
                     }
-                    TableHub.BroadcastData();
-                }
 
-                return RedirectToAction("Index");
+                    var capacities = model.Capacities.Split(',');
+
+                    for (int i = 0; i < model.NumberOfTable; i++)
+                    {
+                        foreach (var item in capacities)
+                        {
+                            var table = new Table
+                            {
+                                Capacity = Convert.ToInt32(item),
+                                Floor = model.Floor,
+                                NumberTable = numberTable++,
+                                Status = 0
+                            };
+                            TableHub.BroadcastData();
+                            await _tableServices.AddAsync(table);
+                        }
+                        TableHub.BroadcastData();
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                return View(model);
             }
-            return View(model);
+            catch (Exception e)
+            {
+                return View("Error", e);
+            }
+            
         }
 
         public ActionResult Create()

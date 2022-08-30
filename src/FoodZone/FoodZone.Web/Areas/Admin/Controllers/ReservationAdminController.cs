@@ -6,6 +6,7 @@ using FoodZone.Web.Areas.Admin.ViewModels;
 using FoodZone.Web.Helpers;
 using Microsoft.AspNet.Identity.Owin;
 using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -49,13 +50,31 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         {
             //var reservation = _reservationServices.GetAll();
             var reservations = new List<Reservation>();
-            using(var ctx = new FoodZoneContext())
+            using (var ctx = new FoodZoneContext())
             {
                 var command = ctx.Reservations.SqlQuery("Select * from Reservations");
                 reservations = command.ToList();
             }
             var list = reservations.OrderByDescending(x => x.InsertedAt);
             return View(list);
+
+        }
+
+        public ActionResult NewReservations()
+        {
+            return View();
+        }
+
+        public ActionResult ListNewReservation()
+        {
+            var reservations = new List<Reservation>();
+            using (var ctx = new FoodZoneContext())
+            {
+                var command = ctx.Reservations.SqlQuery("Select * from Reservations");
+                reservations = command.ToList();
+            }
+            var newReservation = reservations.Where(x => x.ReservationDate.Date == DateTime.Now.Date && x.Status == 0);
+            return PartialView("_ListNewReservation", newReservation);
         }
 
         [HttpPost]
@@ -64,7 +83,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             var table = _tableServices.GetById(tableId);
             table.Status = 0;
             _tableServices.Update(table);
-            return View();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int? id)
@@ -125,14 +144,14 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                     reservation.Status = -1;
                 }
 
-                if(reservation.Status == 2)
+                if (reservation.Status == 2)
                 {
                     var user = await UserManager.FindByIdAsync(reservation.UserId);
                     user.Level += reservation.Capacity;
                     await UserManager.UpdateAsync(user);
                 }
 
-                ChangeTableStatus(reservation);
+                await ChangeTableStatus(reservation);
                 TableHub.BroadcastData();
                 reservation.CancelReason = model.CancelReason;
 
@@ -151,7 +170,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        private void ChangeTableStatus(Reservation reservation)
+        private async Task ChangeTableStatus(Reservation reservation)
         {
             var details = _reservationDetailServices.GetReservationDetailsByReservation(reservation.Id);
 
@@ -166,8 +185,7 @@ namespace FoodZone.Web.Areas.Admin.Controllers
                 {
                     table.Status = 0;
                 }
-                TableHub.BroadcastData();
-                _tableServices.Update(table);
+                await _tableServices.UpdateAsync(table);
             }
         }
 
@@ -181,6 +199,12 @@ namespace FoodZone.Web.Areas.Admin.Controllers
         {
             var food = _foodServices.GetById(foodId);
             return food.Name;
+        }
+
+        public int GetStatusReservationByReservationDetail(int reservationId)
+        {
+            var reservation = _reservationServices.GetById(reservationId);
+            return reservation.Status;
         }
 
         public int GetTableNumber(int tableId)

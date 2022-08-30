@@ -41,11 +41,12 @@
                                             @Html.ValidationMessageFor(model => model.MenuId, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+
                                     <div class="col-md-12 col-custom">
                                         <div class="input-item mb-4">
                                             <div class="title-booking font-weight-bold">Thời gian dùng bữa</div>
-                                                <input class="border-0 rounded-0 w-100 input-area email gray-bg text-box single-line" disabled="disabled" id="ReservationDate" name="ReservationDate" type="text" value="@Model.ReservationDate">
-                                            
+                                            <input class="border-0 rounded-0 w-100 input-area email gray-bg text-box single-line" disabled="disabled" id="ReservationDate" name="ReservationDate" type="text" value="@Model.ReservationDate">
+
                                         </div>
                                     </div>
                                     <div class="col-12 col-custom">
@@ -59,69 +60,82 @@
                                                     {
                                                         for (int i = 11; i <= 12; i++)
                                                         {
-                                                            if (i >= now.Hour)
+                                                            if (i == 11)
                                                             {
-                                                                if (i == now.Hour)
+                                                                if (now.Hour == 11)
                                                                 {
-
                                                                     for (int j = 0; j < 60; j += 10)
                                                                     {
-
-
-                                                                        if (j > now.Minute && i < 12)
+                                                                        if (j >= now.Minute)
                                                                         {
                                                                             <li class="nav-item mr-2 p-1">
                                                                                 <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
                                                                                 <label class="form-check-label label-time " for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
                                                                             </li>
                                                                         }
-
                                                                     }
                                                                 }
-                                                                if (i == 12)
+                                                                else
                                                                 {
-                                                                    <li class="nav-item mr-2 p-1">
-                                                                        <input class="form-check-input input-custom-table" name="Time" type="radio" id="@(i)00" value="@i:00">
-                                                                        <label class="form-check-label label-time" for="@(i)00">@i:00 </label>
-                                                                    </li>
+                                                                    for (int j = 0; j < 60; j += 10)
+                                                                    {
+                                                                        <li class="nav-item mr-2 p-1">
+                                                                            <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
+                                                                            <label class="form-check-label label-time " for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
+                                                                        </li>
+                                                                    }
                                                                 }
+                                                            }
 
+                                                            if (i == 12)
+                                                            {
+                                                                <li class="nav-item mr-2 p-1">
+                                                                    <input class="form-check-input input-custom-table" name="Time" type="radio" id="@(i)00" value="@i:00">
+                                                                    <label class="form-check-label label-time" for="@(i)00">@i:00 </label>
+                                                                </li>
                                                             }
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        for (int i = 19; i <= 23; i++)
+                                                        for (int i = 19; i <= 20; i++)
                                                         {
-                                                            if (i >= now.Hour)
-                                                            {
-                                                                if (i == now.Hour)
+                                                                if (i == 19)
                                                                 {
-
-                                                                    for (int j = 0; j < 60; j += 10)
+                                                                    if (now.Hour == 19)
                                                                     {
-
-
-                                                                        if (j > now.Minute && i < 20)
+                                                                        for (int j = 0; j < 60; j += 10)
+                                                                        {
+                                                                            if (j >= now.Minute)
+                                                                            {
+                                                                                <li class="nav-item mr-2 p-1">
+                                                                                    <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
+                                                                                    <label class="form-check-label label-time " for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
+                                                                                </li>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        for (int j = 0; j < 60; j += 10)
                                                                         {
                                                                             <li class="nav-item mr-2 p-1">
                                                                                 <input class="form-check-input input-custom-table" name="Time" type="radio" id="@i@j" value="@i:@j">
                                                                                 <label class="form-check-label label-time " for="@i@j">@i:@(j == 0 ? "00" : j.ToString()) </label>
                                                                             </li>
                                                                         }
-
                                                                     }
                                                                 }
-                                                                if (i == 23)
+
+                                                                if (i == 20)
                                                                 {
                                                                     <li class="nav-item mr-2 p-1">
                                                                         <input class="form-check-input input-custom-table" name="Time" type="radio" id="@(i)00" value="@i:00">
                                                                         <label class="form-check-label label-time" for="@(i)00">@i:00 </label>
                                                                     </li>
                                                                 }
-
                                                             }
-                                                        }
+                                                        
                                                     }
                                                 </ul>
                                                 <div id="nav">
@@ -169,6 +183,27 @@
                         </div>
                     </div>
                 </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             }
         </div>
     </div>
@@ -214,18 +249,35 @@
             const check = capa.value;
             if (check != "") {
                 for (var i = 0; i < arr.length; i++) {
-
+              
                     if (parseInt(check) < 1) {
-                        arr[i].offsetParent.childNodes[1].setAttribute('disabled', '');
+                        if (arr[i].offsetParent) {
+                            arr[i].offsetParent.childNodes[1].setAttribute('disabled', '');
+                        }
+                        else {
+                            continue;
+                        }
+                       
                     } else if (parseInt(check) > parseInt(arr[i].textContent)) {
-                        arr[i].offsetParent.childNodes[1].setAttribute('disabled', '');
+                        if (arr[i].offsetParent) {
+                            arr[i].offsetParent.childNodes[1].setAttribute('disabled', '');
+                        }
+                        else {
+                            continue;
+                        }
+                     
                     }
                 }
             }
             else {
                 for (var i = 0; i < arr.length; i++) {
                     if (parseInt(arr[i].textContent) > 0) {
-                        arr[i].offsetParent.childNodes[1].removeAttribute('disabled', '');
+                        if (arr[i].offsetParent) {
+                            arr[i].offsetParent.childNodes[1].removeAttribute('disabled', '');
+                        }
+                    }
+                    else {
+                        continue;
                     }
                 }
 

@@ -1,23 +1,29 @@
 ﻿@model IEnumerable<ReservationDetail>
-<br />
-<br />
-<table class="table table-condensed" style="text-align:center">
-    <tr class="d-flex center-title">
-        <th class="col-md-2">Bàn</th>
-        <th class="col-md-2">Combo</th>
-        <th class="col-md-2">Giá</th>
-        <th class="col-md-2">Thao tác</th>
+@{
+    string status = "";
+}
+
+<table class="table table-condensed" style="text-align:center; width: 100%">
+    <tr class="d-flex center-title" style="width:100%">
+        <th style="width: 25%">Bàn</th>
+        <th style="width: 25%">Combo</th>
+        <th style="width: 25%">Giá</th>
+        <th  style="width: 25%">Thao tác</th>
     </tr>
-    @foreach (var item in Model)
+    @for (var i = 0; i < Model.Count(); i++)
     {
-        <tr class="d-flex center-title">
-            <td class="col-md-2">@Html.Action("GetTableNumber", "ReservationAdmin", new { tableId = item.TableId })</td>
-            <td class="col-md-2">@Html.Action("GetMenuName", "ReservationAdmin", new { menuId = item.MenuId })</td>
-            <td class="col-md-2">@(item.MenuPrice.ToString("N0"))</td>
-            <td class="col-md-2">
-                <form action="@Url.Action("RemoveTableFromReservation", "ReservationAdmin", new {tableId = item.TableId})" method="post">
-                    <button type="submit" onclick="return confirm('Bạn có muốn xóa @item.TableId này?')" class="btn btn-danger btn-icon-split btn-sm"><span class="text">Huỷ bàn</span></button>
-                </form>
+        <tr class="d-flex center-title"  style="width:100%">
+            <td style="width: 25%">@Html.Action("GetTableNumber", "ReservationAdmin", new { tableId = Model.ElementAt(i).TableId })</td>
+            <td style="width: 25%">@Html.Action("GetMenuName", "ReservationAdmin", new { menuId = Model.ElementAt(i).MenuId })</td>
+            <td style="width: 25%">@(Model.ElementAt(i).MenuPrice.ToString("N0"))</td>
+            <td style="width: 25%">
+                <p style="display:none">@(status = Html.Action("GetStatusReservationByReservationDetail", "ReservationAdmin", new { reservationId = Model.ElementAt(i).ReservationId }).ToString())</p> 
+                @if (int.Parse(status) >= 0 && int.Parse(status) <= 1 && Model.Count() > 1)
+                {
+                    <form action="@Url.Action("RemoveTableFromReservation", "ReservationAdmin", new {tableId = Model.ElementAt(i).TableId})" method="post">
+                        <button type="submit" onclick="return confirm('Bạn có muốn xóa @Model.ElementAt(i).TableId này?')" class="btn btn-danger btn-icon-split btn-sm"><span class="text">Huỷ bàn</span></button>
+                    </form>
+                }
             </td>
         </tr>
     }

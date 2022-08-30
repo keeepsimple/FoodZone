@@ -138,15 +138,15 @@
 
                                 </li>
                                 <li class="menu-item-has-children ">
-                                    <a href="blog.html">Blog</a>
+                                    <a href="@Url.Action("Index", "News", new { area = "" })">Tin tức</a>
 
                                 </li>
                                 <li class="menu-item-has-children ">
-                                    <a href="voucher.html">Ưu đãi</a>
+                                    <a href="@Url.Action("Index", "Voucher", new { area = "" })l">Ưu đãi</a>
 
                                 </li>
-                                <li><a href="menu.html">Thực đơn</a></li>
-                                <li><a href="contact-us.html">Đặt bàn</a></li>
+                                <li><a href="@Url.Action("GetAll", "Menu", new { area = "" })">Thực đơn</a></li>
+                                <li><a href="@Url.Action("Index", "Reservation", new { area = "" })">Đặt bàn</a></li>
                             </ul>
                         </nav>
                         <!-- mobile menu navigation end -->
@@ -158,11 +158,11 @@
                             <ul class="address-info">
                                 <li>
                                     <i class="fa fa-phone"></i>
-                                    <a href="info%40yourdomain.html">(1245) 2456 012</a>
+                                    <a href="#">01234 567 890</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    <a href="info%40yourdomain.html">info@yourdomain.com</a>
+                                    <a href="#">foodzone@foodzone.com</a>
                                 </li>
                             </ul>
                             <div class="widget-social">

@@ -65,14 +65,14 @@
                                                 </div>
                                                 <div class="single-input-item mb-3" style="width: fit-content">
                                                     <label id="modalBtn" class="required mb-1">
-
-                                                        Level: @(Model.Level == 0 ? Html.Raw("<img src=\"/assets/images/Level/0.png\" ></img>")
-                                                               : Model.Level >= 1 ? Html.Raw("<img src=\"/assets/images/Level/1.png\" ></img>")
-                                                               : Model.Level >= 15 ? Html.Raw("<img src=\"/assets/images/Level/2.png\" ></img>")
-                                                               : Model.Level >= 30 ? Html.Raw("<img src=\"/assets/images/Level/3.png\" ></img>")
-                                                               : Model.Level >= 50 ? Html.Raw("<img src=\"/assets/images/Level/4.png\" ></img>")
-                                                               : Model.Level >= 80 ? Html.Raw("<img src=\"~/assets/images/Level/5.png\"></img>")
-                                                               : Html.Raw("<img src=\"~/assets/images/Level/5.png\"></img>"))
+                                                        
+                                                        Cấp độ: @(Model.Level == 0 ? Html.Raw("<img src=\"/assets/images/Level/0.png\" ></img>")
+                                                               : (Model.Level >= 1 && Model.Level < 15) ? Html.Raw("<img src=\"/assets/images/Level/1.png\" ></img>")
+                                                               : (Model.Level >= 15 && Model.Level < 30) ? Html.Raw("<img src=\"/assets/images/Level/2.png\" ></img>")
+                                                               : (Model.Level >= 30 && Model.Level < 50) ? Html.Raw("<img src=\"/assets/images/Level/3.png\" ></img>")
+                                                               : (Model.Level >= 50 && Model.Level < 80) ? Html.Raw("<img src=\"/assets/images/Level/4.png\" ></img>")
+                                                               : (Model.Level >= 80) ? Html.Raw("<img src=\"/assets/images/Level/5.png\"></img>")
+                                                               : Html.Raw("<img src=\"/assets/images/Level/5.png\"></img>"))
                                                     </label>
                                                 </div>
                                                 <div class="single-input-item single-item-button">
@@ -100,28 +100,28 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <h2>Hệ thống Level</h2>
+                            <h2>Hệ thống Cấp độ</h2>
                         </div>
 
                         <div class="col-12">
                             <p style="font-weight: bold">
                                 @(Model.Level == 0 ? "Bạn là người dùng mới" :
-                                                                    Model.Level >= 1 ? "Bạn đang ở Level 1" :
-                                                                    Model.Level >= 15 ? "Bạn đang ở Level 2" :
-                                                                    Model.Level >= 30 ? "Bạn đang ở Level 3" :
-                                                                    Model.Level >= 50 ? "Bạn đang ở Level 4" :
-                                                                    Model.Level >= 80 ? "Bạn đang ở Level 5" : "Bạn đang ở Level 5")
+                                                                    (Model.Level >= 1 && Model.Level < 15) ? "Bạn đang ở Cấp độ 1" :
+                                                                    (Model.Level >= 15 && Model.Level < 30) ? "Bạn đang ở Cấp độ 2" :
+                                                                    (Model.Level >= 30 && Model.Level < 50) ? "Bạn đang ở Cấp độ 3" :
+                                                                    (Model.Level >= 50 && Model.Level < 80) ? "Bạn đang ở Cấp độ 4" :
+                                                                    (Model.Level >= 80) ? "Bạn đang ở Cấp độ 5" : "Bạn đang ở Cấp độ 5")
                             </p>
                             <p>Khi đặt và đến ăn: </p>
                             <p>
-                                15 bàn bạn sẽ lên level 2
+                                15 bàn bạn sẽ lên Cấp độ 2
                             </p>
                             <p>
-                                30 bàn bạn sẽ lên level 3
+                                30 bàn bạn sẽ lên Cấp độ 3
                             </p>
-                            <p> 50 bàn bạn sẽ lên level 4</p>
+                            <p> 50 bàn bạn sẽ lên Cấp độ 4</p>
                             <p>
-                                80 bàn bạn sẽ lên level 5
+                                80 bàn bạn sẽ lên Cấp độ 5
                             </p>
                         </div>
                     </div>

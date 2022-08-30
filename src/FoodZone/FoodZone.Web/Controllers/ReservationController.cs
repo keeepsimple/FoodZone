@@ -1,18 +1,15 @@
 ﻿using FoodZone.Models.Common;
 using FoodZone.Services.IServices;
-using FoodZone.Web.ViewModels;
 using FoodZone.Web.Helpers;
+using FoodZone.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using PagedList;
-using FoodZone.Services.Services;
-using FoodZone.Models.Security;
-using System.Threading.Tasks;
 
 namespace FoodZone.Web.Controllers
 {
@@ -121,7 +118,7 @@ namespace FoodZone.Web.Controllers
                             MenuPrice = menu.Price
                         };
                         reservationDetails.Add(reservationDetail);
-                        UpdateTableStatus(item.Id, 1);
+                        await UpdateTableStatus(item.Id, 1);
                     }
                     string[] time = reservationViewModel.Time.Split(':');
                     var hour = int.Parse(time[0]);
@@ -195,7 +192,7 @@ namespace FoodZone.Web.Controllers
             return menu.Name;
         }
 
-        private void ChangeTableStatus(Reservation reservation)
+        private async Task ChangeTableStatus(Reservation reservation)
         {
             var details = _reservationDetailsServices.GetReservationDetailsByReservation(reservation.Id);
 
@@ -210,12 +207,12 @@ namespace FoodZone.Web.Controllers
                 {
                     table.Status = 0;
                 }
-                _tableServices.Update(table);
+                await _tableServices.UpdateAsync(table);
             }
         }
 
         [HttpPost]
-        public ActionResult Details(ReservationDetailViewModel model)
+        public async Task<ActionResult> Details(ReservationDetailViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -233,8 +230,9 @@ namespace FoodZone.Web.Controllers
                     }
                 }
 
-                ChangeTableStatus(reservation);
-                var result = _reservationServices.Update(reservation);
+                await ChangeTableStatus(reservation);
+                var result = await _reservationServices.UpdateAsync(reservation);
+                TableHub.BroadcastData();
                 if (result)
                 {
                     TempData["Message"] = "Hủy đặt bàn thành công!";
@@ -263,12 +261,11 @@ namespace FoodZone.Web.Controllers
             return true;
         }
 
-        private void UpdateTableStatus(int tableId, int status)
+        private async Task UpdateTableStatus(int tableId, int status)
         {
             var table = _tableServices.GetById(tableId);
             table.Status = status;
-            _tableServices.Update(table);
-            TableHub.BroadcastData();
+            await _tableServices.UpdateAsync(table);
         }
 
         private void ApplyVoucher(string code)

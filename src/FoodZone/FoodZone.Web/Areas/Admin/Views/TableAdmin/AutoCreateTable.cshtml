@@ -9,29 +9,39 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="input-group">
-        <div class="modal-body w-100 d-flex flex-column">Số lượng bàn:&nbsp; <p class="d-inline-block text-danger">*</p> <input type="number" name="NumberOfTable" class="form-control bg-light border-0 small mt-1" aria-describedby="basic-addon2" placeholder="Số lượng bàn"></div>
-        <div class="modal-body w-100 d-flex  flex-column">Tầng:&nbsp; <p class="d-inline-block text-danger">*</p> <input type="number" name="Floor" class="form-control bg-light border-0 small  mt-1" aria-describedby="basic-addon2" placeholder="Tầng"></div>
-        <div class="modal-body w-100 d-flex  flex-column">Số lượng người :&nbsp; <p class="d-inline-block text-danger">*</p> <input type="text" id="inputNumber" onkeypress="onChangeNumber(event)" name="Capacities" class="form-control bg-light border-0 small  mt-1" aria-describedby="basic-addon2" placeholder="Số lượng người"></div>
+        <div class="modal-body w-100 d-flex flex-column">
+            <div> Số lượng bàn:&nbsp; <p class="d-inline-block text-danger">*</p></div>
+            <input type="number" name="NumberOfTable" class="form-control" aria-describedby="basic-addon2" placeholder="Số lượng bàn">
+            @Html.ValidationMessageFor(model => model.NumberOfTable, "", new { @class = "text-danger" })
+        </div>
+        <div class="modal-body w-100 d-flex  flex-column">
+            <div>
+                Tầng:&nbsp; <p class="d-inline-block text-danger">*</p>
+            </div>
+            <input type="number" name="Floor" class="form-control" aria-describedby="basic-addon2" placeholder="Tầng">
+            @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+        </div>
+        <div class="modal-body w-100 d-flex  flex-column">
+            <div>
+                Số lượng người :&nbsp; <p class="d-inline-block text-danger">*</p>
+            </div>
+            <input type="text" id="inputNumber" onkeyup="onChangeNumber(event)" name="Capacities" class="form-control" aria-describedby="basic-addon2" placeholder="Số lượng người">
+            @Html.ValidationMessageFor(model => model.Capacities, "", new { @class = "text-danger" })
+        </div>
     </div>
-
-
     <div class="d-flex flex-row">
-
         <input type="submit" class="btn btn-success mr-4" value="Tạo" />
         <a href="@Url.Action("Index", "TableAdmin")" class="btn btn-close-white">Hủy</a>
     </div>
 }
 
 @section scripts{
-    
+
     <script>
         function onChangeNumber(event) {
             let result = event.target.value.replace(/[^0-9,]/g, "");
             document.getElementById("inputNumber").value = result
         }
-
-
-
     </script>
-    
-    }
+
+}

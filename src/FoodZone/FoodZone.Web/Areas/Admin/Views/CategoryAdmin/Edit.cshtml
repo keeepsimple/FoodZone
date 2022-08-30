@@ -25,8 +25,13 @@
         </div>
 
         <div class="form-group col-md-6 mt-3">
-            <div> <img id="showImage" src="~/assets/images/category/@Model.Image" class="img-home form-control w-100 h-100 bg-light mr-2" alt=""></div>
-            <input type="file" class="form-control" id="avatar" name="uploadImage" accept="image/png, image/gif, image/jpeg" />
+            @Html.HiddenFor(m => m.Image)
+            <div>
+                <img id="showImage" src="~/assets/images/category/@Model.Image" class="img-home form-control w-50 h-50 bg-light mr-2" alt="">
+
+
+                <input style=" opacity: 0.0;" type="file" class="form-control" id="avatar" name="uploadImage" accept="image/png, image/jpeg" />
+            </div>
         </div>
 
         <div class="form-group form-button mt-4 col-md-12">
@@ -39,4 +44,29 @@
 @section scripts{
     <script src="~/Assets/js/customize.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#showImage').on('click', function () {
+            $('#avatar').trigger('click');
+
+        });
+        $("#avatar").change(function () {
+            if (this.files[0].type == "image/jpeg" || this.files[0].type == "image/png") {
+                readURL(this);
+            }
+            else {
+                document.getElementById("avatar").value = ""
+            }
+        });
+    </script>
 }

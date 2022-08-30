@@ -5,24 +5,43 @@
 
 @foreach (var item in Model)
 {
-
-    <div class="object @(item.Capacity == 2 ? "table-2" : item.Capacity == 3 ? "table-3"
+    if (item.Floor == 1 && (item.Capacity == 2 || item.Capacity == 6 || item.Capacity == 8))
+    {
+        <div class="object @(item.Capacity == 2 ? "table-2" : item.Capacity == 3 ? "table-3"
         : item.Capacity == 5 ? "table-5" :item.Capacity == 6 ? "table-6"
         :item.Capacity == 8 ? "table-8" :item.Capacity == 9 ? "table-9" :"table-12")">
-        <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio"
-               @(item.Count == 0 ? "disabled" : "" )
-               value="@(item.Capacity + "-" + item.Floor)" id="@("ban"+item.Capacity+"nguoi"+item.Floor)">
-        <label class="form-check-label label-table" for="@("ban"+item.Capacity+"nguoi"+item.Floor)">
-            <img src="~/assets/images/booking/stand.png" alt="">
-            <div>
-                Khu vực bàn @item.Capacity người<br>
-                Ghi chú: @(item.Capacity <= 4 ? "có không gian riêng tư" : "thích hợp đi nhiều người")
-                <br>
+            <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio"
+                   @(item.Count == 0 ? "disabled" : "" )
+                   value="@(item.Capacity + "-" + item.Floor)" id="@("ban"+item.Capacity+"nguoi"+item.Floor)">
+            <label class="form-check-label label-table" for="@("ban"+item.Capacity+"nguoi"+item.Floor)">
+                <img src="~/assets/images/booking/stand.png" alt="">
+                <div>
+                    Khu vực bàn @item.Capacity người<br>
 
-                Số lượng còn: <p id="count">@item.Count</p>
-            </div>
-        </label>
-    </div>
+                    Số lượng còn: <p id="count">@item.Count</p>
+                </div>
+            </label>
+        </div>
+    }
+    if (item.Floor == 2 && (item.Capacity == 3 || item.Capacity == 5 || item.Capacity == 9 || item.Capacity == 12))
+    {
+        <div class="object @(item.Capacity == 2 ? "table-2" : item.Capacity == 3 ? "table-3"
+        : item.Capacity == 5 ? "table-5" :item.Capacity == 6 ? "table-6"
+        :item.Capacity == 8 ? "table-8" :item.Capacity == 9 ? "table-9" :"table-12")">
+            <input class="form-check-input input-custom-table" name="TableFloorCapacity" type="radio"
+                   @(item.Count == 0 ? "disabled" : "" )
+                   value="@(item.Capacity + "-" + item.Floor)" id="@("ban"+item.Capacity+"nguoi"+item.Floor)">
+            <label class="form-check-label label-table" for="@("ban"+item.Capacity+"nguoi"+item.Floor)">
+                <img src="~/assets/images/booking/stand.png" alt="">
+                <div>
+                    Khu vực bàn @item.Capacity người<br>
+
+                    Số lượng còn: <p id="count">@item.Count</p>
+                </div>
+            </label>
+        </div>
+    }
+
 }
 
 
